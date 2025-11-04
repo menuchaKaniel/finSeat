@@ -1,0 +1,524 @@
+[
+  {
+    "employee_id": "E845",
+    "employee_name": "Eli K.",
+    "team": "Engineering",
+    "desk_id": "ENG-NW-01",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-13",
+    "remote_ratio": 0.62
+  },
+  {
+    "employee_id": "E208",
+    "employee_name": "Noa S.",
+    "team": "IT Security",
+    "desk_id": "IT -NW-02",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-26",
+    "remote_ratio": 0.68
+  },
+  {
+    "employee_id": "E124",
+    "employee_name": "Ariel M.",
+    "team": "IT Security",
+    "desk_id": "IT -NW-02",
+    "start_date": "2025-03-26",
+    "end_date": "2025-08-16",
+    "remote_ratio": 0.8
+  },
+  {
+    "employee_id": "E514",
+    "employee_name": "Guy L.",
+    "team": "IT Security",
+    "desk_id": "IT -NW-02",
+    "start_date": "2025-08-16",
+    "end_date": "2025-11-15",
+    "remote_ratio": 0.4
+  },
+  {
+    "employee_id": "E344",
+    "employee_name": "Guy L.",
+    "team": "Data",
+    "desk_id": "DAT-NW-03",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-12",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E696",
+    "employee_name": "Eli K.",
+    "team": "DevOps",
+    "desk_id": "DEV-NW-04",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-26",
+    "remote_ratio": 0.59
+  },
+  {
+    "employee_id": "E345",
+    "employee_name": "Esther R.",
+    "team": "DevOps",
+    "desk_id": "DEV-NW-04",
+    "start_date": "2025-01-26",
+    "end_date": "2025-05-29",
+    "remote_ratio": 0.69
+  },
+  {
+    "employee_id": "E277",
+    "employee_name": "Eli K.",
+    "team": "Engineering",
+    "desk_id": "ENG-NW-05",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-11",
+    "remote_ratio": 0.7
+  },
+  {
+    "employee_id": "E902",
+    "employee_name": "Rachel D.",
+    "team": "Engineering",
+    "desk_id": "ENG-NW-05",
+    "start_date": "2025-01-11",
+    "end_date": "2025-04-10",
+    "remote_ratio": 0.66
+  },
+  {
+    "employee_id": "E349",
+    "employee_name": "Sara N.",
+    "team": "Engineering",
+    "desk_id": "ENG-NW-05",
+    "start_date": "2025-04-10",
+    "end_date": "2025-07-13",
+    "remote_ratio": 0.54
+  },
+  {
+    "employee_id": "E655",
+    "employee_name": "Miriam T.",
+    "team": "Data",
+    "desk_id": "DAT-NW-06",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-17",
+    "remote_ratio": 0.73
+  },
+  {
+    "employee_id": "E246",
+    "employee_name": "Rachel D.",
+    "team": "Data",
+    "desk_id": "DAT-NW-06",
+    "start_date": "2025-02-17",
+    "end_date": "2025-05-11",
+    "remote_ratio": 0.68
+  },
+  {
+    "employee_id": "E387",
+    "employee_name": "Esther R.",
+    "team": "Data",
+    "desk_id": "DAT-NW-06",
+    "start_date": "2025-05-11",
+    "end_date": "2025-07-22",
+    "remote_ratio": 0.79
+  },
+  {
+    "employee_id": "E805",
+    "employee_name": "Ariel M.",
+    "team": "Risk",
+    "desk_id": "RIS-W-07",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-01",
+    "remote_ratio": 0.62
+  },
+  {
+    "employee_id": "E705",
+    "employee_name": "Eli K.",
+    "team": "Risk",
+    "desk_id": "RIS-W-07",
+    "start_date": "2025-03-01",
+    "end_date": "2025-07-18",
+    "remote_ratio": 0.54
+  },
+  {
+    "employee_id": "E826",
+    "employee_name": "Eli K.",
+    "team": "Risk",
+    "desk_id": "RIS-W-07",
+    "start_date": "2025-07-18",
+    "end_date": "2025-09-19",
+    "remote_ratio": 0.77
+  },
+  {
+    "employee_id": "E254",
+    "employee_name": "Ariel M.",
+    "team": "Data",
+    "desk_id": "DAT-W-08",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-16",
+    "remote_ratio": 0.52
+  },
+  {
+    "employee_id": "E843",
+    "employee_name": "Ariel M.",
+    "team": "Data",
+    "desk_id": "DAT-W-09",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-08",
+    "remote_ratio": 0.56
+  },
+  {
+    "employee_id": "E797",
+    "employee_name": "Yanai P.",
+    "team": "Data",
+    "desk_id": "DAT-W-09",
+    "start_date": "2025-03-08",
+    "end_date": "2025-05-17",
+    "remote_ratio": 0.67
+  },
+  {
+    "employee_id": "E109",
+    "employee_name": "Yanai P.",
+    "team": "Data",
+    "desk_id": "DAT-W-09",
+    "start_date": "2025-05-17",
+    "end_date": "2025-09-21",
+    "remote_ratio": 0.65
+  },
+  {
+    "employee_id": "E631",
+    "employee_name": "Miriam T.",
+    "team": "Product",
+    "desk_id": "PRO-W-10",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-30",
+    "remote_ratio": 0.65
+  },
+  {
+    "employee_id": "E903",
+    "employee_name": "Esther R.",
+    "team": "IT Security",
+    "desk_id": "IT -W-11",
+    "start_date": "2024-11-01",
+    "end_date": "2024-12-31",
+    "remote_ratio": 0.75
+  },
+  {
+    "employee_id": "E222",
+    "employee_name": "Noa S.",
+    "team": "Data",
+    "desk_id": "DAT-W-12",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-29",
+    "remote_ratio": 0.78
+  },
+  {
+    "employee_id": "E668",
+    "employee_name": "Esther R.",
+    "team": "Data",
+    "desk_id": "DAT-W-12",
+    "start_date": "2025-03-29",
+    "end_date": "2025-06-23",
+    "remote_ratio": 0.42
+  },
+  {
+    "employee_id": "E800",
+    "employee_name": "Rachel D.",
+    "team": "IT Security",
+    "desk_id": "IT -SW-13",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-20",
+    "remote_ratio": 0.74
+  },
+  {
+    "employee_id": "E374",
+    "employee_name": "David B.",
+    "team": "IT Security",
+    "desk_id": "IT -SW-13",
+    "start_date": "2025-03-20",
+    "end_date": "2025-06-04",
+    "remote_ratio": 0.63
+  },
+  {
+    "employee_id": "E560",
+    "employee_name": "David B.",
+    "team": "Data",
+    "desk_id": "DAT-SW-14",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-04",
+    "remote_ratio": 0.57
+  },
+  {
+    "employee_id": "E714",
+    "employee_name": "Guy L.",
+    "team": "Data",
+    "desk_id": "DAT-SW-14",
+    "start_date": "2025-02-04",
+    "end_date": "2025-05-25",
+    "remote_ratio": 0.54
+  },
+  {
+    "employee_id": "E454",
+    "employee_name": "Yanai P.",
+    "team": "IT Security",
+    "desk_id": "IT -SW-15",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-16",
+    "remote_ratio": 0.72
+  },
+  {
+    "employee_id": "E971",
+    "employee_name": "Yanai P.",
+    "team": "IT Security",
+    "desk_id": "IT -SW-15",
+    "start_date": "2025-02-16",
+    "end_date": "2025-04-30",
+    "remote_ratio": 0.78
+  },
+  {
+    "employee_id": "E703",
+    "employee_name": "Esther R.",
+    "team": "IT Security",
+    "desk_id": "IT -SW-15",
+    "start_date": "2025-04-30",
+    "end_date": "2025-07-15",
+    "remote_ratio": 0.75
+  },
+  {
+    "employee_id": "E230",
+    "employee_name": "Rachel D.",
+    "team": "Product",
+    "desk_id": "PRO-SW-16",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-10",
+    "remote_ratio": 0.79
+  },
+  {
+    "employee_id": "E945",
+    "employee_name": "Yanai P.",
+    "team": "Data",
+    "desk_id": "DAT-SW-17",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-02",
+    "remote_ratio": 0.6
+  },
+  {
+    "employee_id": "E617",
+    "employee_name": "Noa S.",
+    "team": "Product",
+    "desk_id": "PRO-SW-18",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-07",
+    "remote_ratio": 0.57
+  },
+  {
+    "employee_id": "E219",
+    "employee_name": "Sara N.",
+    "team": "Product",
+    "desk_id": "PRO-SE-19",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-25",
+    "remote_ratio": 0.69
+  },
+  {
+    "employee_id": "E798",
+    "employee_name": "Ariel M.",
+    "team": "Risk",
+    "desk_id": "RIS-SE-20",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-03",
+    "remote_ratio": 0.72
+  },
+  {
+    "employee_id": "E782",
+    "employee_name": "Guy L.",
+    "team": "Risk",
+    "desk_id": "RIS-SE-20",
+    "start_date": "2025-01-03",
+    "end_date": "2025-03-13",
+    "remote_ratio": 0.74
+  },
+  {
+    "employee_id": "E466",
+    "employee_name": "Noa S.",
+    "team": "Risk",
+    "desk_id": "RIS-SE-21",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-16",
+    "remote_ratio": 0.56
+  },
+  {
+    "employee_id": "E654",
+    "employee_name": "Eli K.",
+    "team": "Risk",
+    "desk_id": "RIS-SE-21",
+    "start_date": "2025-01-16",
+    "end_date": "2025-03-18",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E205",
+    "employee_name": "Esther R.",
+    "team": "Risk",
+    "desk_id": "RIS-SE-22",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-29",
+    "remote_ratio": 0.75
+  },
+  {
+    "employee_id": "E765",
+    "employee_name": "Yanai P.",
+    "team": "Risk",
+    "desk_id": "RIS-SE-22",
+    "start_date": "2025-03-29",
+    "end_date": "2025-07-06",
+    "remote_ratio": 0.49
+  },
+  {
+    "employee_id": "E873",
+    "employee_name": "Guy L.",
+    "team": "Data",
+    "desk_id": "DAT-SE-23",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-28",
+    "remote_ratio": 0.64
+  },
+  {
+    "employee_id": "E813",
+    "employee_name": "Miriam T.",
+    "team": "Data",
+    "desk_id": "DAT-SE-23",
+    "start_date": "2025-02-28",
+    "end_date": "2025-06-17",
+    "remote_ratio": 0.6
+  },
+  {
+    "employee_id": "E130",
+    "employee_name": "Esther R.",
+    "team": "Data",
+    "desk_id": "DAT-SE-23",
+    "start_date": "2025-06-17",
+    "end_date": "2025-10-13",
+    "remote_ratio": 0.49
+  },
+  {
+    "employee_id": "E479",
+    "employee_name": "Miriam T.",
+    "team": "Engineering",
+    "desk_id": "ENG-SE-24",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-27",
+    "remote_ratio": 0.58
+  },
+  {
+    "employee_id": "E927",
+    "employee_name": "Miriam T.",
+    "team": "Engineering",
+    "desk_id": "ENG-SE-24",
+    "start_date": "2025-02-27",
+    "end_date": "2025-06-26",
+    "remote_ratio": 0.42
+  },
+  {
+    "employee_id": "E352",
+    "employee_name": "Eli K.",
+    "team": "Product",
+    "desk_id": "PRO-NE-25",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-07",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E759",
+    "employee_name": "Ariel M.",
+    "team": "Product",
+    "desk_id": "PRO-NE-25",
+    "start_date": "2025-02-07",
+    "end_date": "2025-06-16",
+    "remote_ratio": 0.48
+  },
+  {
+    "employee_id": "E377",
+    "employee_name": "Noa S.",
+    "team": "DevOps",
+    "desk_id": "DEV-NE-26",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-23",
+    "remote_ratio": 0.46
+  },
+  {
+    "employee_id": "E709",
+    "employee_name": "Miriam T.",
+    "team": "DevOps",
+    "desk_id": "DEV-NE-26",
+    "start_date": "2025-02-23",
+    "end_date": "2025-05-07",
+    "remote_ratio": 0.47
+  },
+  {
+    "employee_id": "E869",
+    "employee_name": "Esther R.",
+    "team": "DevOps",
+    "desk_id": "DEV-NE-27",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-02",
+    "remote_ratio": 0.73
+  },
+  {
+    "employee_id": "E978",
+    "employee_name": "David B.",
+    "team": "DevOps",
+    "desk_id": "DEV-NE-27",
+    "start_date": "2025-03-02",
+    "end_date": "2025-05-26",
+    "remote_ratio": 0.57
+  },
+  {
+    "employee_id": "E901",
+    "employee_name": "Ariel M.",
+    "team": "DevOps",
+    "desk_id": "DEV-NE-27",
+    "start_date": "2025-05-26",
+    "end_date": "2025-10-04",
+    "remote_ratio": 0.69
+  },
+  {
+    "employee_id": "E791",
+    "employee_name": "Eli K.",
+    "team": "Product",
+    "desk_id": "PRO-NE-28",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-05",
+    "remote_ratio": 0.46
+  },
+  {
+    "employee_id": "E957",
+    "employee_name": "Rachel D.",
+    "team": "Product",
+    "desk_id": "PRO-NE-28",
+    "start_date": "2025-01-05",
+    "end_date": "2025-05-07",
+    "remote_ratio": 0.75
+  },
+  {
+    "employee_id": "E408",
+    "employee_name": "Noa S.",
+    "team": "IT Security",
+    "desk_id": "IT -NE-29",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-17",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E844",
+    "employee_name": "Guy L.",
+    "team": "Risk",
+    "desk_id": "RIS-NE-30",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-22",
+    "remote_ratio": 0.65
+  },
+  {
+    "employee_id": "E249",
+    "employee_name": "Rachel D.",
+    "team": "Risk",
+    "desk_id": "RIS-NE-30",
+    "start_date": "2025-02-22",
+    "end_date": "2025-05-10",
+    "remote_ratio": 0.57
+  }
+]

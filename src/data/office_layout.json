@@ -1,0 +1,2788 @@
+{
+  "meeting_rooms": [
+    {
+      "name": "Hermon",
+      "id": "MR-NW-01",
+      "capacity": 8,
+      "zone": "NW",
+      "type": "Meeting Room",
+      "notes": "Near cafeteria"
+    },
+    {
+      "name": "Tavor",
+      "id": "MR-NW-02",
+      "capacity": 4,
+      "zone": "NW",
+      "type": "Meeting Room",
+      "notes": "Near Hermon"
+    },
+    {
+      "name": "Gilboa",
+      "id": "MR-NW-03",
+      "capacity": 4,
+      "zone": "NW",
+      "type": "Reserved",
+      "notes": "HR"
+    },
+    {
+      "name": "Arbel",
+      "id": "MR-NW-04",
+      "capacity": 4,
+      "zone": "NW",
+      "type": "Reserved",
+      "notes": "HR"
+    },
+    {
+      "name": "Ramon",
+      "id": "MR-W-01",
+      "capacity": 4,
+      "zone": "W",
+      "type": "Meeting Room",
+      "notes": "Near WC"
+    },
+    {
+      "name": "Timna",
+      "id": "MR-W-02",
+      "capacity": 6,
+      "zone": "W",
+      "type": "Meeting Room",
+      "notes": "Near shower"
+    },
+    {
+      "name": "Negev",
+      "id": "MR-W-03",
+      "capacity": 4,
+      "zone": "W",
+      "type": "Wellness Room",
+      "notes": ""
+    },
+    {
+      "name": "Dan",
+      "id": "MR-SE-01",
+      "capacity": 6,
+      "zone": "SE",
+      "type": "Meeting Room",
+      "notes": "Near kitchenette"
+    },
+    {
+      "name": "Carmel",
+      "id": "MR-SE-02",
+      "capacity": 16,
+      "zone": "SE",
+      "type": "Conference Room",
+      "notes": "Near IT Security zone"
+    },
+    {
+      "name": "Golan",
+      "id": "MR-NE-01",
+      "capacity": 2,
+      "zone": "NE",
+      "type": "Meeting Room",
+      "notes": "Near DBA/IT"
+    },
+    {
+      "name": "Meron",
+      "id": "MR-SW-01",
+      "capacity": 8,
+      "zone": "SW",
+      "type": "Meeting Room",
+      "notes": "Near Engineering"
+    },
+    {
+      "name": "Yarkon",
+      "id": "MR-SW-02",
+      "capacity": 4,
+      "zone": "SW",
+      "type": "Meeting Room",
+      "notes": "Near Engineering"
+    },
+    {
+      "name": "Nursing Room",
+      "id": "NR-C-01",
+      "capacity": 2,
+      "zone": "C",
+      "type": "Nursing",
+      "notes": "Near center/lobby"
+    }
+  ],
+  "desks": [
+    {
+      "desk_id": "RIS-NW-01",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 100,
+        "y": 100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Hermon",
+          "Tavor"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-02",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 180,
+        "y": 100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Hermon",
+          "Tavor"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-03",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 260,
+        "y": 100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Hermon",
+          "Tavor"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-04",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 100,
+        "y": 180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Hermon",
+          "Tavor"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-05",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 180,
+        "y": 180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Gilboa",
+          "Arbel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-06",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 260,
+        "y": 180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Gilboa",
+          "Arbel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-07",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 100,
+        "y": 260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Tavor",
+          "Gilboa"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-08",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 180,
+        "y": 260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Hermon",
+          "Tavor"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-09",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 260,
+        "y": 260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Tavor",
+          "Gilboa"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-10",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 100,
+        "y": 340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Gilboa",
+          "Arbel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-11",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 180,
+        "y": 340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Tavor",
+          "Gilboa"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-12",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 260,
+        "y": 340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Tavor",
+          "Gilboa"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-13",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 100,
+        "y": 420
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Tavor",
+          "Gilboa"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-14",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 180,
+        "y": 420
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Hermon",
+          "Tavor"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-15",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 260,
+        "y": 420
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Hermon",
+          "Tavor"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-16",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 100,
+        "y": 500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Tavor",
+          "Gilboa"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-17",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 180,
+        "y": 500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Gilboa",
+          "Arbel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-18",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 100,
+        "y": 600
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Ramon",
+          "Negev"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-19",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 180,
+        "y": 600
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-20",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 260,
+        "y": 600
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-21",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 100,
+        "y": 680
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Ramon",
+          "Negev"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-22",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 180,
+        "y": 680
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Ramon",
+          "Negev"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-23",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 100,
+        "y": 760
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Negev",
+          "Timna"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-24",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 180,
+        "y": 760
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-25",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 260,
+        "y": 760
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Negev",
+          "Timna"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-26",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 100,
+        "y": 840
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-27",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 180,
+        "y": 840
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-28",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 260,
+        "y": 840
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Ramon",
+          "Negev"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-29",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 100,
+        "y": 920
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-30",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 180,
+        "y": 920
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-31",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 260,
+        "y": 920
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Ramon",
+          "Negev"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-32",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 100,
+        "y": 1000
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Ramon",
+          "Negev"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-33",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 180,
+        "y": 1000
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-34",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 260,
+        "y": 1000
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Timna",
+          "Ramon"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-35",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 100,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Yarkon",
+          "Meron"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-36",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 180,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Yarkon",
+          "Meron"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-37",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 100,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Meron",
+          "Yarkon"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-38",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 180,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Yarkon",
+          "Meron"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-39",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 260,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Meron",
+          "Yarkon"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-40",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 100,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Yarkon",
+          "Meron"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-41",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 180,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Yarkon",
+          "Meron"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-42",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 260,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Meron",
+          "Yarkon"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-43",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 100,
+        "y": 1340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Meron",
+          "Yarkon"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-44",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 180,
+        "y": 1340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Yarkon",
+          "Meron"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-45",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 260,
+        "y": 1340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Yarkon",
+          "Meron"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-46",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 340,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-47",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 340,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-48",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 340,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-49",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 420,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-50",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 420,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-51",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 420,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-52",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 500,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-53",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 500,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-54",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 500,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-55",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 580,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-56",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 580,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-57",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 580,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-58",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 660,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-59",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 660,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-60",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 660,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-61",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 740,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-62",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 740,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-S-63",
+      "team": "Engineering",
+      "zone": "S",
+      "coordinates": {
+        "x": 740,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-64",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 760,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-65",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 800,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-66",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 840,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-67",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 880,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-68",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 760,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-69",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 800,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-70",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 840,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-71",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 880,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-72",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 760,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-73",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 800,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-74",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 840,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-75",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 900,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-76",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 980,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-77",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 1060,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-78",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 900,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-79",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 980,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-80",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 1060,
+        "y": 1180
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-81",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 900,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-82",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 980,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-83",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 1060,
+        "y": 1260
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-84",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 900,
+        "y": 1340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-85",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 980,
+        "y": 1340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-86",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 1060,
+        "y": 1340
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-87",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 900,
+        "y": 1420
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-88",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 980,
+        "y": 1420
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-89",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 1060,
+        "y": 1420
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-90",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 900,
+        "y": 1500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-91",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 980,
+        "y": 1500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-E-92",
+      "team": "Reserved",
+      "zone": "E",
+      "coordinates": {
+        "x": 900,
+        "y": 800
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-E-93",
+      "team": "Reserved",
+      "zone": "E",
+      "coordinates": {
+        "x": 980,
+        "y": 800
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-E-94",
+      "team": "Reserved",
+      "zone": "E",
+      "coordinates": {
+        "x": 1060,
+        "y": 800
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-E-95",
+      "team": "Reserved",
+      "zone": "E",
+      "coordinates": {
+        "x": 900,
+        "y": 880
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-E-96",
+      "team": "Reserved",
+      "zone": "E",
+      "coordinates": {
+        "x": 980,
+        "y": 880
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-97",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 900,
+        "y": 600
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-98",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 980,
+        "y": 600
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "monitor",
+        "keyboard",
+        "dock"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-99",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 1060,
+        "y": 600
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-100",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 900,
+        "y": 680
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-101",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 980,
+        "y": 680
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-102",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 1060,
+        "y": 680
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-103",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 900,
+        "y": 760
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-104",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 980,
+        "y": 760
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-105",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 1060,
+        "y": 760
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-106",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 900,
+        "y": 840
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-107",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 980,
+        "y": 840
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "DEV-E-108",
+      "team": "DevOps",
+      "zone": "E",
+      "coordinates": {
+        "x": 1060,
+        "y": 840
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Golan"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    }
+  ]
+}
