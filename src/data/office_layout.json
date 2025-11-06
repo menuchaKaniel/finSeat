@@ -482,31 +482,6 @@
       "reserved_for": null
     },
     {
-      "desk_id": "RIS-NW-16",
-      "team": "Risk",
-      "zone": "NW",
-      "coordinates": {
-        "x": 100,
-        "y": 500
-      },
-      "nearby": {
-        "meeting_rooms": [
-          "Tavor",
-          "Gilboa"
-        ],
-        "bathroom": false,
-        "window": false,
-        "kitchenette": false
-      },
-      "equipment": [
-        "dock",
-        "chair",
-        "keyboard"
-      ],
-      "status": "available",
-      "reserved_for": null
-    },
-    {
       "desk_id": "RIS-NW-17",
       "team": "Risk",
       "zone": "NW",
@@ -526,6 +501,31 @@
       "equipment": [
         "keyboard",
         "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RIS-NW-18",
+      "team": "Risk",
+      "zone": "NW",
+      "coordinates": {
+        "x": 260,
+        "y": 500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Gilboa",
+          "Arbel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
         "monitor"
       ],
       "status": "available",
@@ -607,31 +607,6 @@
       "reserved_for": null
     },
     {
-      "desk_id": "PRO-W-21",
-      "team": "Product",
-      "zone": "W",
-      "coordinates": {
-        "x": 100,
-        "y": 680
-      },
-      "nearby": {
-        "meeting_rooms": [
-          "Ramon",
-          "Negev"
-        ],
-        "bathroom": false,
-        "window": false,
-        "kitchenette": false
-      },
-      "equipment": [
-        "dock",
-        "chair",
-        "keyboard"
-      ],
-      "status": "available",
-      "reserved_for": null
-    },
-    {
       "desk_id": "PRO-W-22",
       "team": "Product",
       "zone": "W",
@@ -651,6 +626,31 @@
       "equipment": [
         "chair",
         "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "PRO-W-35",
+      "team": "Product",
+      "zone": "W",
+      "coordinates": {
+        "x": 260,
+        "y": 680
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Ramon",
+          "Negev"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
         "monitor"
       ],
       "status": "available",
@@ -957,31 +957,6 @@
       "reserved_for": null
     },
     {
-      "desk_id": "ENG-SW-35",
-      "team": "Engineering",
-      "zone": "SW",
-      "coordinates": {
-        "x": 100,
-        "y": 1100
-      },
-      "nearby": {
-        "meeting_rooms": [
-          "Yarkon",
-          "Meron"
-        ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": true
-      },
-      "equipment": [
-        "keyboard",
-        "chair",
-        "monitor"
-      ],
-      "status": "occupied",
-      "reserved_for": null
-    },
-    {
       "desk_id": "ENG-SW-36",
       "team": "Engineering",
       "zone": "SW",
@@ -1002,6 +977,31 @@
         "monitor",
         "keyboard",
         "dock"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "ENG-SW-46",
+      "team": "Engineering",
+      "zone": "SW",
+      "coordinates": {
+        "x": 260,
+        "y": 1100
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Yarkon",
+          "Meron"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
       ],
       "status": "available",
       "reserved_for": null
@@ -1236,8 +1236,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 340,
-        "y": 1100
+        "x": 370,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1261,8 +1261,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 340,
-        "y": 1180
+        "x": 370,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1286,8 +1286,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 340,
-        "y": 1260
+        "x": 370,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1310,8 +1310,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 420,
-        "y": 1100
+        "x": 450,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1335,8 +1335,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 420,
-        "y": 1180
+        "x": 450,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1360,8 +1360,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 420,
-        "y": 1260
+        "x": 450,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1385,8 +1385,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 500,
-        "y": 1100
+        "x": 530,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1410,8 +1410,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 500,
-        "y": 1180
+        "x": 530,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1434,8 +1434,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 500,
-        "y": 1260
+        "x": 530,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1459,8 +1459,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 580,
-        "y": 1100
+        "x": 610,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1484,8 +1484,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 580,
-        "y": 1180
+        "x": 610,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1508,8 +1508,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 580,
-        "y": 1260
+        "x": 610,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1533,8 +1533,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 660,
-        "y": 1100
+        "x": 690,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1557,8 +1557,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 660,
-        "y": 1180
+        "x": 690,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1582,8 +1582,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 660,
-        "y": 1260
+        "x": 690,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1607,8 +1607,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 740,
-        "y": 1100
+        "x": 770,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1632,8 +1632,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 740,
-        "y": 1180
+        "x": 770,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1656,8 +1656,8 @@
       "team": "Engineering",
       "zone": "S",
       "coordinates": {
-        "x": 740,
-        "y": 1260
+        "x": 770,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1681,8 +1681,8 @@
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 760,
-        "y": 1100
+        "x": 880,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1706,8 +1706,8 @@
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 800,
-        "y": 1100
+        "x": 940,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1731,8 +1731,8 @@
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 840,
-        "y": 1100
+        "x": 1000,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1756,8 +1756,8 @@
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 880,
-        "y": 1100
+        "x": 1060,
+        "y": 1260
       },
       "nearby": {
         "meeting_rooms": [
@@ -1781,8 +1781,8 @@
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 760,
-        "y": 1180
+        "x": 880,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1806,8 +1806,8 @@
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 800,
-        "y": 1180
+        "x": 940,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1831,8 +1831,8 @@
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 840,
-        "y": 1180
+        "x": 1000,
+        "y": 1340
       },
       "nearby": {
         "meeting_rooms": [
@@ -1852,37 +1852,12 @@
       "reserved_for": null
     },
     {
-      "desk_id": "RES-S-71",
-      "team": "Reserved",
-      "zone": "S",
-      "coordinates": {
-        "x": 880,
-        "y": 1180
-      },
-      "nearby": {
-        "meeting_rooms": [
-          "Carmel",
-          "Dan"
-        ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": true
-      },
-      "equipment": [
-        "chair",
-        "dock",
-        "monitor"
-      ],
-      "status": "occupied",
-      "reserved_for": null
-    },
-    {
       "desk_id": "RES-S-72",
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 760,
-        "y": 1260
+        "x": 1060,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1894,11 +1869,11 @@
         "kitchenette": false
       },
       "equipment": [
-        "keyboard",
+        "dock",
         "chair",
-        "monitor"
+        "keyboard"
       ],
-      "status": "available",
+      "status": "occupied",
       "reserved_for": null
     },
     {
@@ -1906,8 +1881,33 @@
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 800,
-        "y": 1260
+        "x": 880,
+        "y": 1420
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Carmel",
+          "Dan"
+        ],
+        "bathroom": true,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "occupied",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-74",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 940,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1927,12 +1927,12 @@
       "reserved_for": null
     },
     {
-      "desk_id": "RES-S-74",
+      "desk_id": "RES-S-75",
       "team": "Reserved",
       "zone": "S",
       "coordinates": {
-        "x": 840,
-        "y": 1260
+        "x": 1000,
+        "y": 1420
       },
       "nearby": {
         "meeting_rooms": [
@@ -1952,12 +1952,112 @@
       "reserved_for": null
     },
     {
+      "desk_id": "RES-S-76",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 880,
+        "y": 1500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-77",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 940,
+        "y": 1500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-78",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 1000,
+        "y": 1500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "chair",
+        "dock",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
+      "desk_id": "RES-S-79",
+      "team": "Reserved",
+      "zone": "S",
+      "coordinates": {
+        "x": 1060,
+        "y": 1500
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false
+      },
+      "equipment": [
+        "dock",
+        "chair",
+        "keyboard"
+      ],
+      "status": "available",
+      "reserved_for": null
+    },
+    {
       "desk_id": "ITS-SE-75",
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 900,
-        "y": 1100
+        "x": 1260,
+        "y": 1070
       },
       "nearby": {
         "meeting_rooms": [
@@ -1980,8 +2080,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 980,
-        "y": 1100
+        "x": 1340,
+        "y": 1070
       },
       "nearby": {
         "meeting_rooms": [
@@ -2000,36 +2100,12 @@
       "reserved_for": null
     },
     {
-      "desk_id": "ITS-SE-77",
-      "team": "IT Security",
-      "zone": "SE",
-      "coordinates": {
-        "x": 1060,
-        "y": 1100
-      },
-      "nearby": {
-        "meeting_rooms": [
-          "Carmel"
-        ],
-        "bathroom": false,
-        "window": true,
-        "kitchenette": true
-      },
-      "equipment": [
-        "chair",
-        "dock",
-        "monitor"
-      ],
-      "status": "available",
-      "reserved_for": null
-    },
-    {
       "desk_id": "ITS-SE-78",
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 900,
-        "y": 1180
+        "x": 1260,
+        "y": 1150
       },
       "nearby": {
         "meeting_rooms": [
@@ -2053,8 +2129,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 980,
-        "y": 1180
+        "x": 1340,
+        "y": 1150
       },
       "nearby": {
         "meeting_rooms": [
@@ -2078,8 +2154,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 1060,
-        "y": 1180
+        "x": 1420,
+        "y": 1150
       },
       "nearby": {
         "meeting_rooms": [
@@ -2102,8 +2178,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 900,
-        "y": 1260
+        "x": 1260,
+        "y": 1230
       },
       "nearby": {
         "meeting_rooms": [
@@ -2126,8 +2202,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 980,
-        "y": 1260
+        "x": 1340,
+        "y": 1230
       },
       "nearby": {
         "meeting_rooms": [
@@ -2151,8 +2227,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 1060,
-        "y": 1260
+        "x": 1420,
+        "y": 1230
       },
       "nearby": {
         "meeting_rooms": [
@@ -2175,8 +2251,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 900,
-        "y": 1340
+        "x": 1260,
+        "y": 1310
       },
       "nearby": {
         "meeting_rooms": [
@@ -2199,8 +2275,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 980,
-        "y": 1340
+        "x": 1340,
+        "y": 1310
       },
       "nearby": {
         "meeting_rooms": [
@@ -2224,8 +2300,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 1060,
-        "y": 1340
+        "x": 1420,
+        "y": 1310
       },
       "nearby": {
         "meeting_rooms": [
@@ -2249,8 +2325,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 900,
-        "y": 1420
+        "x": 1260,
+        "y": 1390
       },
       "nearby": {
         "meeting_rooms": [
@@ -2274,8 +2350,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 980,
-        "y": 1420
+        "x": 1340,
+        "y": 1390
       },
       "nearby": {
         "meeting_rooms": [
@@ -2298,8 +2374,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 1060,
-        "y": 1420
+        "x": 1420,
+        "y": 1390
       },
       "nearby": {
         "meeting_rooms": [
@@ -2323,8 +2399,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 900,
-        "y": 1500
+        "x": 1260,
+        "y": 1470
       },
       "nearby": {
         "meeting_rooms": [
@@ -2348,8 +2424,8 @@
       "team": "IT Security",
       "zone": "SE",
       "coordinates": {
-        "x": 980,
-        "y": 1500
+        "x": 1340,
+        "y": 1470
       },
       "nearby": {
         "meeting_rooms": [
@@ -2373,8 +2449,8 @@
       "team": "Reserved",
       "zone": "E",
       "coordinates": {
-        "x": 900,
-        "y": 800
+        "x": 1260,
+        "y": 880
       },
       "nearby": {
         "meeting_rooms": [
@@ -2398,8 +2474,8 @@
       "team": "Reserved",
       "zone": "E",
       "coordinates": {
-        "x": 980,
-        "y": 800
+        "x": 1340,
+        "y": 880
       },
       "nearby": {
         "meeting_rooms": [
@@ -2423,8 +2499,8 @@
       "team": "Reserved",
       "zone": "E",
       "coordinates": {
-        "x": 1060,
-        "y": 800
+        "x": 1260,
+        "y": 960
       },
       "nearby": {
         "meeting_rooms": [
@@ -2447,8 +2523,8 @@
       "team": "Reserved",
       "zone": "E",
       "coordinates": {
-        "x": 900,
-        "y": 880
+        "x": 1340,
+        "y": 960
       },
       "nearby": {
         "meeting_rooms": [
@@ -2471,8 +2547,8 @@
       "team": "Reserved",
       "zone": "E",
       "coordinates": {
-        "x": 980,
-        "y": 880
+        "x": 1420,
+        "y": 960
       },
       "nearby": {
         "meeting_rooms": [
@@ -2496,8 +2572,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 900,
-        "y": 600
+        "x": 1260,
+        "y": 520
       },
       "nearby": {
         "meeting_rooms": [
@@ -2520,8 +2596,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 980,
-        "y": 600
+        "x": 1340,
+        "y": 520
       },
       "nearby": {
         "meeting_rooms": [
@@ -2545,8 +2621,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 1060,
-        "y": 600
+        "x": 1420,
+        "y": 520
       },
       "nearby": {
         "meeting_rooms": [
@@ -2570,8 +2646,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 900,
-        "y": 680
+        "x": 1260,
+        "y": 600
       },
       "nearby": {
         "meeting_rooms": [
@@ -2594,8 +2670,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 980,
-        "y": 680
+        "x": 1340,
+        "y": 600
       },
       "nearby": {
         "meeting_rooms": [
@@ -2618,8 +2694,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 1060,
-        "y": 680
+        "x": 1420,
+        "y": 600
       },
       "nearby": {
         "meeting_rooms": [
@@ -2642,8 +2718,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 900,
-        "y": 760
+        "x": 1260,
+        "y": 680
       },
       "nearby": {
         "meeting_rooms": [
@@ -2667,8 +2743,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 980,
-        "y": 760
+        "x": 1340,
+        "y": 680
       },
       "nearby": {
         "meeting_rooms": [
@@ -2691,8 +2767,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 1060,
-        "y": 760
+        "x": 1420,
+        "y": 680
       },
       "nearby": {
         "meeting_rooms": [
@@ -2716,8 +2792,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 900,
-        "y": 840
+        "x": 1260,
+        "y": 760
       },
       "nearby": {
         "meeting_rooms": [
@@ -2741,8 +2817,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 980,
-        "y": 840
+        "x": 1340,
+        "y": 760
       },
       "nearby": {
         "meeting_rooms": [
@@ -2765,8 +2841,8 @@
       "team": "DevOps",
       "zone": "E",
       "coordinates": {
-        "x": 1060,
-        "y": 840
+        "x": 1420,
+        "y": 760
       },
       "nearby": {
         "meeting_rooms": [
@@ -2783,6 +2859,174 @@
       ],
       "status": "available",
       "reserved_for": null
+    },
+    {
+      "desk_id": "ITS-SE-92",
+      "team": "IT Security",
+      "zone": "SE",
+      "coordinates": {
+        "x": 1420,
+        "y": 1470
+      },
+      "nearby": {
+        "meeting_rooms": [
+          "Dan",
+          "Carmel"
+        ],
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false
+      },
+      "equipment": [
+        "keyboard",
+        "chair",
+        "monitor"
+      ],
+      "status": "available",
+      "reserved_for": null
     }
-  ]
+  ],
+  "layout_coordinates": {
+    "meeting_rooms": [
+      {
+        "name": "Hermon",
+        "left": 370,
+        "top": 310,
+        "width": 90,
+        "height": 140,
+        "orientation": "vertical"
+      },
+      {
+        "name": "Tavor",
+        "left": 370,
+        "top": 460,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Gilboa",
+        "left": 370,
+        "top": 600,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Arbel",
+        "left": 515,
+        "top": 600,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Nursing Room",
+        "left": 370,
+        "top": 700,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Ramon",
+        "left": 370,
+        "top": 800,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Timna",
+        "left": 370,
+        "top": 1198,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Negev",
+        "left": 370,
+        "top": 1298,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Dan",
+        "left": 880,
+        "top": 1298,
+        "width": 90,
+        "height": 90,
+        "orientation": "square"
+      },
+      {
+        "name": "Carmel",
+        "left": 1140,
+        "top": 1448,
+        "width": 90,
+        "height": 300,
+        "orientation": "vertical_stretched"
+      },
+      {
+        "name": "Golan",
+        "left": 1090,
+        "top": 875,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Meron",
+        "left": 100,
+        "top": 1600,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      },
+      {
+        "name": "Yarkon",
+        "left": 340,
+        "top": 1700,
+        "width": 140,
+        "height": 90,
+        "orientation": "horizontal"
+      }
+    ],
+    "facilities": [
+      {
+        "name": "Cafeteria",
+        "type": "kitchenette",
+        "left": 880,
+        "top": 300,
+        "width": 380,
+        "height": 390
+      },
+      {
+        "name": "Men Bathroom",
+        "type": "bathroom",
+        "left": 550,
+        "top": 1198,
+        "width": 270,
+        "height": 90
+      },
+      {
+        "name": "Women Bathroom",
+        "type": "bathroom",
+        "left": 520,
+        "top": 1298,
+        "width": 300,
+        "height": 90
+      },
+      {
+        "name": "Kitchenette",
+        "type": "kitchenette",
+        "left": 980,
+        "top": 1298,
+        "width": 110,
+        "height": 80
+      }
+    ],
+    "notes": "Coordinates are in pixels. Y-axis has 200px offset applied in rendering (App.tsx). All alignments documented as of latest update."
+  }
 }
