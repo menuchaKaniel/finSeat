@@ -231,8 +231,8 @@ const SeatElement = styled(motion.div)<{
     height: 20px;
     background: ${props => {
       if (props.isSelected) return 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)';
-      if (!props.isAvailable) return 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)';
       if (props.isRecommended) return 'linear-gradient(135deg, #34d399 0%, #10b981 100%)';
+      if (!props.isAvailable) return 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)';
       return 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)';
     }};
     border: 2px solid ${props => {
@@ -258,8 +258,8 @@ const SeatElement = styled(motion.div)<{
     height: 18px;
     background: ${props => {
       if (props.isSelected) return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-      if (!props.isAvailable) return 'linear-gradient(135deg, #9ca3af 0%, #6b7280 100%)';
       if (props.isRecommended) return 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+      if (!props.isAvailable) return 'linear-gradient(135deg, #9ca3af 0%, #6b7280 100%)';
       return 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
     }};
     border: 2px solid ${props => {
@@ -734,6 +734,8 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         const desk = getDeskForSeat(seat);
         const isReservedTeam = desk?.team === 'Reserved';
         const canSelect = seat.isAvailable && !isReservedTeam;
+   
+        
         return (
           <SeatElement
             key={seat.id}
