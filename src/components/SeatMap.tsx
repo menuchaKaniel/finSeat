@@ -192,12 +192,13 @@ const TeamZoneBorder = styled.div<{ team: string }>`
 const LeanDesk = styled.div`
   position: absolute;
   height: 12px;
-  background: linear-gradient(180deg, #8b4513 0%, #654321 100%);
-  border: 1px solid #5a3a1a;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, #d1d5db 0%, #9ca3af 100%);
+  border: 1px solid #6b7280;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.3);
   pointer-events: none;
   z-index: 1;
+  transform: translateY(-6px); // Center vertically between rows (half of height)
 `;
 
 const SeatElement = styled(motion.div)<{ 
@@ -221,38 +222,11 @@ const SeatElement = styled(motion.div)<{
   transition: all 0.3s ease;
   z-index: 1;
   
-  /* Office Chair - Backrest */
+  /* Office Chair - Seat (bottom - closest to desk) */
   &::before {
     content: '';
     position: absolute;
     top: -2px;
-    width: 32px;
-    height: 18px;
-    background: ${props => {
-      if (props.isSelected) return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-      if (!props.isAvailable) return 'linear-gradient(135deg, #9ca3af 0%, #6b7280 100%)';
-      if (props.isRecommended) return 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-      return 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
-    }};
-    border: 2px solid ${props => {
-      if (props.isSelected) return '#4f46e5';
-      if (props.isRecommended) return '#059669';
-      if (!props.isAvailable) return '#4b5563';
-      return '#1e40af';
-    }};
-    border-radius: 8px 8px 4px 4px;
-    box-shadow: ${props => {
-      if (props.isSelected) return '0 2px 8px rgba(79, 70, 229, 0.4)';
-      if (props.isRecommended) return '0 2px 8px rgba(16, 185, 129, 0.3)';
-      return '0 2px 6px rgba(0, 0, 0, 0.15)';
-    }};
-  }
-  
-  /* Office Chair - Seat */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 14px;
     width: 36px;
     height: 20px;
     background: ${props => {
@@ -275,6 +249,33 @@ const SeatElement = styled(motion.div)<{
     }};
   }
   
+  /* Office Chair - Backrest (top - away from desk) */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    width: 32px;
+    height: 18px;
+    background: ${props => {
+      if (props.isSelected) return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+      if (!props.isAvailable) return 'linear-gradient(135deg, #9ca3af 0%, #6b7280 100%)';
+      if (props.isRecommended) return 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+      return 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
+    }};
+    border: 2px solid ${props => {
+      if (props.isSelected) return '#4f46e5';
+      if (props.isRecommended) return '#059669';
+      if (!props.isAvailable) return '#4b5563';
+      return '#1e40af';
+    }};
+    border-radius: 4px 4px 8px 8px;
+    box-shadow: ${props => {
+      if (props.isSelected) return '0 2px 8px rgba(79, 70, 229, 0.4)';
+      if (props.isRecommended) return '0 2px 8px rgba(16, 185, 129, 0.3)';
+      return '0 2px 6px rgba(0, 0, 0, 0.15)';
+    }};
+  }
+  
   color: ${props => {
     if (props.isSelected) return 'white';
     if (props.isRecommended) return 'white';
@@ -287,16 +288,16 @@ const SeatElement = styled(motion.div)<{
     z-index: 10;
     
     &::before {
-      box-shadow: ${props => props.isAvailable ? '0 4px 14px rgba(0, 0, 0, 0.25)' : '0 2px 6px rgba(0, 0, 0, 0.15)'};
-    }
-    
-    &::after {
       box-shadow: ${props => {
         if (props.isAvailable && props.isSelected) return '0 6px 18px rgba(139, 92, 246, 0.6)';
         if (props.isAvailable && props.isRecommended) return '0 6px 18px rgba(16, 185, 129, 0.5)';
         if (props.isAvailable) return '0 5px 16px rgba(0, 0, 0, 0.3)';
         return '0 3px 10px rgba(0, 0, 0, 0.2)';
       }};
+    }
+    
+    &::after {
+      box-shadow: ${props => props.isAvailable ? '0 4px 14px rgba(0, 0, 0, 0.25)' : '0 2px 6px rgba(0, 0, 0, 0.15)'};
     }
   }
 `;
@@ -390,7 +391,7 @@ export const SeatMap: React.FC<SeatMapProps> = ({
       {meetingRooms.map((room: any, idx: number) => {
         // Position Meron meeting room below Engineering(SW)
         const isMeron = room.name === 'Meron';
-        const meronPosition = isMeron ? { left: 100, top: 1600 } : null;
+        const meronPosition = isMeron ? { left: 155, top: 1606 } : null; // Adjusted +5px to account for zone bottom extension
         
         // Position Yarkon meeting room below Engineering(S) aligned to left
         const isYarkon = room.name === 'Yarkon';
@@ -458,7 +459,6 @@ export const SeatMap: React.FC<SeatMapProps> = ({
             <Users size={20} style={{ marginBottom: 4 }} />
             <div>{room.name}</div>
             <div style={{ fontSize: '10px', opacity: 0.7 }}>Cap: {room.capacity}</div>
-            <div style={{ fontSize: '9px', opacity: 0.6 }}>{room.zone}</div>
           </MeetingRoomBox>
         );
       })}
@@ -536,9 +536,10 @@ export const SeatMap: React.FC<SeatMapProps> = ({
           
           // Border dimensions accounting for seat structure
           const padding = 15;
-          const deskWidth = 50;
+          const deskWidth = 50; // Fixed desk width in px
           const backrestOffset = 2; // Backrest starts 2px above the element (top: -2px)
-          const seatBottom = 34; // Seat ends at top: 14px + height: 20px
+          const seatBottom = 34; // Actual bottom of seat: backrest at top:16px + height:18px = 34px
+          const bottomExtension = 5; // Extra 5px extension on the bottom
           const yOffset = 200; // Match the offset applied to seats in App.tsx
           
           return (
@@ -549,7 +550,7 @@ export const SeatMap: React.FC<SeatMapProps> = ({
                 left: minX - padding,
                 top: minY + yOffset - padding - backrestOffset, // Account for backrest position and y-offset
                 width: (maxX - minX) + deskWidth + (padding * 2),
-                height: (maxY - minY) + seatBottom + (padding * 2) + backrestOffset
+                height: (maxY - minY) + seatBottom + (padding * 2) + backrestOffset + bottomExtension
               }}
             />
           );
@@ -592,7 +593,7 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         });
       })()}
 
-      {/* Lean Desks between rows */}
+      {/* Lean Desks between rows/columns */}
       {desks && (() => {
         const teamZoneGroups = desks.reduce((acc, desk) => {
           const key = `${desk.team}-${desk.zone}`;
@@ -604,39 +605,127 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         return Object.entries(teamZoneGroups).flatMap(([key, group]) => {
           if (group.desks.length === 0) return [];
           
-          // Get unique Y coordinates (rows)
-          const yCoords = Array.from(new Set(group.desks.map(d => d.coordinates.y))).sort((a, b) => a - b);
-          
-          if (yCoords.length < 2) return []; // Need at least 2 rows
-          
-          // Get X range for the desks
-          const minX = Math.min(...group.desks.map(d => d.coordinates.x));
-          const maxX = Math.max(...group.desks.map(d => d.coordinates.x));
-          
           const yOffset = 200; // From App.tsx
           
-          // Create lean desks between pairs of rows
-          // Rows are paired: (0,1), (2,3), (4,5), etc.
-          // Lean desks go between pairs: between (1,2), (3,4), (5,6), etc.
-          const leanDesks = [];
-          for (let i = 1; i < yCoords.length - 1; i += 2) {
-            const y1 = yCoords[i];     // Last row of current pair
-            const y2 = yCoords[i + 1]; // First row of next pair
-            const midY = (y1 + y2) / 2;
-            
-            leanDesks.push(
+          // Special handling for Reserved(S) - custom grouping
+          if (key === 'Reserved-S') {
+            // Group A (64, 65, 68, 69): X=880-940, Y=1260-1340
+            // Group B (73, 74, 76, 77): X=880-940, Y=1420-1500
+            // Group C (66, 67, 70): X=1000-1060, Y=1260-1340
+            // Group D (75, 72, 78, 79): X=1000-1060, Y=1420-1500
+            return [
+              // Lean desk for Group A (X=880-940, Y=1260-1340)
               <LeanDesk
-                key={`${key}-lean-${i}`}
+                key={`${key}-lean-a`}
                 style={{
-                  left: minX,
-                  top: midY + yOffset,
-                  width: maxX - minX + 50 // Span across the zone width (50px is desk width)
+                  left: 910 + 25, // Midpoint between 880 and 940, plus centering
+                  top: 1260 + yOffset,
+                  width: 12,
+                  height: 130, // From Y=1260 to Y=1340 + desk height
+                  transform: 'translateX(-6px)'
+                }}
+              />,
+              // Lean desk for Group B (X=880-940, Y=1420-1500)
+              <LeanDesk
+                key={`${key}-lean-b`}
+                style={{
+                  left: 910 + 25, // Midpoint between 880 and 940, plus centering
+                  top: 1420 + yOffset,
+                  width: 12,
+                  height: 130, // From Y=1420 to Y=1500 (80px span + 50px desk height)
+                  transform: 'translateX(-6px)'
+                }}
+              />,
+              // Lean desk for Group C (X=1000-1060, Y=1260-1340)
+              <LeanDesk
+                key={`${key}-lean-c`}
+                style={{
+                  left: 1030 + 25, // Midpoint between 1000 and 1060, plus centering
+                  top: 1260 + yOffset,
+                  width: 12,
+                  height: 130, // From Y=1260 to Y=1340 + desk height
+                  transform: 'translateX(-6px)'
+                }}
+              />,
+              // Lean desk for Group D (X=1000-1060, Y=1420-1500)
+              <LeanDesk
+                key={`${key}-lean-d`}
+                style={{
+                  left: 1030 + 25, // Midpoint between 1000 and 1060, plus centering
+                  top: 1420 + yOffset,
+                  width: 12,
+                  height: 130, // From Y=1420 to Y=1500 (80px span + 50px desk height)
+                  transform: 'translateX(-6px)'
                 }}
               />
-            );
+            ];
           }
           
-          return leanDesks;
+          // Get unique X and Y coordinates
+          const xCoords = Array.from(new Set(group.desks.map(d => d.coordinates.x))).sort((a, b) => a - b);
+          const yCoords = Array.from(new Set(group.desks.map(d => d.coordinates.y))).sort((a, b) => a - b);
+          
+          // Determine orientation based on specific team-zone combinations
+          // Engineering(S) has 6 columns in 3 pairs - vertical
+          // Reserved(E) has 2 horizontal rows - horizontal
+          const verticalZones = ['Engineering-S'];
+          const isVertical = verticalZones.includes(key) || (xCoords.length > yCoords.length && !['Reserved-E'].includes(key));
+          
+          if (isVertical) {
+            // Vertical orientation (Engineering-S, Reserved-S, Reserved-E): lean desks between X columns
+            if (xCoords.length < 2) return [];
+            
+            const minY = Math.min(...group.desks.map(d => d.coordinates.y));
+            const maxY = Math.max(...group.desks.map(d => d.coordinates.y));
+            
+            const leanDesks = [];
+            for (let i = 0; i < xCoords.length - 1; i += 2) {
+              const x1 = xCoords[i];
+              const x2 = xCoords[i + 1];
+              const midX = (x1 + x2) / 2;
+              
+              leanDesks.push(
+                <LeanDesk
+                  key={`${key}-lean-${i}`}
+                  style={{
+                    left: midX + 25, // Center on desk (50px desk width / 2)
+                    top: minY + yOffset,
+                    width: 12, // Vertical desk
+                    height: maxY - minY + 50, // Span vertically
+                    transform: 'translateX(-6px)' // Center the 12px width
+                  }}
+                />
+              );
+            }
+            return leanDesks;
+          } else {
+            // Horizontal orientation: lean desks between Y rows
+            if (yCoords.length < 2) return [];
+            
+            const minX = Math.min(...group.desks.map(d => d.coordinates.x));
+            const maxX = Math.max(...group.desks.map(d => d.coordinates.x));
+            
+            const leanDesks = [];
+            for (let i = 0; i < yCoords.length - 1; i += 2) {
+              const y1 = yCoords[i];
+              const y2 = yCoords[i + 1];
+              const midY = (y1 + y2) / 2;
+              
+              leanDesks.push(
+                <LeanDesk
+                  key={`${key}-lean-${i}`}
+                  style={{
+                    left: minX,
+                    top: midY + yOffset + 25, // Center on desk (50px desk height / 2)
+                    width: maxX - minX + 50, // Span across the zone width (50px is desk width)
+                    height: 12, // Horizontal desk
+                    transform: 'translateY(-6px)' // Center the 12px height
+                  }}
+                />
+              );
+            }
+            return leanDesks;
+          }
         });
       })()}
 

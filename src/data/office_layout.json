@@ -2978,8 +2978,8 @@
       },
       {
         "name": "Meron",
-        "left": 100,
-        "top": 1600,
+        "left": 155,
+        "top": 1606,
         "width": 140,
         "height": 90,
         "orientation": "horizontal"
