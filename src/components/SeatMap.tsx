@@ -47,10 +47,33 @@ const MapContainer = styled.div`
   max-width: 1500px;
   height: 800px;
   max-height: 800px;
-  border: 2px solid #333;
-  background-color: white;
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
   overflow-y: scroll;
   overflow-x: auto;
+  box-shadow: 
+    0 0 40px rgba(0, 255, 255, 0.2),
+    inset 0 0 60px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.5), rgba(0, 255, 157, 0.5));
+    border-radius: 6px;
+    border: 2px solid rgba(15, 23, 42, 0.5);
+    
+    &:hover {
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.7), rgba(0, 255, 157, 0.7));
+    }
+  }
 `;
 
 const MapContent = styled.div`
@@ -58,6 +81,10 @@ const MapContent = styled.div`
   width: 1500px;
   height: 1900px;
   min-height: 1900px;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
 `;
 
 const MapHeader = styled.div`
@@ -65,55 +92,64 @@ const MapHeader = styled.div`
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid #3b82f6;
-  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  border-radius: 0;
   padding: 8px 20px;
   font-size: 14px;
   font-weight: 700;
-  color: #1e40af;
+  color: #00ffff;
   text-align: center;
   z-index: 200;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 `;
 
 const MeetingRoomBox = styled.div`
   position: absolute;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  border: 2px solid #3b82f6;
-  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%);
+  border: 2px solid rgba(59, 130, 246, 0.5);
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 600;
-  color: #1e40af;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  color: rgba(147, 197, 253, 0.9);
+  box-shadow: 
+    0 4px 12px rgba(59, 130, 246, 0.3),
+    inset 0 0 20px rgba(59, 130, 246, 0.1);
   padding: 8px;
   text-align: center;
+  backdrop-filter: blur(5px);
 `;
 
 const FacilityBox = styled.div<{ facilityType: string }>`
   position: absolute;
   background: ${props => {
     switch (props.facilityType) {
-      case 'kitchenette': return 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)';
-      case 'bathroom': return 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%)';
-      case 'printer': return 'linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%)';
-      case 'elevator': return 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)';
-      default: return 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)';
+      case 'kitchenette': return 'linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%)';
+      case 'bathroom': return 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.15) 100%)';
+      case 'printer': return 'linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(147, 51, 234, 0.15) 100%)';
+      case 'elevator': return 'linear-gradient(135deg, rgba(107, 114, 128, 0.15) 0%, rgba(75, 85, 99, 0.15) 100%)';
+      default: return 'linear-gradient(135deg, rgba(156, 163, 175, 0.15) 0%, rgba(107, 114, 128, 0.15) 100%)';
     }
   }};
   border: 2px solid ${props => {
     switch (props.facilityType) {
-      case 'kitchenette': return '#f59e0b';
-      case 'bathroom': return '#6366f1';
-      case 'printer': return '#a855f7';
-      case 'elevator': return '#6b7280';
-      default: return '#9ca3af';
+      case 'kitchenette': return 'rgba(251, 191, 36, 0.5)';
+      case 'bathroom': return 'rgba(99, 102, 241, 0.5)';
+      case 'printer': return 'rgba(168, 85, 247, 0.5)';
+      case 'elevator': return 'rgba(107, 114, 128, 0.5)';
+      default: return 'rgba(156, 163, 175, 0.5)';
     }
   }};
-  border-radius: 8px;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,30 +158,35 @@ const FacilityBox = styled.div<{ facilityType: string }>`
   font-weight: 600;
   color: ${props => {
     switch (props.facilityType) {
-      case 'kitchenette': return '#92400e';
-      case 'bathroom': return '#3730a3';
-      case 'printer': return '#6b21a8';
-      case 'elevator': return '#374151';
-      default: return '#4b5563';
+      case 'kitchenette': return 'rgba(251, 191, 36, 0.9)';
+      case 'bathroom': return 'rgba(165, 180, 252, 0.9)';
+      case 'printer': return 'rgba(216, 180, 254, 0.9)';
+      case 'elevator': return 'rgba(209, 213, 219, 0.9)';
+      default: return 'rgba(229, 231, 235, 0.9)';
     }
   }};
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   padding: 8px;
   text-align: center;
+  backdrop-filter: blur(5px);
 `;
 
 const ZoneLabel = styled.div`
   position: absolute;
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid #10b981;
-  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 2px solid rgba(0, 255, 157, 0.5);
+  border-radius: 0;
   padding: 6px 12px;
   font-size: 13px;
   font-weight: 700;
-  color: #059669;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-  backdrop-filter: blur(4px);
+  color: #00ff9d;
+  box-shadow: 
+    0 4px 12px rgba(0, 255, 157, 0.3),
+    0 0 20px rgba(0, 255, 157, 0.2);
+  backdrop-filter: blur(10px);
   pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 `;
 
 const TeamZoneBorder = styled.div<{ team: string }>`
@@ -162,7 +203,7 @@ const TeamZoneBorder = styled.div<{ team: string }>`
       default: return '#6b7280';
     }
   }};
-  border-radius: 16px;
+  border-radius: 0;
   background: ${props => {
     switch (props.team) {
       case 'Risk': return 'rgba(239, 68, 68, 0.03)';
@@ -192,13 +233,16 @@ const TeamZoneBorder = styled.div<{ team: string }>`
 const LeanDesk = styled.div`
   position: absolute;
   height: 12px;
-  background: linear-gradient(180deg, #d1d5db 0%, #9ca3af 100%);
-  border: 1px solid #6b7280;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(180deg, rgba(71, 85, 105, 0.6) 0%, rgba(51, 65, 85, 0.8) 100%);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 0;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4), 
+    inset 0 1px 2px rgba(0, 255, 255, 0.2),
+    0 0 10px rgba(0, 255, 255, 0.1);
   pointer-events: none;
   z-index: 1;
-  transform: translateY(-6px); // Center vertically between rows (half of height)
+  transform: translateY(-6px);
 `;
 
 const SeatElement = styled(motion.div)<{ 
@@ -213,92 +257,41 @@ const SeatElement = styled(motion.div)<{
   height: 50px;
   cursor: ${props => props.isAvailable ? 'pointer' : 'not-allowed'};
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4px;
-  font-size: 8px;
-  font-weight: 700;
   transition: all 0.3s ease;
-  z-index: 1;
+  z-index: 2;
+  border-radius: 0;
   
-  /* Office Chair - Seat (bottom - closest to desk) */
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    width: 36px;
-    height: 20px;
-    background: ${props => {
-      if (props.isSelected) return 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)';
-      if (props.isRecommended) return 'linear-gradient(135deg, #34d399 0%, #10b981 100%)';
-      if (!props.isAvailable) return 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)';
-      return 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)';
-    }};
-    border: 2px solid ${props => {
-      if (props.isSelected) return '#6d28d9';
-      if (props.isRecommended) return '#047857';
-      if (!props.isAvailable) return '#6b7280';
-      return '#2563eb';
-    }};
-    border-radius: 6px;
-    box-shadow: ${props => {
-      if (props.isSelected) return '0 4px 12px rgba(139, 92, 246, 0.5)';
-      if (props.isRecommended) return '0 4px 12px rgba(16, 185, 129, 0.4)';
-      return '0 3px 10px rgba(0, 0, 0, 0.2)';
-    }};
-  }
+  background: ${props => {
+    if (props.isSelected) return 'linear-gradient(135deg, rgba(138, 43, 226, 0.8) 0%, rgba(124, 58, 237, 0.9) 100%)';
+    if (props.isRecommended) return 'linear-gradient(135deg, rgba(0, 255, 157, 0.8) 0%, rgba(0, 255, 255, 0.8) 100%)';
+    if (!props.isAvailable) return 'linear-gradient(135deg, rgba(71, 85, 105, 0.6) 0%, rgba(51, 65, 85, 0.7) 100%)';
+    return 'linear-gradient(135deg, rgba(59, 130, 246, 0.7) 0%, rgba(37, 99, 235, 0.8) 100%)';
+  }};
   
-  /* Office Chair - Backrest (top - away from desk) */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 16px;
-    width: 32px;
-    height: 18px;
-    background: ${props => {
-      if (props.isSelected) return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-      if (props.isRecommended) return 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-      if (!props.isAvailable) return 'linear-gradient(135deg, #9ca3af 0%, #6b7280 100%)';
-      return 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
-    }};
-    border: 2px solid ${props => {
-      if (props.isSelected) return '#4f46e5';
-      if (props.isRecommended) return '#059669';
-      if (!props.isAvailable) return '#4b5563';
-      return '#1e40af';
-    }};
-    border-radius: 4px 4px 8px 8px;
-    box-shadow: ${props => {
-      if (props.isSelected) return '0 2px 8px rgba(79, 70, 229, 0.4)';
-      if (props.isRecommended) return '0 2px 8px rgba(16, 185, 129, 0.3)';
-      return '0 2px 6px rgba(0, 0, 0, 0.15)';
-    }};
-  }
+  border: 2px solid ${props => {
+    if (props.isSelected) return 'rgba(138, 43, 226, 0.9)';
+    if (props.isRecommended) return 'rgba(0, 255, 157, 0.9)';
+    if (!props.isAvailable) return 'rgba(100, 116, 139, 0.5)';
+    return 'rgba(59, 130, 246, 0.8)';
+  }};
   
-  color: ${props => {
-    if (props.isSelected) return 'white';
-    if (props.isRecommended) return 'white';
-    if (!props.isAvailable) return '#4b5563';
-    return '#1e3a8a';
+  box-shadow: ${props => {
+    if (props.isSelected) return '0 4px 12px rgba(138, 43, 226, 0.6), 0 0 20px rgba(138, 43, 226, 0.3)';
+    if (props.isRecommended) return '0 4px 12px rgba(0, 255, 157, 0.6), 0 0 20px rgba(0, 255, 157, 0.4)';
+    return '0 3px 10px rgba(0, 0, 0, 0.4)';
   }};
 
   &:hover {
-    transform: ${props => props.isAvailable ? 'translateY(-4px) scale(1.08)' : 'none'};
+    transform: ${props => props.isAvailable ? 'translateY(-4px) scale(1.1)' : 'none'};
     z-index: 10;
-    
-    &::before {
-      box-shadow: ${props => {
-        if (props.isAvailable && props.isSelected) return '0 6px 18px rgba(139, 92, 246, 0.6)';
-        if (props.isAvailable && props.isRecommended) return '0 6px 18px rgba(16, 185, 129, 0.5)';
-        if (props.isAvailable) return '0 5px 16px rgba(0, 0, 0, 0.3)';
-        return '0 3px 10px rgba(0, 0, 0, 0.2)';
-      }};
-    }
-    
-    &::after {
-      box-shadow: ${props => props.isAvailable ? '0 4px 14px rgba(0, 0, 0, 0.25)' : '0 2px 6px rgba(0, 0, 0, 0.15)'};
-    }
+    box-shadow: ${props => {
+      if (props.isAvailable && props.isSelected) return '0 6px 18px rgba(138, 43, 226, 0.7), 0 0 30px rgba(138, 43, 226, 0.5)';
+      if (props.isAvailable && props.isRecommended) return '0 6px 18px rgba(0, 255, 157, 0.7), 0 0 30px rgba(0, 255, 157, 0.5)';
+      if (props.isAvailable) return '0 5px 16px rgba(59, 130, 246, 0.5), 0 0 25px rgba(59, 130, 246, 0.3)';
+      return '0 3px 10px rgba(0, 0, 0, 0.4)';
+    }};
   }
 `;
 
@@ -330,12 +323,15 @@ const Legend = styled.div`
   position: absolute;
   top: 16px;
   right: 16px;
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(15, 23, 42, 0.95);
   padding: 16px;
   border-radius: 12px;
   font-size: 13px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(0, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   z-index: 100;
 `;
@@ -345,6 +341,7 @@ const LegendItem = styled.div`
   align-items: center;
   margin: 6px 0;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
   
   &::before {
     content: '';
@@ -353,7 +350,8 @@ const LegendItem = styled.div`
     border-radius: 4px;
     margin-right: 10px;
     background: ${props => props.color};
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px ${props => props.color}40;
+    border: 1px solid ${props => props.color}80;
   }
 `;
 
@@ -536,11 +534,26 @@ export const SeatMap: React.FC<SeatMapProps> = ({
           
           // Border dimensions accounting for seat structure
           const padding = 15;
-          const deskWidth = 50; // Fixed desk width in px
-          const backrestOffset = 2; // Backrest starts 2px above the element (top: -2px)
-          const seatBottom = 34; // Actual bottom of seat: backrest at top:16px + height:18px = 34px
-          const bottomExtension = 5; // Extra 5px extension on the bottom
+          const seatWidth = 50; // Seat width in px
+          const seatHeight = 50; // Seat height in px
           const yOffset = 200; // Match the offset applied to seats in App.tsx
+          
+          // Zones with 0px seat offsets - no extra space needed in borders
+          const teamZone = key;
+          const hasVerticalOffset = teamZone === 'Engineering-S'; // Only Engineering-S has vertical desk
+          const hasHorizontalOffset = teamZone !== 'Reserved-S' && teamZone !== 'Engineering-S'; // Exclude only Reserved-S and Engineering-S
+          
+          // Calculate width accounting for seat offsets
+          let borderWidth = (maxX - minX) + seatWidth + (padding * 2);
+          if (hasVerticalOffset) {
+            borderWidth += 0; // No extra space - seats touch desk
+          }
+          
+          // Calculate height accounting for seat offsets
+          let borderHeight = (maxY - minY) + seatHeight + (padding * 2);
+          if (hasHorizontalOffset) {
+            borderHeight += 0; // No extra space - seats touch desk
+          }
           
           return (
             <TeamZoneBorder 
@@ -548,9 +561,9 @@ export const SeatMap: React.FC<SeatMapProps> = ({
               team={group.team}
               style={{ 
                 left: minX - padding,
-                top: minY + yOffset - padding - backrestOffset, // Account for backrest position and y-offset
-                width: (maxX - minX) + deskWidth + (padding * 2),
-                height: (maxY - minY) + seatBottom + (padding * 2) + backrestOffset + bottomExtension
+                top: minY + yOffset - padding,
+                width: borderWidth,
+                height: borderHeight
               }}
             />
           );
@@ -574,7 +587,6 @@ export const SeatMap: React.FC<SeatMapProps> = ({
           const minY = Math.min(...group.desks.map(d => d.coordinates.y));
           
           const padding = 15;
-          const backrestOffset = 2;
           const yOffset = 200;
           const labelHeight = 20; // Approximate label height
           
@@ -583,7 +595,7 @@ export const SeatMap: React.FC<SeatMapProps> = ({
               key={key} 
               style={{ 
                 left: minX - padding + 5, // 5px inside from left border
-                top: minY + yOffset - padding - backrestOffset - labelHeight, // Position above border
+                top: minY + yOffset - padding - labelHeight, // Position above border
                 zIndex: 2
               }}
             >
@@ -618,44 +630,44 @@ export const SeatMap: React.FC<SeatMapProps> = ({
               <LeanDesk
                 key={`${key}-lean-a`}
                 style={{
-                  left: 910 + 25, // Midpoint between 880 and 940, plus centering
-                  top: 1260 + yOffset,
-                  width: 12,
-                  height: 130, // From Y=1260 to Y=1340 + desk height
-                  transform: 'translateX(-6px)'
+                  left: 910 + 25, // Midpoint + centering
+                  top: 1260 + yOffset + 2, // 2px top padding
+                  width: 2, // Thin desk width
+                  height: 126, // Reduced by 4px (2px top + 2px bottom)
+                  transform: 'translateX(-1px)' // Center the 2px width
                 }}
               />,
               // Lean desk for Group B (X=880-940, Y=1420-1500)
               <LeanDesk
                 key={`${key}-lean-b`}
                 style={{
-                  left: 910 + 25, // Midpoint between 880 and 940, plus centering
-                  top: 1420 + yOffset,
-                  width: 12,
-                  height: 130, // From Y=1420 to Y=1500 (80px span + 50px desk height)
-                  transform: 'translateX(-6px)'
+                  left: 910 + 25, // Midpoint + centering
+                  top: 1420 + yOffset + 2, // 2px top padding
+                  width: 2, // Thin desk width
+                  height: 126, // Reduced by 4px (2px top + 2px bottom)
+                  transform: 'translateX(-1px)' // Center the 2px width
                 }}
               />,
               // Lean desk for Group C (X=1000-1060, Y=1260-1340)
               <LeanDesk
                 key={`${key}-lean-c`}
                 style={{
-                  left: 1030 + 25, // Midpoint between 1000 and 1060, plus centering
-                  top: 1260 + yOffset,
-                  width: 12,
-                  height: 130, // From Y=1260 to Y=1340 + desk height
-                  transform: 'translateX(-6px)'
+                  left: 1030 + 25, // Midpoint + centering
+                  top: 1260 + yOffset + 2, // 2px top padding
+                  width: 2, // Thin desk width
+                  height: 126, // Reduced by 4px (2px top + 2px bottom)
+                  transform: 'translateX(-1px)' // Center the 2px width
                 }}
               />,
               // Lean desk for Group D (X=1000-1060, Y=1420-1500)
               <LeanDesk
                 key={`${key}-lean-d`}
                 style={{
-                  left: 1030 + 25, // Midpoint between 1000 and 1060, plus centering
-                  top: 1420 + yOffset,
-                  width: 12,
-                  height: 130, // From Y=1420 to Y=1500 (80px span + 50px desk height)
-                  transform: 'translateX(-6px)'
+                  left: 1030 + 25, // Midpoint + centering
+                  top: 1420 + yOffset + 2, // 2px top padding
+                  width: 2, // Thin desk width
+                  height: 126, // Reduced by 4px (2px top + 2px bottom)
+                  transform: 'translateX(-1px)' // Center the 2px width
                 }}
               />
             ];
@@ -666,9 +678,9 @@ export const SeatMap: React.FC<SeatMapProps> = ({
           const yCoords = Array.from(new Set(group.desks.map(d => d.coordinates.y))).sort((a, b) => a - b);
           
           // Determine orientation based on specific team-zone combinations
-          // Engineering(S) has 6 columns in 3 pairs - vertical
+          // Engineering(S) and Reserved(S) have 6 columns in 3 pairs - vertical
           // Reserved(E) has 2 horizontal rows - horizontal
-          const verticalZones = ['Engineering-S'];
+          const verticalZones = ['Engineering-S', 'Reserved-S'];
           const isVertical = verticalZones.includes(key) || (xCoords.length > yCoords.length && !['Reserved-E'].includes(key));
           
           if (isVertical) {
@@ -677,6 +689,8 @@ export const SeatMap: React.FC<SeatMapProps> = ({
             
             const minY = Math.min(...group.desks.map(d => d.coordinates.y));
             const maxY = Math.max(...group.desks.map(d => d.coordinates.y));
+            
+            console.log(`VERTICAL ${key}: xCoords=${xCoords.length}, yCoords=${yCoords.length}, minY=${minY}, maxY=${maxY}, height will be=${maxY - minY + 50}`);
             
             const leanDesks = [];
             for (let i = 0; i < xCoords.length - 1; i += 2) {
@@ -689,10 +703,10 @@ export const SeatMap: React.FC<SeatMapProps> = ({
                   key={`${key}-lean-${i}`}
                   style={{
                     left: midX + 25, // Center on desk (50px desk width / 2)
-                    top: minY + yOffset,
-                    width: 12, // Vertical desk
-                    height: maxY - minY + 50, // Span vertically
-                    transform: 'translateX(-6px)' // Center the 12px width
+                    top: minY + yOffset, // No additional offset needed
+                    width: 2, // Thin vertical desk
+                    height: maxY - minY + 50, // Full span: gap between rows + seat height
+                    transform: 'translateX(-1px)' // Center the 2px width
                   }}
                 />
               );
@@ -705,6 +719,8 @@ export const SeatMap: React.FC<SeatMapProps> = ({
             const minX = Math.min(...group.desks.map(d => d.coordinates.x));
             const maxX = Math.max(...group.desks.map(d => d.coordinates.x));
             
+            console.log(`HORIZONTAL ${key}: xCoords=${xCoords.length}, yCoords=${yCoords.length}, minX=${minX}, maxX=${maxX}, width will be=${maxX - minX + 50}`);
+            
             const leanDesks = [];
             for (let i = 0; i < yCoords.length - 1; i += 2) {
               const y1 = yCoords[i];
@@ -715,11 +731,11 @@ export const SeatMap: React.FC<SeatMapProps> = ({
                 <LeanDesk
                   key={`${key}-lean-${i}`}
                   style={{
-                    left: minX,
+                    left: minX, // No additional offset needed
                     top: midY + yOffset + 25, // Center on desk (50px desk height / 2)
-                    width: maxX - minX + 50, // Span across the zone width (50px is desk width)
-                    height: 12, // Horizontal desk
-                    transform: 'translateY(-6px)' // Center the 12px height
+                    width: maxX - minX + 50, // Full span: gap between columns + seat width
+                    height: 2, // Thin horizontal desk
+                    transform: 'translateY(-1px)' // Center the 2px height
                   }}
                 />
               );
@@ -735,6 +751,76 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         const isReservedTeam = desk?.team === 'Reserved';
         const canSelect = seat.isAvailable && !isReservedTeam;
    
+        // Calculate offset based on seat position relative to desk
+        // For vertical desks (Engineering-S): seats are left/right of desk
+        // For horizontal desks (other zones): seats are above/below desk
+        // Reserved-S keeps original 2px spacing (no offset)
+        let xOffset = 0;
+        let yOffset = 0;
+        
+        // Special adjustment for specific Reserved-S seats - Group C needs proper spacing
+        // Gap: 60px, move toward center leaving 2px on each side of desk
+        // Left seat: move (60-50-2-4)/2 = 2px right, Right seat: move 2px left
+        if (desk && desk.desk_id && ['RES-S-66', 'RES-S-70', 'RES-S-75', 'RES-S-78'].includes(desk.desk_id)) {
+          xOffset = 2; // Move right (from 1000 to 1002)
+        } else if (desk && desk.desk_id && ['RES-S-67', 'RES-S-72', 'RES-S-79'].includes(desk.desk_id)) {
+          xOffset = -2; // Move left (from 1060 to 1058)
+        }
+        
+        if (desk) {
+          const teamZone = `${desk.team}-${desk.zone}`;
+          const verticalZones = ['Engineering-S']; // Removed Reserved-S
+          
+          if (verticalZones.includes(teamZone)) {
+            // Vertical desk zones: total 5px spacing (1.5px each side of 2px desk)
+            const seatX = seat.x;
+            const zoneSeats = seats.filter(s => {
+              const d = getDeskForSeat(s);
+              return d && d.team === desk.team && d.zone === desk.zone;
+            });
+            const xCoords = Array.from(new Set(zoneSeats.map(s => s.x))).sort((a, b) => a - b);
+            
+            // Find which pair this seat belongs to and move toward desk
+            for (let i = 0; i < xCoords.length; i += 2) {
+              const x1 = xCoords[i];
+              const x2 = xCoords[i + 1];
+              const gap = x2 - x1;
+              const moveDistance = (gap - 50 - 2 - 3) / 2; // (gap - seat_width - desk_width - 1.5px*2) / 2
+              
+              if (x1 === seatX) {
+                xOffset = moveDistance; // Left seat - move right toward desk
+                break;
+              } else if (x2 === seatX) {
+                xOffset = -moveDistance; // Right seat - move left toward desk
+                break;
+              }
+            }
+          } else if (teamZone !== 'Reserved-S') {
+            // Horizontal desk zones: total 5px spacing between rows (1.5px each side of 2px desk)
+            const seatY = seat.y;
+            const zoneSeats = seats.filter(s => {
+              const d = getDeskForSeat(s);
+              return d && d.team === desk.team && d.zone === desk.zone;
+            });
+            const yCoords = Array.from(new Set(zoneSeats.map(s => s.y))).sort((a, b) => a - b);
+            
+            // Find which pair this seat belongs to and move toward desk
+            for (let i = 0; i < yCoords.length; i += 2) {
+              const y1 = yCoords[i];
+              const y2 = yCoords[i + 1];
+              const gap = y2 - y1;
+              const moveDistance = (gap - 50 - 2 - 3) / 2; // (gap - seat_height - desk_height - 1.5px*2) / 2 = 5px total
+              
+              if (y1 === seatY) {
+                yOffset = moveDistance; // Top seat - move down toward desk
+                break;
+              } else if (y2 === seatY) {
+                yOffset = -moveDistance; // Bottom seat - move up toward desk
+                break;
+              }
+            }
+          }
+        }
         
         return (
           <SeatElement
@@ -744,31 +830,13 @@ export const SeatMap: React.FC<SeatMapProps> = ({
             isRecommended={recommendedSeats.includes(seat.id)}
             zone={seat.zone}
             team={desk?.team}
-            style={{ left: seat.x, top: seat.y }}
+            style={{ left: seat.x + xOffset, top: seat.y + yOffset }}
             onMouseEnter={() => setHoveredSeat(seat)}
             onMouseLeave={() => setHoveredSeat(null)}
             onClick={() => canSelect && onSeatSelect(seat)}
             whileHover={{ scale: canSelect ? 1.05 : 1 }}
             whileTap={{ scale: canSelect ? 0.95 : 1 }}
           >
-            {desk && (
-              <div style={{ 
-                fontSize: '7px', 
-                fontWeight: 700, 
-                lineHeight: 1, 
-                textAlign: 'center',
-                position: 'relative',
-                zIndex: 2,
-                textShadow: '0 1px 2px rgba(255,255,255,0.8)',
-                marginTop: '32px',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                maxWidth: '46px'
-              }}>
-                {desk.team}
-              </div>
-            )}
           </SeatElement>
         );
       })}

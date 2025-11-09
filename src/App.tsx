@@ -17,36 +17,77 @@ import {
 } from './types';
 import { seatHistories } from './data/officeLayout';
 import { desks as layoutDesks, deskToSeat } from './data/desks';
+import { seatService } from './services/seatService';
 import { Settings, Eye, EyeOff } from 'lucide-react';
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0a0e27;
+  background-image: 
+    radial-gradient(at 20% 30%, rgba(0, 255, 255, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 70%, rgba(138, 43, 226, 0.15) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(0, 255, 157, 0.08) 0px, transparent 50%);
   padding: 30px 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
 `;
 
 const Header = styled.div`
   text-align: center;
   color: white;
   margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
 `;
 
 const Title = styled(motion.h1)`
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 900;
   margin: 0 0 10px 0;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  background: linear-gradient(135deg, #00ffff 0%, #00ff9d 50%, #8a2be2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+  letter-spacing: -1px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ffff, transparent);
+    box-shadow: 0 0 10px #00ffff;
+  }
 `;
 
 const Subtitle = styled.p`
   font-size: 1.1rem;
-  opacity: 0.9;
-  margin: 0;
+  color: rgba(0, 255, 255, 0.7);
+  margin: 20px 0 0 0;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
 `;
 
 const MainContent = styled.div`
@@ -55,6 +96,8 @@ const MainContent = styled.div`
   gap: 30px;
   max-width: 1600px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
   
   @media (max-width: 1200px) {
     grid-template-columns: 1fr;
@@ -72,11 +115,26 @@ const MapControls = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
   padding: 16px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.5), transparent);
+  }
 `;
 
 const ControlGroup = styled.div`
@@ -89,20 +147,47 @@ const ToggleButton = styled(motion.button)<{ active: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: ${props => props.active ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 'linear-gradient(135deg, #6b7280 0%, #4b5563 100%)'};
-  color: white;
-  border: none;
+  background: ${props => props.active 
+    ? 'linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 157, 0.2) 100%)' 
+    : 'rgba(30, 41, 59, 0.6)'};
+  color: ${props => props.active ? '#00ffff' : 'rgba(255, 255, 255, 0.6)'};
+  border: 1px solid ${props => props.active ? 'rgba(0, 255, 255, 0.5)' : 'rgba(100, 116, 139, 0.3)'};
   padding: 10px 16px;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px ${props => props.active ? 'rgba(16, 185, 129, 0.3)' : 'rgba(0, 0, 0, 0.1)'};
+  box-shadow: ${props => props.active 
+    ? '0 0 20px rgba(0, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)' 
+    : '0 2px 8px rgba(0, 0, 0, 0.2)'};
+  position: relative;
+  backdrop-filter: blur(5px);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    padding: 1px;
+    background: ${props => props.active 
+      ? 'linear-gradient(135deg, rgba(0, 255, 255, 0.5), rgba(0, 255, 157, 0.5))' 
+      : 'transparent'};
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: ${props => props.active ? 1 : 0};
+    transition: opacity 0.3s ease;
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px ${props => props.active ? 'rgba(16, 185, 129, 0.4)' : 'rgba(0, 0, 0, 0.15)'};
+    border-color: ${props => props.active ? 'rgba(0, 255, 255, 0.8)' : 'rgba(100, 116, 139, 0.5)'};
+    color: ${props => props.active ? '#00ffff' : 'rgba(255, 255, 255, 0.9)'};
+    box-shadow: ${props => props.active 
+      ? '0 0 30px rgba(0, 255, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15)' 
+      : '0 4px 12px rgba(0, 0, 0, 0.3)'};
   }
 `;
 
@@ -110,7 +195,7 @@ const StatsDisplay = styled.div`
   display: flex;
   gap: 20px;
   font-size: 14px;
-  color: #374151;
+  color: rgba(255, 255, 255, 0.8);
 `;
 
 const StatItem = styled.div`
@@ -118,23 +203,37 @@ const StatItem = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 12px;
+  position: relative;
+  
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.3), transparent);
+  }
   
   .number {
     font-weight: 800;
     font-size: 22px;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    background: linear-gradient(135deg, #00ffff 0%, #00ff9d 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    font-family: 'Orbitron', monospace;
   }
   
   .label {
-    font-size: 11px;
-    color: #6b7280;
-    font-weight: 600;
+    font-size: 10px;
+    color: rgba(0, 255, 255, 0.6);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 2px;
+    letter-spacing: 1px;
+    margin-top: 4px;
   }
 `;
 
@@ -199,11 +298,23 @@ function App() {
   });
   
   const [seats, setSeats] = useState<Seat[]>(() => {
+    // Try to load saved state from localStorage first
+    seatService.loadFromStorage();
+    
     // Convert desks to seats for map rendering - use actual coordinates from JSON
+    // Also sync with seat service state
+    const allDesks = seatService.getAllDesks();
+    
     return layoutDesks.map(d => {
+      // Find corresponding desk in seat service to get current status
+      const serviceDesk = allDesks.find(sd => sd.desk_id === d.desk_id);
+      const isAvailable = serviceDesk ? serviceDesk.status === 'available' : d.status === 'available';
+      
       const seat = deskToSeat(d);
       return {
         ...seat,
+        isAvailable: isAvailable,
+        currentUser: serviceDesk?.reserved_for || undefined,
         x: seat.x, // Use actual coordinates from JSON
         y: seat.y + 200  // Offset for meeting rooms and header at top
       };
@@ -313,14 +424,35 @@ function App() {
     // Find corresponding desk
     const deskId = desks.find(d => d.legacySeatId === seat.id || d.desk_id === seat.id)?.desk_id;
     
-    // Update desk availability
+    if (!deskId) {
+      console.error('Could not find desk ID for seat:', seat.id);
+      return;
+    }
+
+    // Reserve the seat using seat service
+    const success = seatService.reserveSeat(deskId, 'You');
+    
+    if (!success) {
+      // Seat could not be reserved (not available or error)
+      const errorMessage: ChatMessage = {
+        id: Date.now().toString(),
+        content: `Sorry, ${deskId} is no longer available. Please choose another seat.`,
+        sender: 'ai',
+        timestamp: new Date(),
+        type: 'text'
+      };
+      setMessages(prev => [...prev, errorMessage]);
+      return;
+    }
+    
+    // Update desk availability in local state
     setDesks(prev => prev.map(d => 
       (d.legacySeatId === seat.id || d.desk_id === seat.id)
         ? { ...d, status: 'reserved' as any, reserved_for: 'You' }
         : d
     ));
     
-    // Update seat availability
+    // Update seat availability in local state
     setSeats(prev => prev.map(s => 
       s.id === seat.id 
         ? { ...s, isAvailable: false, currentUser: 'You', scheduledUntil: new Date(Date.now() + 4 * 60 * 60 * 1000) }
@@ -341,6 +473,10 @@ function App() {
     };
 
     setMessages(prev => [...prev, confirmationMessage]);
+    
+    // Log statistics
+    const stats = seatService.getStatistics();
+    console.log('📊 Seat Statistics:', stats);
   };
 
   const handleApiKeyUpdate = (apiKey: string) => {

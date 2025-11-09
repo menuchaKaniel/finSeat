@@ -128,7 +128,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -153,7 +153,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -378,7 +378,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -578,7 +578,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -678,7 +678,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -803,7 +803,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -828,7 +828,7 @@
         "keyboard",
         "dock"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -903,7 +903,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -953,7 +953,7 @@
         "keyboard",
         "dock"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1028,7 +1028,7 @@
         "keyboard",
         "dock"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1053,7 +1053,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1128,7 +1128,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1203,7 +1203,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1228,7 +1228,7 @@
         "keyboard",
         "dock"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1278,7 +1278,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1302,7 +1302,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1352,7 +1352,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1377,7 +1377,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1426,7 +1426,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1451,7 +1451,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1525,7 +1525,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1574,7 +1574,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1599,7 +1599,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1624,7 +1624,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1648,7 +1648,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -1699,7 +1699,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-65",
@@ -1724,7 +1724,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-66",
@@ -1749,7 +1749,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-67",
@@ -1774,7 +1774,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-68",
@@ -1799,7 +1799,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-69",
@@ -1824,7 +1824,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-70",
@@ -1849,7 +1849,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-72",
@@ -1874,7 +1874,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-73",
@@ -1899,7 +1899,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-74",
@@ -1924,7 +1924,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-75",
@@ -1948,8 +1948,8 @@
         "dock",
         "monitor"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-76",
@@ -1973,8 +1973,8 @@
         "chair",
         "monitor"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-77",
@@ -1998,8 +1998,8 @@
         "chair",
         "keyboard"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-78",
@@ -2023,8 +2023,8 @@
         "dock",
         "monitor"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-S-79",
@@ -2048,8 +2048,8 @@
         "chair",
         "keyboard"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "ITS-SE-75",
@@ -2072,7 +2072,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2170,7 +2170,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2219,7 +2219,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2292,7 +2292,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2317,7 +2317,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2342,7 +2342,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2416,7 +2416,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2441,7 +2441,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2466,8 +2466,8 @@
         "dock",
         "monitor"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-E-93",
@@ -2491,8 +2491,8 @@
         "chair",
         "monitor"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-E-94",
@@ -2515,8 +2515,8 @@
         "chair",
         "keyboard"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-E-95",
@@ -2539,8 +2539,8 @@
         "keyboard",
         "dock"
       ],
-      "status": "available",
-      "reserved_for": null
+      "status": "occupied",
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "RES-E-96",
@@ -2565,7 +2565,7 @@
         "dock"
       ],
       "status": "occupied",
-      "reserved_for": null
+      "reserved_for": "Reserved Team"
     },
     {
       "desk_id": "DEV-E-97",
@@ -2613,7 +2613,7 @@
         "keyboard",
         "dock"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2662,7 +2662,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2710,7 +2710,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2735,7 +2735,7 @@
         "chair",
         "keyboard"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2784,7 +2784,7 @@
         "chair",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
@@ -2833,7 +2833,7 @@
         "dock",
         "monitor"
       ],
-      "status": "occupied",
+      "status": "available",
       "reserved_for": null
     },
     {
