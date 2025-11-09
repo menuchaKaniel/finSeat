@@ -77,14 +77,20 @@ class OpenAIProvider implements LLMProvider {
         ).join(' | ')}`
       : 'No active recommendations';
 
+    const amenityInfo = userPreferences.amenityPreferences 
+      ? `Amenities: ${userPreferences.amenityPreferences.avoidColdAreas ? 'prefers warm areas' : 'no temperature preference'}${userPreferences.amenityPreferences.preferAisle ? ', prefers aisle seats' : ''}${userPreferences.amenityPreferences.nearMeetingRooms ? ', near meeting rooms' : ''}`
+      : '';
+
     return `You are AI Desk Buddy 2.0, a friendly and intelligent office seating assistant. Your personality is helpful, conversational, and slightly enthusiastic about finding the perfect workspace.
 
 CURRENT CONTEXT:
 - Time: ${timeOfDay} (${currentTime.toLocaleTimeString()})
 - Available seats: ${availableCount} seats available
+- User team: ${userPreferences.team}
 - User work style: ${userPreferences.workStyle}
 - Collaboration needs: ${userPreferences.collaborationNeeds}
 - Preferred zones: ${userPreferences.preferredZones.join(', ')}
+${amenityInfo ? `- ${amenityInfo}` : ''}
 - ${scheduleInfo}
 
 OFFICE ZONES:
@@ -95,18 +101,19 @@ ${recommendationInfo}
 CONVERSATION GUIDELINES:
 1. Be conversational and friendly, not robotic
 2. Reference specific seat details, zones, and features when relevant
-3. Consider the user's schedule and work style in responses  
+3. Consider the user's schedule, work style, team, and amenity preferences in responses  
 4. Vary your language - don't repeat the same phrases
 5. Ask follow-up questions to better understand needs
 6. Use emojis sparingly (1-2 per message max)
 7. Keep responses concise but informative (2-4 sentences)
 8. Acknowledge the current time and context
-9. If recommending seats, explain WHY they're good matches
+9. If recommending seats, explain WHY they're good matches (including team area proximity, temperature comfort, etc.)
 10. Be proactive about potential conflicts or considerations
+11. Note: "Negev" is a wellness/manicure room, NOT a meeting room - don't recommend seats near it for meeting proximity
 
 RESPONSE STYLE:
 - Casual but professional
-- Personalized to the user's preferences
+- Personalized to the user's preferences and team
 - Context-aware of office dynamics
 - Solution-focused
 
@@ -402,6 +409,7 @@ export class LLMService {
   }
 
   async generateResponse(userMessage: string, context: ConversationContext): Promise<string> {
+    debugger;
     // Check if we have a valid API key first
     const hasApiKey = localStorage.getItem('openai_api_key') && localStorage.getItem('openai_api_key')!.startsWith('sk-');
     
@@ -440,16 +448,23 @@ export class LLMService {
   // Method to test if the service is working
   async testConnection(): Promise<boolean> {
     try {
+      // Test context with all required UserPreferences fields
       const testContext: ConversationContext = {
         userMessage: 'test',
         availableSeats: [],
         zones: [],
         userPreferences: {
+          team: 'Engineering',
           workStyle: 'mixed',
           collaborationNeeds: 'medium',
           preferredZones: [],
           timePreferences: { morningPerson: true, afternoonFocus: true },
-          seatFeatures: []
+          seatFeatures: [],
+          amenityPreferences: {
+            avoidColdAreas: false,
+            preferAisle: false,
+            nearMeetingRooms: true
+          }
         },
         userSchedule: [],
         conversationHistory: [],

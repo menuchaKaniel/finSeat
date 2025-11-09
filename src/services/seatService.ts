@@ -11,6 +11,8 @@ interface DeskData {
     window: boolean;
     kitchenette?: boolean;
     cafeteria?: boolean;
+    aisle?: boolean;
+    cold_area?: boolean;
   };
   equipment: string[];
   status: 'available' | 'occupied';
@@ -56,6 +58,90 @@ class SeatService {
    */
   getDesksByTeam(team: string): DeskData[] {
     return this.data.desks.filter(desk => desk.team === team);
+  }
+
+  /**
+   * Get desks by amenity preferences
+   */
+  getDesksByAmenities(preferences: {
+    avoidColdAreas?: boolean;
+    preferAisle?: boolean;
+    nearWindow?: boolean;
+    nearKitchen?: boolean;
+    nearBathroom?: boolean;
+  }): DeskData[] {
+    return this.data.desks.filter(desk => {
+      // Filter out cold areas if user wants to avoid them
+      if (preferences.avoidColdAreas && desk.nearby.cold_area) {
+        return false;
+      }
+
+      // If user prefers aisle, only show aisle seats
+      if (preferences.preferAisle && !desk.nearby.aisle) {
+        return false;
+      }
+
+      // If user wants window, only show window seats
+      if (preferences.nearWindow && !desk.nearby.window) {
+        return false;
+      }
+
+      // If user wants kitchen, only show seats near kitchen
+      if (preferences.nearKitchen && !desk.nearby.kitchenette) {
+        return false;
+      }
+
+      // If user wants bathroom, only show seats near bathroom
+      if (preferences.nearBathroom && !desk.nearby.bathroom) {
+        return false;
+      }
+
+      return true;
+    });
+  }
+
+  /**
+   * Get available desks with amenity filters
+   */
+  getAvailableDesksWithPreferences(preferences: {
+    avoidColdAreas?: boolean;
+    preferAisle?: boolean;
+    nearWindow?: boolean;
+    nearKitchen?: boolean;
+    nearBathroom?: boolean;
+    team?: string;
+  }): DeskData[] {
+    let desks = this.getAvailableDesks();
+
+    // Apply team filter if specified
+    if (preferences.team) {
+      desks = desks.filter(desk => desk.team === preferences.team);
+    }
+
+    // Apply amenity filters
+    return desks.filter(desk => {
+      if (preferences.avoidColdAreas && desk.nearby.cold_area) {
+        return false;
+      }
+
+      if (preferences.preferAisle && !desk.nearby.aisle) {
+        return false;
+      }
+
+      if (preferences.nearWindow && !desk.nearby.window) {
+        return false;
+      }
+
+      if (preferences.nearKitchen && !desk.nearby.kitchenette) {
+        return false;
+      }
+
+      if (preferences.nearBathroom && !desk.nearby.bathroom) {
+        return false;
+      }
+
+      return true;
+    });
   }
 
   /**
@@ -130,6 +216,10 @@ class SeatService {
     const available = this.data.desks.filter(d => d.status === 'available').length;
     const occupied = this.data.desks.filter(d => d.status === 'occupied').length;
     const reserved = this.data.desks.filter(d => d.team === 'Reserved').length;
+    const aisleSeats = this.data.desks.filter(d => d.nearby.aisle).length;
+    const coldAreaSeats = this.data.desks.filter(d => d.nearby.cold_area).length;
+    const availableAisleSeats = this.data.desks.filter(d => d.status === 'available' && d.nearby.aisle).length;
+    const availableWarmSeats = this.data.desks.filter(d => d.status === 'available' && !d.nearby.cold_area).length;
 
     return {
       total,
@@ -137,7 +227,11 @@ class SeatService {
       occupied,
       reserved,
       availablePercentage: Math.round((available / total) * 100),
-      occupiedPercentage: Math.round((occupied / total) * 100)
+      occupiedPercentage: Math.round((occupied / total) * 100),
+      aisleSeats,
+      coldAreaSeats,
+      availableAisleSeats,
+      availableWarmSeats
     };
   }
 

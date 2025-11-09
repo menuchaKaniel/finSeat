@@ -262,6 +262,7 @@ function deriveZonesFromDesks(desks: Desk[]): Zone[] {
 }
 
 const sampleUserPreferences: UserPreferences = {
+  team: 'Engineering', // Default team
   workStyle: 'mixed',
   collaborationNeeds: 'medium',
   preferredZones: [ZoneType.FOCUS, ZoneType.COLLABORATIVE],
@@ -269,7 +270,12 @@ const sampleUserPreferences: UserPreferences = {
     morningPerson: true,
     afternoonFocus: true
   },
-  seatFeatures: ['monitor', 'window-view', 'standing-desk']
+  seatFeatures: ['monitor', 'window-view', 'standing-desk'],
+  amenityPreferences: {
+    avoidColdAreas: true, // Avoid cold areas by default
+    preferAisle: false,
+    nearMeetingRooms: true // Prefer proximity to actual meeting rooms (not wellness rooms)
+  }
 };
 
 const sampleSchedule: Schedule[] = [

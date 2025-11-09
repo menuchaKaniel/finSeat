@@ -22,6 +22,8 @@ export const desks: Desk[] = officeLayoutData.desks.map((deskData: any): Desk =>
       cafeteria: deskData.nearby.cafeteria || false,
       window: deskData.nearby.window || false,
       elevator: deskData.nearby.elevator || false,
+      aisle: deskData.nearby.aisle ?? false,
+      cold_area: deskData.nearby.cold_area ?? false,
     },
     status: deskData.status,
     equipment: deskData.equipment || [],
@@ -46,5 +48,7 @@ export function deskToSeat(desk: Desk): Seat {
     isSelected: false,
     zone: 'focus' as any,
     features: desk.equipment.map(e => ({ type: e as any, label: e })),
+    aisle: desk.nearby.aisle,
+    isColdArea: desk.nearby.cold_area,
   };
 }

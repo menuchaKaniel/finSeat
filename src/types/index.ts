@@ -13,6 +13,8 @@ export interface Seat {
   currentUser?: string;
   scheduledUntil?: Date;
   // Extended metadata
+  aisle?: boolean; // Default: false. Seat is next to an aisle
+  isColdArea?: boolean; // Default: false. Area tends to be cold (AC/ventilation)
   orientation?: 'north' | 'south' | 'east' | 'west';
   nearby?: {
     meetingRooms: string[]; // meeting room ids within proximity threshold
@@ -92,6 +94,7 @@ export interface Facility {
 }
 
 export interface UserPreferences {
+  team: string; // User's team (e.g., 'Engineering', 'Product', 'Risk')
   workStyle: 'quiet' | 'social' | 'mixed';
   collaborationNeeds: 'high' | 'medium' | 'low';
   preferredZones: ZoneType[];
@@ -100,6 +103,11 @@ export interface UserPreferences {
     afternoonFocus: boolean;
   };
   seatFeatures: string[];
+  amenityPreferences?: {
+    avoidColdAreas?: boolean; // Avoid seats in cold areas (AC/ventilation)
+    preferAisle?: boolean; // Prefer seats next to aisles
+    nearMeetingRooms?: boolean; // Prefer proximity to actual meeting rooms (exclude non-meeting spaces)
+  };
 }
 
 export interface Schedule {
@@ -164,6 +172,8 @@ export interface DeskNearbyFeatures {
   cafeteria: boolean;
   window: boolean;
   elevator: boolean;
+  aisle: boolean; // Desk is next to an aisle
+  cold_area: boolean; // Area tends to be cold (AC/ventilation)
 }
 
 export interface DeskCoordinate {

@@ -229,6 +229,10 @@ export class AIRecommendationEngine {
     let score = 0;
     const maxScore = 100;
 
+    // Team zone matching (20 point bonus)
+    const teamBonus = this.getTeamZoneBonus(seat, preferences.team);
+    score += teamBonus;
+
     // Zone preference matching (30% weight)
     if (preferences.preferredZones.includes(seat.zone)) {
       score += 30;
@@ -262,7 +266,51 @@ export class AIRecommendationEngine {
       score += this.getActivityLevelScore(zone, preferences) * 0.1;
     }
 
+    // Amenity preferences scoring
+    if (preferences.amenityPreferences) {
+      score += this.getAmenityScore(seat, preferences.amenityPreferences);
+    }
+
     return Math.min(score, maxScore);
+  }
+
+  // Get amenity preference score
+  private getAmenityScore(seat: Seat, amenityPrefs: NonNullable<UserPreferences['amenityPreferences']>): number {
+    let score = 0;
+
+    // Penalize cold areas if user wants to avoid them
+    if (amenityPrefs.avoidColdAreas && seat.isColdArea) {
+      score -= 15; // Penalty for cold areas
+    }
+
+    // Bonus for aisle seats if preferred
+    if (amenityPrefs.preferAisle && seat.aisle) {
+      score += 10; // Bonus for aisle access
+    }
+
+    return score;
+  }
+
+  // Get team zone matching bonus
+  private getTeamZoneBonus(seat: Seat, userTeam: string): number {
+    // Extract team name from seat ID (e.g., "ENG-S-01" -> "Engineering")
+    const seatId = seat.id;
+    const teamPrefixes: { [key: string]: string } = {
+      'ENG': 'Engineering',
+      'PROD': 'Product',
+      'RISK': 'Risk',
+      'IT': 'IT Security',
+      'DEV': 'DevOps',
+      'RES': 'Reserved'
+    };
+
+    for (const [prefix, teamName] of Object.entries(teamPrefixes)) {
+      if (seatId.startsWith(prefix) && teamName === userTeam) {
+        return 20; // 20 point bonus for team zone match
+      }
+    }
+
+    return 0;
   }
 
   // Get zone compatibility score for non-preferred zones
@@ -377,6 +425,12 @@ export class AIRecommendationEngine {
   private generateReasons(seat: Seat, preferences: UserPreferences, score: number): string[] {
     const reasons = [];
 
+    // Team zone match reason (highest priority)
+    const teamBonus = this.getTeamZoneBonus(seat, preferences.team);
+    if (teamBonus > 0) {
+      reasons.push(`In your team's area (${preferences.team})`);
+    }
+
     // Zone-based reasons
     if (preferences.preferredZones.includes(seat.zone)) {
       reasons.push(`Perfect ${seat.zone} zone match`);
@@ -417,6 +471,18 @@ export class AIRecommendationEngine {
       }
     }
 
+    // Amenity-based reasons
+    if (preferences.amenityPreferences) {
+      if (preferences.amenityPreferences.preferAisle && seat.aisle) {
+        reasons.push('Easy aisle access');
+      }
+      if (preferences.amenityPreferences.avoidColdAreas && !seat.isColdArea) {
+        reasons.push('Comfortable temperature zone');
+      } else if (!preferences.amenityPreferences.avoidColdAreas && seat.isColdArea) {
+        // Only mention if it's a cold area and user doesn't mind
+      }
+    }
+
     // Availability reasons
     reasons.push('Available now');
 
@@ -426,6 +492,12 @@ export class AIRecommendationEngine {
   // Get matched preferences
   private getMatchedPreferences(seat: Seat, preferences: UserPreferences): string[] {
     const matched = [];
+
+    // Team zone match
+    const teamBonus = this.getTeamZoneBonus(seat, preferences.team);
+    if (teamBonus > 0) {
+      matched.push(`${preferences.team} team area`);
+    }
 
     if (preferences.preferredZones.includes(seat.zone)) {
       matched.push(`${seat.zone} zone`);

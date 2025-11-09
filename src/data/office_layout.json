@@ -119,9 +119,11 @@
           "Hermon",
           "Tavor"
         ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": true
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -129,7 +131,8 @@
         "keyboard"
       ],
       "status": "available",
-      "reserved_for": null
+      "reserved_for": null,
+      "f": false
     },
     {
       "desk_id": "RIS-NW-02",
@@ -144,9 +147,11 @@
           "Hermon",
           "Tavor"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -169,9 +174,11 @@
           "Hermon",
           "Tavor"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -196,7 +203,9 @@
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -216,12 +225,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Gilboa",
-          "Arbel"
+          "Hermon",
+          "Tavor"
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -241,12 +252,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Gilboa",
-          "Arbel"
+          "Hermon",
+          "Tavor"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -269,9 +282,11 @@
           "Tavor",
           "Gilboa"
         ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": true
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -291,12 +306,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Hermon",
-          "Tavor"
+          "Tavor",
+          "Gilboa"
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -321,7 +338,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -344,9 +363,11 @@
           "Gilboa",
           "Arbel"
         ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": false
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -371,7 +392,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -396,7 +419,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -421,7 +446,9 @@
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -441,12 +468,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Hermon",
-          "Tavor"
+          "Tavor",
+          "Gilboa"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -466,12 +495,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Hermon",
-          "Tavor"
+          "Tavor",
+          "Gilboa"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": true
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -495,8 +526,10 @@
           "Arbel"
         ],
         "bathroom": false,
-        "window": false,
-        "kitchenette": false
+        "window": true,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -521,7 +554,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -541,12 +576,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Ramon",
-          "Negev"
+          "Ramon"
         ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": false
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "chair",
@@ -566,12 +602,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
           "Ramon"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": true
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "dock",
@@ -591,12 +628,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
           "Ramon"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "keyboard",
@@ -616,12 +654,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Ramon",
-          "Negev"
+          "Ramon"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "chair",
@@ -641,12 +680,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Ramon",
-          "Negev"
+          "Ramon"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "keyboard",
@@ -669,9 +709,11 @@
           "Negev",
           "Timna"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "dock",
@@ -691,12 +733,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
-          "Ramon"
+          "Negev",
+          "Timna"
         ],
         "bathroom": false,
-        "window": true,
-        "kitchenette": true
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "chair",
@@ -719,9 +763,11 @@
           "Negev",
           "Timna"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "dock",
@@ -741,12 +787,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
-          "Ramon"
+          "Negev",
+          "Timna"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "monitor",
@@ -766,12 +814,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
-          "Ramon"
+          "Negev",
+          "Timna"
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "chair",
@@ -791,12 +841,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Ramon",
-          "Negev"
+          "Negev",
+          "Timna"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": true
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "chair",
@@ -816,12 +868,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
-          "Ramon"
+          "Negev",
+          "Timna"
         ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": false
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "monitor",
@@ -841,12 +895,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
-          "Ramon"
+          "Negev",
+          "Timna"
         ],
         "bathroom": false,
-        "window": true,
-        "kitchenette": true
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "keyboard",
@@ -866,12 +922,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Ramon",
-          "Negev"
+          "Negev",
+          "Timna"
         ],
         "bathroom": false,
-        "window": true,
-        "kitchenette": false
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "chair",
@@ -891,12 +949,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Ramon",
-          "Negev"
+          "Negev",
+          "Timna"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "chair",
@@ -916,12 +976,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
-          "Ramon"
+          "Negev",
+          "Timna"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "dock",
@@ -941,12 +1003,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Timna",
-          "Ramon"
+          "Negev",
+          "Timna"
         ],
         "bathroom": false,
-        "window": true,
-        "kitchenette": true
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": true
       },
       "equipment": [
         "monitor",
@@ -969,9 +1033,11 @@
           "Yarkon",
           "Meron"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -994,9 +1060,11 @@
           "Yarkon",
           "Meron"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1019,9 +1087,11 @@
           "Meron",
           "Yarkon"
         ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": false
+        "bathroom": false,
+        "window": true,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -1045,8 +1115,10 @@
           "Meron"
         ],
         "bathroom": false,
-        "window": true,
-        "kitchenette": true
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1069,9 +1141,11 @@
           "Meron",
           "Yarkon"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1094,9 +1168,11 @@
           "Yarkon",
           "Meron"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1120,8 +1196,10 @@
           "Meron"
         ],
         "bathroom": false,
-        "window": true,
-        "kitchenette": true
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1146,7 +1224,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1171,7 +1251,9 @@
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1194,9 +1276,11 @@
           "Yarkon",
           "Meron"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1219,9 +1303,11 @@
           "Yarkon",
           "Meron"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -1241,12 +1327,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
-          "Carmel"
+          "Yarkon",
+          "Meron"
         ],
-        "bathroom": false,
-        "window": true,
-        "kitchenette": true
+        "bathroom": true,
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1266,12 +1354,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel",
-          "Dan"
+          "Yarkon",
+          "Meron"
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1291,11 +1381,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel"
+          "Yarkon",
+          "Meron"
         ],
-        "bathroom": false,
-        "window": true,
-        "kitchenette": false
+        "bathroom": true,
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1315,12 +1408,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
-          "Carmel"
+          "Yarkon",
+          "Meron"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1340,12 +1435,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel",
-          "Dan"
+          "Yarkon",
+          "Meron"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1365,12 +1462,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
-          "Carmel"
+          "Yarkon",
+          "Meron"
         ],
         "bathroom": true,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1390,12 +1489,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel",
           "Dan"
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1415,11 +1515,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel"
+          "Dan"
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1439,12 +1541,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
-          "Carmel"
+          "Dan"
         ],
-        "bathroom": false,
-        "window": false,
-        "kitchenette": false
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1464,12 +1567,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
-          "Carmel"
+          "Dan"
         ],
         "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -1493,7 +1597,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1513,12 +1619,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
-          "Carmel"
+          "Dan"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1538,11 +1645,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel"
+          "Carmel",
+          "Dan"
         ],
         "bathroom": true,
-        "window": true,
-        "kitchenette": true
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -1567,7 +1677,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1590,9 +1702,11 @@
           "Carmel",
           "Dan"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": true,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1616,8 +1730,10 @@
           "Dan"
         ],
         "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1637,11 +1753,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel"
+          "Carmel",
+          "Dan"
         ],
         "bathroom": true,
-        "window": true,
-        "kitchenette": true
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1664,9 +1783,11 @@
           "Carmel",
           "Dan"
         ],
-        "bathroom": false,
-        "window": false,
-        "kitchenette": false
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1691,7 +1812,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1699,7 +1822,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-65",
@@ -1716,7 +1839,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1724,7 +1849,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-66",
@@ -1741,7 +1866,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1749,7 +1876,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-67",
@@ -1766,7 +1893,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1774,7 +1903,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-68",
@@ -1791,7 +1920,9 @@
         ],
         "bathroom": true,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1799,7 +1930,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-69",
@@ -1816,7 +1947,9 @@
         ],
         "bathroom": true,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1824,7 +1957,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-70",
@@ -1841,7 +1974,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1849,7 +1984,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-72",
@@ -1866,7 +2001,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1874,7 +2011,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-73",
@@ -1891,7 +2028,9 @@
         ],
         "bathroom": true,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1899,7 +2038,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-74",
@@ -1916,7 +2055,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1924,7 +2065,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-75",
@@ -1941,7 +2082,9 @@
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -1949,7 +2092,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-76",
@@ -1966,7 +2109,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -1974,7 +2119,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-77",
@@ -1991,7 +2136,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -1999,7 +2146,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-78",
@@ -2016,7 +2163,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -2024,7 +2173,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-S-79",
@@ -2041,7 +2190,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2049,7 +2200,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "ITS-SE-75",
@@ -2063,9 +2214,11 @@
         "meeting_rooms": [
           "Carmel"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2087,9 +2240,11 @@
         "meeting_rooms": [
           "Carmel"
         ],
-        "bathroom": false,
-        "window": false,
-        "kitchenette": true
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2114,7 +2269,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2137,9 +2294,11 @@
           "Dan",
           "Carmel"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -2159,11 +2318,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel"
+          "Carmel",
+          "Dan"
         ],
-        "bathroom": false,
-        "window": false,
-        "kitchenette": false
+        "bathroom": true,
+        "window": true,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2185,9 +2347,11 @@
         "meeting_rooms": [
           "Carmel"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -2210,9 +2374,11 @@
           "Dan",
           "Carmel"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -2232,11 +2398,14 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Carmel"
+          "Carmel",
+          "Dan"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2260,7 +2429,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2280,12 +2451,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
           "Carmel"
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -2305,12 +2477,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
           "Carmel"
         ],
-        "bathroom": false,
+        "bathroom": true,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2330,12 +2503,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
           "Carmel"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2357,9 +2531,11 @@
         "meeting_rooms": [
           "Carmel"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -2379,12 +2555,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
           "Carmel"
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -2404,12 +2581,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
           "Carmel"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2429,12 +2607,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
           "Carmel"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "bathroom": false,
+        "window": false,
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2459,7 +2638,9 @@
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -2467,7 +2648,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-E-93",
@@ -2484,7 +2665,9 @@
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2492,7 +2675,7 @@
         "monitor"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-E-94",
@@ -2508,7 +2691,9 @@
         ],
         "bathroom": true,
         "window": false,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2516,7 +2701,7 @@
         "keyboard"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-E-95",
@@ -2532,7 +2717,9 @@
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -2540,7 +2727,7 @@
         "dock"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "RES-E-96",
@@ -2557,7 +2744,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -2565,7 +2754,7 @@
         "dock"
       ],
       "status": "occupied",
-      "reserved_for": "Reserved Team"
+      "reserved_for": "HR and Finance"
     },
     {
       "desk_id": "DEV-E-97",
@@ -2581,7 +2770,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -2601,12 +2792,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Golan",
-          "Carmel"
+          "Golan"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "monitor",
@@ -2626,12 +2818,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Golan",
-          "Carmel"
+          "Golan"
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -2655,7 +2848,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2679,7 +2874,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -2703,7 +2900,9 @@
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2726,9 +2925,11 @@
           "Golan",
           "Carmel"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": true
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2750,9 +2951,11 @@
         "meeting_rooms": [
           "Golan"
         ],
-        "bathroom": true,
-        "window": true,
-        "kitchenette": false
+        "bathroom": false,
+        "window": false,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2772,12 +2975,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Golan",
-          "Carmel"
+          "Golan"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2797,12 +3001,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Golan",
-          "Carmel"
+          "Golan"
         ],
-        "bathroom": true,
+        "bathroom": false,
         "window": false,
-        "kitchenette": true
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",
@@ -2826,7 +3031,9 @@
         ],
         "bathroom": false,
         "window": false,
-        "kitchenette": false
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "chair",
@@ -2848,9 +3055,11 @@
         "meeting_rooms": [
           "Golan"
         ],
-        "bathroom": true,
-        "window": false,
-        "kitchenette": false
+        "bathroom": false,
+        "window": true,
+        "kitchenette": true,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "dock",
@@ -2870,12 +3079,13 @@
       },
       "nearby": {
         "meeting_rooms": [
-          "Dan",
           "Carmel"
         ],
         "bathroom": false,
         "window": true,
-        "kitchenette": false
+        "kitchenette": false,
+        "aisle": false,
+        "cold_area": false
       },
       "equipment": [
         "keyboard",

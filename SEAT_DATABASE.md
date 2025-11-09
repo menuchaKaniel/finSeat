@@ -25,8 +25,8 @@ The `office_layout.json` file serves as the **database** for the project, storin
       "coordinates": { "x": 100, "y": 100 },
       "nearby": {
         "meeting_rooms": ["Hermon", "Tavor"],
-        "bathroom": true,
-        "window": false,
+        "bathroom": false,
+        "window": true,
         "kitchenette": true
       },
       "equipment": ["dock", "chair", "keyboard"],
