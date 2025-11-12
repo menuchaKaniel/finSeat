@@ -1,4 +1,7 @@
-import OpenAI from 'openai';
+import {
+  BedrockRuntimeClient,
+  InvokeModelCommand,
+} from "@aws-sdk/client-bedrock-runtime";
 import { 
   Seat, 
   SeatRecommendation, 
@@ -6,6 +9,10 @@ import {
   Schedule, 
   Zone
 } from '../types';
+
+// Import office layout data
+import officeLayoutData from '../data/office_layout.json';
+import { BookingHistoryService } from '../services/bookingHistoryService';
 
 export interface LLMProvider {
   generateResponse(prompt: string, context: ConversationContext): Promise<string>;
@@ -22,102 +29,214 @@ export interface ConversationContext {
   currentTime: Date;
 }
 
-class OpenAIProvider implements LLMProvider {
-  private client: OpenAI;
-  private model: string;
+class BedrockProvider implements LLMProvider {
+  private client: BedrockRuntimeClient;
+  private modelId: string;
 
-  constructor(apiKey?: string, model: string = 'gpt-3.5-turbo') {
-    this.client = new OpenAI({
-      apiKey: apiKey || process.env.REACT_APP_OPENAI_API_KEY || '',
-      dangerouslyAllowBrowser: true // Only for demo - use backend in production
+  constructor(region?: string, modelId?: string) {
+    // Use environment variables with REACT_APP_ prefix (required for React)
+    const awsRegion = region || process.env.REACT_APP_AWS_DEFAULT_REGION || 'us-east-1';
+    this.modelId = modelId || process.env.REACT_APP_AWS_BEDROCK_MODEL_ID || 'anthropic.claude-3-sonnet-20240229-v1:0';
+    
+    // Debug: Check what environment variables are available
+    console.log('🔍 Environment Variables Debug:', {
+      'process.env.REACT_APP_AWS_ACCESS_KEY_ID': process.env.REACT_APP_AWS_ACCESS_KEY_ID ? 'SET' : 'NOT SET',
+      'process.env.REACT_APP_AWS_SECRET_ACCESS_KEY': process.env.REACT_APP_AWS_SECRET_ACCESS_KEY ? 'SET' : 'NOT SET',
+      'process.env.REACT_APP_AWS_SESSION_TOKEN': process.env.REACT_APP_AWS_SESSION_TOKEN ? 'SET' : 'NOT SET',
+      'All env vars': Object.keys(process.env).filter(key => key.startsWith('REACT_APP_AWS'))
     });
-    this.model = model;
+    
+    // Configure the Bedrock client with credentials from environment
+    const credentials: any = {
+      accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID || '',
+      secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY || ''
+    };
+    
+    // Add session token if available (for temporary credentials)
+    if (process.env.REACT_APP_AWS_SESSION_TOKEN) {
+      credentials.sessionToken = process.env.REACT_APP_AWS_SESSION_TOKEN;
+    }
+    
+    console.log('🔑 Bedrock Credentials Check:', {
+      hasAccessKey: !!credentials.accessKeyId,
+      hasSecretKey: !!credentials.secretAccessKey,
+      hasSessionToken: !!credentials.sessionToken,
+      accessKeyLength: credentials.accessKeyId?.length || 0,
+      region: awsRegion,
+      modelId: this.modelId
+    });
+    
+    this.client = new BedrockRuntimeClient({ 
+      region: awsRegion,
+      credentials
+    });
   }
 
   async generateResponse(prompt: string, context: ConversationContext): Promise<string> {
     try {
-      const systemPrompt = this.buildSystemPrompt(context);
+      // Build context information separately from user instructions
+      const contextData = this.buildContextData(context);
+      const systemInstructions = this.buildSystemInstructions();
       
-      const response = await this.client.chat.completions.create({
-        model: this.model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: prompt }
-        ],
-        max_tokens: 300,
+      // Build the request body for Claude on Bedrock
+      const body = JSON.stringify({
+        anthropic_version: "bedrock-2023-05-31",
+        max_tokens: 200, // Reduced for shorter responses
         temperature: 0.7,
-        presence_penalty: 0.1,
-        frequency_penalty: 0.1
+        system: systemInstructions,
+        messages: [
+          { 
+            role: "user", 
+            content: `CONTEXT DATA:
+${contextData}
+
+USER REQUEST: ${prompt}
+
+Please analyze the context data and respond to the user request with the top 3 seat recommendations.` 
+          }
+        ],
       });
 
-      return response.choices[0]?.message?.content || 'I apologize, but I encountered an issue processing your request. Please try again.';
+      // Prepare the command
+      const command = new InvokeModelCommand({
+        modelId: this.modelId,
+        body,
+      });
+
+      // Invoke the model
+      const response = await this.client.send(command);
+
+      // Decode the streaming body
+      const responseBody = JSON.parse(
+        new TextDecoder().decode(response.body)
+      );
+
+      return responseBody.content[0]?.text || 'I apologize, but I encountered an issue processing your request. Please try again.';
     } catch (error) {
-      console.error('OpenAI API Error:', error);
+      console.error('Bedrock API Error:', error);
       throw error;
     }
   }
 
-  private buildSystemPrompt(context: ConversationContext): string {
+  private buildSystemInstructions(): string {
+    return `You are AI Desk Buddy 2.0, a smart office seating assistant. 
+
+CRITICAL RULES:
+1. ONLY recommend seats that appear in the "AVAILABLE SEAT IDS" list in the context
+2. NEVER suggest seats that are not in the available list - they are already booked
+3. If a seat doesn't appear in available seats, it means someone has already booked it
+4. PRIORITIZE seats from the "SEAT HISTORY DATA" that match the user's team or previous preferences
+5. Give HIGHER SCORES (90-95%) to seats with good historical usage by the same team
+
+INSTRUCTIONS:
+1. Analyze the office layout data (which only shows currently available seats)
+2. Check the seat history data to see which seats are popular with the user's team
+3. Respond to the user's request with exactly 3 seat recommendations
+4. Format each recommendation as: "Seat [ID] ([percentage]% match) - [brief reason]"
+5. Order seats by highest match percentage
+6. Keep response concise (2-3 sentences max)
+7. If user mentions specific team (devops, engineering, product, etc.), prioritize those team's seats from history
+8. If user mentions preferences (window, quiet, etc.), factor those into recommendations
+
+SCORING GUIDELINES:
+- Seats with team history: 85-95% match
+- Seats matching preferences: 75-85% match  
+- Good location seats: 65-75% match
+- Basic available seats: 50-65% match
+
+RESPONSE FORMAT:
+Seat [ID] ([percentage]% match) - [reason]
+Seat [ID] ([percentage]% match) - [reason]  
+Seat [ID] ([percentage]% match) - [reason]
+
+Brief explanation of why these are the best matches.
+
+REMEMBER: Only suggest seats from the available list - never recommend booked seats!`;
+  }
+
+  private buildContextData(context: ConversationContext): string {
     const { availableSeats, zones, userPreferences, userSchedule, recommendations, currentTime } = context;
     
-    const timeOfDay = this.getTimeOfDay(currentTime);
-    const availableCount = availableSeats.length;
+    // Filter office layout data to only include available seats
+    const availableDesks = officeLayoutData.desks.filter(desk => 
+      desk.status === 'available' && !desk.reserved_for
+    );
     
-    const zoneInfo = zones.map(zone => 
-      `${zone.name} (${zone.type}): ${zone.currentActivity}% activity, ${availableSeats.filter(s => s.zone === zone.type).length} available seats`
-    ).join('\n');
+    const filteredOfficeData = {
+      ...officeLayoutData,
+      desks: availableDesks
+    };
+    
+    const officeData = JSON.stringify(filteredOfficeData, null, 2);
+    
+    // Get seat history data
+    const teamHistory = userPreferences.team ? 
+      BookingHistoryService.getHistoryForTeam(userPreferences.team) : [];
+    
+    const seatPopularity = BookingHistoryService.getSeatPopularityData();
+    
+    // Build seat history context for available seats only
+    const availableSeatIds = availableSeats.map(seat => seat.id);
+    const relevantHistory = Array.from(seatPopularity.entries())
+      .filter(([seatId]) => availableSeatIds.includes(seatId))
+      .map(([seatId, data]) => ({
+        seatId,
+        bookingCount: data.count,
+        teams: data.teams,
+        isTeamPreferred: userPreferences.team ? data.teams.includes(userPreferences.team) : false
+      }))
+      .sort((a, b) => {
+        // Sort by team preference first, then by booking count
+        if (a.isTeamPreferred && !b.isTeamPreferred) return -1;
+        if (!a.isTeamPreferred && b.isTeamPreferred) return 1;
+        return b.bookingCount - a.bookingCount;
+      });
+    
+    // Current system state
+    const currentState = `
+CURRENT OFFICE STATE:
+Time: ${currentTime.toLocaleTimeString()}
+Available seats: ${availableSeats.length} seats
 
-    const scheduleInfo = userSchedule.length > 0 
-      ? `Upcoming schedule: ${userSchedule.slice(0, 3).map(s => `${s.title} at ${s.startTime.toLocaleTimeString()}`).join(', ')}`
-      : 'No upcoming scheduled events';
+SEAT HISTORY DATA (HIGHER SCORES FOR TEAM MATCHES):
+${relevantHistory.length > 0 ? 
+  relevantHistory.slice(0, 10).map(h => 
+    `Seat ${h.seatId}: ${h.bookingCount} bookings, Teams: ${h.teams.join('/')}, ${h.isTeamPreferred ? '⭐ TEAM PREFERRED' : 'Other teams'}`
+  ).join('\n') 
+  : 'No historical data available for current available seats'}
 
-    const recommendationInfo = recommendations && recommendations.length > 0
-      ? `Current recommendations: ${recommendations.slice(0, 3).map(r => 
-          `Seat ${r.seat.id} (${Math.round(r.score)}% match) - ${r.reasons.slice(0, 2).join(', ')}`
-        ).join(' | ')}`
-      : 'No active recommendations';
+${userPreferences.team ? `
+TEAM ${userPreferences.team.toUpperCase()} HISTORICAL PREFERENCES:
+${teamHistory.length > 0 ? 
+  teamHistory.slice(-10).map(h => 
+    `${h.employee_name} used ${h.desk_id} (${h.start_date} to ${h.end_date})`
+  ).join('\n')
+  : `No historical data for ${userPreferences.team} team`}` : ''}
 
-    const amenityInfo = userPreferences.amenityPreferences 
-      ? `Amenities: ${userPreferences.amenityPreferences.avoidColdAreas ? 'prefers warm areas' : 'no temperature preference'}${userPreferences.amenityPreferences.preferAisle ? ', prefers aisle seats' : ''}${userPreferences.amenityPreferences.nearMeetingRooms ? ', near meeting rooms' : ''}`
-      : '';
+ZONES ACTIVITY:
+${zones.map(zone => `${zone.name}: ${zone.currentActivity}% activity, ${availableSeats.filter(s => s.zone === zone.type).length} available seats`).join('\n')}
 
-    return `You are AI Desk Buddy 2.0, a friendly and intelligent office seating assistant. Your personality is helpful, conversational, and slightly enthusiastic about finding the perfect workspace.
+AVAILABLE SEAT IDS (ONLY RECOMMEND FROM THESE):
+${availableSeats.map(seat => seat.id).sort().join(', ')}
 
-CURRENT CONTEXT:
-- Time: ${timeOfDay} (${currentTime.toLocaleTimeString()})
-- Available seats: ${availableCount} seats available
-- User team: ${userPreferences.team}
-- User work style: ${userPreferences.workStyle}
-- Collaboration needs: ${userPreferences.collaborationNeeds}
-- Preferred zones: ${userPreferences.preferredZones.join(', ')}
-${amenityInfo ? `- ${amenityInfo}` : ''}
-- ${scheduleInfo}
+CURRENT TOP RECOMMENDATIONS:
+${recommendations && recommendations.length > 0 
+  ? recommendations.slice(0, 5).map(r => 
+      `Seat ${r.seat.id} (${Math.round(r.score)}% match) - ${r.reasons.slice(0, 2).join(', ')}`
+    ).join('\n')
+  : 'No current recommendations available'}
 
-OFFICE ZONES:
-${zoneInfo}
+USER PREFERENCES:
+${userPreferences.team ? `Team: ${userPreferences.team}` : 'No team specified'}
+Work Style: ${userPreferences.workStyle}
+Collaboration Needs: ${userPreferences.collaborationNeeds}
+Preferred Zones: ${userPreferences.preferredZones.join(', ')}
+Seat Features: ${userPreferences.seatFeatures.join(', ')}
 
-${recommendationInfo}
+OFFICE LAYOUT DATA (AVAILABLE SEATS ONLY):
+${officeData}`;
 
-CONVERSATION GUIDELINES:
-1. Be conversational and friendly, not robotic
-2. Reference specific seat details, zones, and features when relevant
-3. Consider the user's schedule, work style, team, and amenity preferences in responses  
-4. Vary your language - don't repeat the same phrases
-5. Ask follow-up questions to better understand needs
-6. Use emojis sparingly (1-2 per message max)
-7. Keep responses concise but informative (2-4 sentences)
-8. Acknowledge the current time and context
-9. If recommending seats, explain WHY they're good matches (including team area proximity, temperature comfort, etc.)
-10. Be proactive about potential conflicts or considerations
-11. Note: "Negev" is a wellness/manicure room, NOT a meeting room - don't recommend seats near it for meeting proximity
-
-RESPONSE STYLE:
-- Casual but professional
-- Personalized to the user's preferences and team
-- Context-aware of office dynamics
-- Solution-focused
-
-Remember: You're not just booking seats, you're optimizing the user's work experience!`;
+    return currentState;
   }
 
   private getTimeOfDay(date: Date): string {
@@ -125,323 +244,29 @@ Remember: You're not just booking seats, you're optimizing the user's work exper
     if (hour < 12) return 'morning';
     if (hour < 17) return 'afternoon';
     return 'evening';
-  }
-}
-
-// Enhanced fallback provider for when API keys aren't available
-class FallbackProvider implements LLMProvider {
-  private responseHistory: string[] = [];
-  private conversationCount = 0;
-
-  async generateResponse(prompt: string, context: ConversationContext): Promise<string> {
-    this.conversationCount++;
-    const lowerMessage = prompt.toLowerCase();
-
-    // Generate contextual response based on rich context
-    let response = this.generateContextualResponse(lowerMessage, context);
-    
-    // Ensure we don't repeat responses
-    while (this.responseHistory.includes(response) && this.responseHistory.length > 0) {
-      response = this.generateContextualResponse(lowerMessage, context, true);
-    }
-    
-    // Keep history manageable
-    this.responseHistory.push(response);
-    if (this.responseHistory.length > 10) {
-      this.responseHistory.shift();
-    }
-
-    return response;
-  }
-
-  private generateContextualResponse(message: string, context: ConversationContext, forceVariant = false): string {
-    const { availableSeats, userPreferences, zones, userSchedule, currentTime, recommendations } = context;
-    const timeOfDay = this.getTimeOfDay(currentTime);
-    const busyZones = zones.filter(z => z.currentActivity > 60);
-    const quietZones = zones.filter(z => z.currentActivity < 40);
-    
-    // Seating requests
-    if (message.includes('recommend') || message.includes('find') || message.includes('seat') || message.includes('need')) {
-      const responses = [
-        `Looking at our ${availableSeats.length} available seats right now, I can see some great matches for your ${userPreferences.workStyle} work style. ${this.getZoneRecommendation(message, zones, userPreferences)} ${this.getTimeContext(timeOfDay)}`,
-        
-        `Perfect! I've analyzed the current office vibe and found several spots that should work well. ${recommendations && recommendations.length > 0 ? `My top recommendation is based on ${recommendations[0].reasons[0]}.` : `The ${this.getBestZoneForRequest(message, zones)} area looks promising right now.`}`,
-        
-        `${this.getGreeting(timeOfDay)} Based on your preferences for ${userPreferences.collaborationNeeds} collaboration and ${userPreferences.workStyle} work style, I have some targeted suggestions. ${this.getAvailabilityContext(availableSeats.length)}`,
-        
-        `Great timing! ${this.getActivityInsight(busyZones, quietZones)} With ${availableSeats.length} seats available, I can definitely find something that matches what you're looking for.`
-      ];
-      
-      return responses[forceVariant ? Math.floor(Math.random() * responses.length) : this.conversationCount % responses.length];
-    }
-
-    // Availability queries
-    if (message.includes('available') || message.includes('free') || message.includes('open') || message.includes('busy')) {
-      const occupancyRate = Math.round(((100 - availableSeats.length) / 100) * 100);
-      const responses = [
-        `Current status: ${availableSeats.length} seats available across all zones. ${this.getZoneActivity(zones)} ${occupancyRate > 70 ? "It's pretty busy right now!" : "Good availability!"}`,
-        
-        `Right now we have ${availableSeats.length} open seats. ${quietZones.length > 0 ? `The ${quietZones[0].name} is particularly calm` : `Activity levels are moderate`} - perfect for ${timeOfDay} work. Want specific zone details?`,
-        
-        `${this.getGreeting(timeOfDay)} Availability looks ${availableSeats.length > 15 ? 'great' : 'limited'} with ${availableSeats.length} seats free. ${this.getZoneBreakdown(zones, availableSeats)}`,
-        
-        `Here's the current picture: ${availableSeats.length} available seats, with ${this.getMostActiveZone(zones)} being the most active and ${this.getLeastActiveZone(zones)} being the quietest.`
-      ];
-      
-      return responses[forceVariant ? Math.floor(Math.random() * responses.length) : this.conversationCount % responses.length];
-    }
-
-    // Zone queries
-    if (message.includes('zone') || message.includes('quiet') || message.includes('social') || message.includes('collaborative') || message.includes('vibe')) {
-      const responses = [
-        `Here's the current vibe: ${this.getDetailedZoneInfo(zones, availableSeats)} ${this.getZoneRecommendationByPreference(userPreferences, zones)}`,
-        
-        `Zone overview for ${timeOfDay}: ${zones.map(z => `${z.name} (${z.currentActivity}% active, ${availableSeats.filter(s => s.zone === z.type).length} seats)`).join(' • ')}`,
-        
-        `${this.getZonePersonality(message, zones)} ${this.getZoneMatchForUser(userPreferences, zones)}`,
-        
-        `The office energy right now: ${busyZones.length > 0 ? `${busyZones[0].name} is buzzing` : 'pretty calm overall'}. ${quietZones.length > 0 ? `${quietZones[0].name} is your best bet for focus work.` : 'All zones have moderate activity.'}`
-      ];
-      
-      return responses[forceVariant ? Math.floor(Math.random() * responses.length) : this.conversationCount % responses.length];
-    }
-
-    // Schedule queries
-    if (message.includes('schedule') || message.includes('meeting') || message.includes('calendar') || message.includes('time')) {
-      const upcomingMeetings = userSchedule.filter(s => s.startTime > currentTime).slice(0, 2);
-      const responses = [
-        `${upcomingMeetings.length > 0 ? `I see you have ${upcomingMeetings[0].title} coming up at ${upcomingMeetings[0].startTime.toLocaleTimeString()}. ` : 'Your schedule looks clear ahead. '}${this.getScheduleBasedAdvice(upcomingMeetings, zones)}`,
-        
-        `Looking at your day: ${upcomingMeetings.length === 0 ? 'No meetings scheduled - perfect for deep work!' : `${upcomingMeetings.length} meetings coming up.`} ${this.getTimingAdvice(currentTime, upcomingMeetings)}`,
-        
-        `${this.getGreeting(timeOfDay)} ${upcomingMeetings.length > 0 ? `With ${upcomingMeetings[0].title} at ${upcomingMeetings[0].startTime.toLocaleTimeString()}, I'd suggest staying close to meeting areas.` : `No meetings scheduled - great time for focused work in the ${this.getBestQuietZone(zones)} area.`}`,
-        
-        `Schedule-wise: ${upcomingMeetings.length === 0 ? `You're free for the next few hours! ${this.getFreeTimeAdvice(timeOfDay, zones)}` : `${upcomingMeetings.map(m => m.title).join(' and ')} coming up. ${this.getMeetingPrepAdvice()}`}`
-      ];
-      
-      return responses[forceVariant ? Math.floor(Math.random() * responses.length) : this.conversationCount % responses.length];
-    }
-
-    // General/greeting responses
-    const responses = [
-      `${this.getGreeting(timeOfDay)} I'm here to help you find the perfect workspace! With ${availableSeats.length} seats available, what kind of environment are you looking for today?`,
-      
-      `Hi there! Ready to optimize your workspace experience? I can consider your ${userPreferences.workStyle} work style, schedule, and the current office vibe to find you the ideal spot.`,
-      
-      `Welcome! ${this.getOfficeStatus(zones, availableSeats)} What can I help you with - finding a seat, checking availability, or getting the zone breakdown?`,
-      
-      `${this.getTimeGreeting(timeOfDay)} I'm your AI workspace assistant, and I'm excited to help! Tell me what you need and I'll factor in all the office dynamics to get you set up perfectly.`
-    ];
-    
-    return responses[forceVariant ? Math.floor(Math.random() * responses.length) : this.conversationCount % responses.length];
-  }
-
-  // Helper methods for more dynamic responses
-  private getTimeOfDay(date: Date): string {
-    const hour = date.getHours();
-    if (hour < 12) return 'morning';
-    if (hour < 17) return 'afternoon';
-    return 'evening';
-  }
-
-  private getGreeting(timeOfDay: string): string {
-    const greetings = {
-      morning: ['Good morning!', 'Morning!', 'Great morning for productivity!'],
-      afternoon: ['Good afternoon!', 'Afternoon!', 'Hope your day is going well!'],
-      evening: ['Good evening!', 'Evening!', 'Wrapping up the day?']
-    };
-    const options = greetings[timeOfDay as keyof typeof greetings];
-    return options[Math.floor(Math.random() * options.length)];
-  }
-
-  private getTimeGreeting(timeOfDay: string): string {
-    const timeGreetings = {
-      morning: 'Starting your day right with the perfect workspace?',
-      afternoon: 'Looking for an afternoon productivity boost?',
-      evening: 'Evening work session coming up?'
-    };
-    return timeGreetings[timeOfDay as keyof typeof timeGreetings];
-  }
-
-  private getZoneRecommendation(message: string, zones: Zone[], preferences: UserPreferences): string {
-    if (message.includes('quiet') || message.includes('focus')) {
-      const quietZone = zones.find(z => z.currentActivity < 40);
-      return quietZone ? `The ${quietZone.name} is particularly peaceful right now.` : 'Most zones are moderately active today.';
-    }
-    if (message.includes('social') || message.includes('collaborative')) {
-      const socialZone = zones.find(z => z.currentActivity > 60);
-      return socialZone ? `The ${socialZone.name} has great energy for collaboration.` : 'The collaborative areas have good activity levels.';
-    }
-    return `Based on your ${preferences.workStyle} preference, I have some great options.`;
-  }
-
-  private getTimeContext(timeOfDay: string): string {
-    const contexts = {
-      morning: 'Perfect timing for morning focus!',
-      afternoon: 'Great for afternoon productivity.',
-      evening: 'Good for evening wrap-up work.'
-    };
-    return contexts[timeOfDay as keyof typeof contexts];
-  }
-
-  private getBestZoneForRequest(message: string, zones: Zone[]): string {
-    if (message.includes('quiet')) return zones.find(z => z.currentActivity < 40)?.name || 'focus';
-    if (message.includes('social')) return zones.find(z => z.currentActivity > 60)?.name || 'collaborative';
-    return zones[Math.floor(Math.random() * zones.length)].name;
-  }
-
-  private getAvailabilityContext(count: number): string {
-    if (count > 20) return 'Plenty of great options available!';
-    if (count > 10) return 'Good selection of seats to choose from.';
-    return 'Limited but quality options available.';
-  }
-
-  private getActivityInsight(busyZones: Zone[], quietZones: Zone[]): string {
-    if (busyZones.length > quietZones.length) return 'The office has good energy today with lots of collaboration happening.';
-    if (quietZones.length > busyZones.length) return 'It\'s a calm day - perfect for focused work.';
-    return 'Nice balanced atmosphere across all zones.';
-  }
-
-  private getZoneActivity(zones: Zone[]): string {
-    const avgActivity = zones.reduce((sum, z) => sum + z.currentActivity, 0) / zones.length;
-    if (avgActivity > 60) return 'High energy across most zones.';
-    if (avgActivity < 40) return 'Calm atmosphere throughout the office.';
-    return 'Balanced activity levels across zones.';
-  }
-
-  private getZoneBreakdown(zones: Zone[], availableSeats: Seat[]): string {
-    const zoneWithMostSeats = zones.reduce((best, zone) => {
-      const seatCount = availableSeats.filter(s => s.zone === zone.type).length;
-      const bestCount = availableSeats.filter(s => s.zone === best.type).length;
-      return seatCount > bestCount ? zone : best;
-    });
-    return `Most availability in the ${zoneWithMostSeats.name}.`;
-  }
-
-  private getMostActiveZone(zones: Zone[]): string {
-    return zones.reduce((most, zone) => zone.currentActivity > most.currentActivity ? zone : most).name;
-  }
-
-  private getLeastActiveZone(zones: Zone[]): string {
-    return zones.reduce((least, zone) => zone.currentActivity < least.currentActivity ? zone : least).name;
-  }
-
-  private getDetailedZoneInfo(zones: Zone[], availableSeats: Seat[]): string {
-    return zones.map(z => 
-      `${z.name}: ${z.currentActivity}% active, ${availableSeats.filter(s => s.zone === z.type).length} seats`
-    ).join(' | ');
-  }
-
-  private getZoneRecommendationByPreference(preferences: UserPreferences, zones: Zone[]): string {
-    if (preferences.workStyle === 'quiet') {
-      const quietZone = zones.find(z => z.currentActivity < 40);
-      return quietZone ? `Perfect match for quiet work: ${quietZone.name}.` : '';
-    }
-    return '';
-  }
-
-  private getZonePersonality(message: string, zones: Zone[]): string {
-    if (message.includes('quiet')) {
-      const quietZone = zones.find(z => z.currentActivity < 30);
-      return quietZone ? `${quietZone.name} is your zen zone today - super peaceful.` : 'All zones have some activity, but focus areas are your best bet.';
-    }
-    return 'Each zone has its own personality today.';
-  }
-
-  private getZoneMatchForUser(preferences: UserPreferences, zones: Zone[]): string {
-    const match = zones.find(z => preferences.preferredZones.includes(z.type));
-    return match ? `Your preferred ${match.name} is looking good!` : '';
-  }
-
-  private getScheduleBasedAdvice(meetings: Schedule[], zones: Zone[]): string {
-    if (meetings.length === 0) return 'Great time for deep work in the focus areas!';
-    if (meetings[0].type === 'meeting') return 'I\'d suggest staying near collaborative zones for easy meeting access.';
-    return 'Plan your seat choice around your upcoming schedule.';
-  }
-
-  private getTimingAdvice(currentTime: Date, meetings: Schedule[]): string {
-    if (meetings.length === 0) return 'No time constraints - choose based on your work style!';
-    const nextMeeting = meetings[0];
-    const timeUntil = (nextMeeting.startTime.getTime() - currentTime.getTime()) / (1000 * 60);
-    if (timeUntil < 60) return 'With a meeting soon, stay close to meeting areas.';
-    return 'You have time for focused work before your next commitment.';
-  }
-
-  private getBestQuietZone(zones: Zone[]): string {
-    return zones.find(z => z.currentActivity < 40)?.name || 'focus';
-  }
-
-  private getFreeTimeAdvice(timeOfDay: string, zones: Zone[]): string {
-    const quietZone = zones.find(z => z.currentActivity < 40);
-    return quietZone ? `${timeOfDay} is perfect for deep work in ${quietZone.name}.` : `Great ${timeOfDay} for getting things done!`;
-  }
-
-  private getMeetingPrepAdvice(): string {
-    const advice = [
-      'Stay accessible for easy meeting transitions.',
-      'Choose a spot near collaborative areas.',
-      'Pick somewhere you can easily step away from.'
-    ];
-    return advice[Math.floor(Math.random() * advice.length)];
-  }
-
-  private getOfficeStatus(zones: Zone[], availableSeats: Seat[]): string {
-    const avgActivity = zones.reduce((sum, z) => sum + z.currentActivity, 0) / zones.length;
-    if (avgActivity > 60) return `The office is buzzing today with ${availableSeats.length} seats available.`;
-    if (avgActivity < 40) return `It's a calm day with ${availableSeats.length} peaceful spots available.`;
-    return `Balanced energy today with ${availableSeats.length} seats ready.`;
   }
 }
 
 export class LLMService {
   private provider: LLMProvider;
-  private fallbackProvider: LLMProvider;
 
-  constructor(apiKey?: string) {
-    this.fallbackProvider = new FallbackProvider();
-    
-    try {
-      this.provider = new OpenAIProvider(apiKey);
-    } catch (error) {
-      console.warn('Failed to initialize OpenAI provider, using fallback:', error);
-      this.provider = this.fallbackProvider;
-    }
+  constructor(region?: string, modelId?: string) {
+    this.provider = new BedrockProvider(region, modelId);
   }
 
   async generateResponse(userMessage: string, context: ConversationContext): Promise<string> {
-    debugger;
-    // Check if we have a valid API key first
-    const hasApiKey = localStorage.getItem('openai_api_key') && localStorage.getItem('openai_api_key')!.startsWith('sk-');
-    
-    if (!hasApiKey) {
-      console.log('No valid OpenAI API key found, using enhanced fallback');
-      return await this.fallbackProvider.generateResponse(userMessage, context);
-    }
-
-    try {
-      console.log('Attempting OpenAI API call...');
-      const response = await this.provider.generateResponse(userMessage, context);
-      console.log('OpenAI API call successful');
-      return response;
-    } catch (error) {
-      console.warn('OpenAI API failed, using fallback:', error);
-      
-      // Fall back to the enhanced provider
-      try {
-        return await this.fallbackProvider.generateResponse(userMessage, context);
-      } catch (fallbackError) {
-        console.error('Both providers failed:', fallbackError);
-        return "I'm having trouble processing your request right now. Could you please try again or rephrase your question?";
-      }
-    }
+    console.log('Attempting Bedrock API call...');
+    const response = await this.provider.generateResponse(userMessage, context);
+    console.log('Bedrock API call successful');
+    return response;
   }
 
-  // Method to update API key dynamically
-  updateApiKey(apiKey: string): void {
+  // Method to update Bedrock configuration dynamically
+  updateBedrockConfig(region?: string, modelId?: string): void {
     try {
-      this.provider = new OpenAIProvider(apiKey);
+      this.provider = new BedrockProvider(region, modelId);
     } catch (error) {
-      console.error('Failed to update API key:', error);
+      console.error('Failed to update Bedrock configuration:', error);
     }
   }
 
@@ -454,7 +279,7 @@ export class LLMService {
         availableSeats: [],
         zones: [],
         userPreferences: {
-          team: 'Engineering',
+          team: 'Engineering', // Default team
           workStyle: 'mixed',
           collaborationNeeds: 'medium',
           preferredZones: [],

@@ -38,6 +38,12 @@ export function deskToSeat(desk: Desk): Seat {
   const seat = layoutSeats.find(s => s.id === desk.legacySeatId);
   if (seat) return seat;
   
+  // Build features array including window feature if nearby
+  const features = desk.equipment.map(e => ({ type: e as any, label: e }));
+  if (desk.nearby.window) {
+    features.push({ type: 'window-view' as any, label: 'Window View' });
+  }
+  
   return {
     id: desk.desk_id,
     row: 0,
@@ -47,8 +53,10 @@ export function deskToSeat(desk: Desk): Seat {
     isAvailable: desk.status === 'available',
     isSelected: false,
     zone: 'focus' as any,
-    features: desk.equipment.map(e => ({ type: e as any, label: e })),
+    features,
     aisle: desk.nearby.aisle,
     isColdArea: desk.nearby.cold_area,
+    // Add window property for additional checking
+    ...(desk.nearby.window && { window: true }),
   };
 }

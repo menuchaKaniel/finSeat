@@ -1,4 +1,5 @@
 import officeLayoutData from '../data/office_layout.json';
+import { BookingHistoryService } from './bookingHistoryService';
 
 interface DeskData {
   desk_id: string;
@@ -154,9 +155,9 @@ class SeatService {
 
   /**
    * Reserve a seat for a user
-   * This updates the local state - in a real app, you'd also update the server
+   * This updates the local state and adds to booking history
    */
-  reserveSeat(deskId: string, userName: string): boolean {
+  reserveSeat(deskId: string, userName: string, userTeam: string = 'Engineering', startDate?: Date, endDate?: Date): boolean {
     const desk = this.getDeskById(deskId);
     
     if (!desk) {
@@ -169,14 +170,28 @@ class SeatService {
       return false;
     }
 
+    // Default booking period: today until end of week
+    const bookingStartDate = startDate || new Date();
+    const bookingEndDate = endDate || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
+
     // Update the desk status
     desk.status = 'occupied';
     desk.reserved_for = userName;
 
-    // In a real application, you would persist this to a backend/database
+    // Add to booking history
+    BookingHistoryService.addBookingToHistory({
+      employeeId: this.generateEmployeeId(userName),
+      employeeName: userName,
+      team: userTeam,
+      deskId: deskId,
+      startDate: bookingStartDate,
+      endDate: bookingEndDate
+    });
+
+    // Persist changes
     this.persistToStorage();
 
-    console.log(`✅ Seat ${deskId} reserved for ${userName}`);
+    console.log(`✅ Seat ${deskId} reserved for ${userName} (${userTeam}) from ${bookingStartDate.toDateString()} to ${bookingEndDate.toDateString()}`);
     return true;
   }
 
@@ -196,6 +211,10 @@ class SeatService {
       console.error(`Cannot release Reserved team seat ${deskId}`);
       return false;
     }
+
+    // Remove from booking history if it exists
+    const employeeId = this.generateEmployeeId(desk.reserved_for || '');
+    BookingHistoryService.removeBookingFromHistory(deskId, employeeId);
 
     // Update the desk status
     desk.status = 'available';
@@ -238,13 +257,32 @@ class SeatService {
   /**
    * Persist current state to localStorage
    * In a production app, this would be an API call to save to a database
+   * Note: We only use localStorage since React can't write to JSON files directly
    */
   private persistToStorage() {
     try {
+      // Save to localStorage for immediate UI updates
       localStorage.setItem('office_layout_state', JSON.stringify(this.data));
       console.log('💾 State persisted to localStorage');
+      
+      // Also update the in-memory office layout data so LLM gets correct data
+      this.updateInMemoryData();
     } catch (error) {
       console.error('Failed to persist state:', error);
+    }
+  }
+
+  /**
+   * Update the in-memory office layout data to match current state
+   * This ensures the LLM always has up-to-date availability data
+   */
+  private updateInMemoryData() {
+    try {
+      // Update the imported office layout data directly
+      (officeLayoutData as any).desks = this.data.desks;
+      console.log('� In-memory office layout data updated');
+    } catch (error) {
+      console.error('Failed to update in-memory data:', error);
     }
   }
 
@@ -294,6 +332,47 @@ class SeatService {
    */
   exportState(): string {
     return JSON.stringify(this.data, null, 2);
+  }
+
+  /**
+   * Generate a simple employee ID from user name
+   * In a real system, this would be provided by the user management system
+   */
+  private generateEmployeeId(userName: string): string {
+    // Simple ID generation: E + first letter + last 3 digits of hash
+    const hash = this.simpleHash(userName);
+    const firstLetter = userName.charAt(0).toUpperCase();
+    return `E${firstLetter}${hash % 1000}`.padEnd(4, '0');
+  }
+
+  /**
+   * Simple hash function for generating consistent IDs
+   */
+  private simpleHash(str: string): number {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
+  }
+
+  /**
+   * Export booking history as downloadable JSON file
+   */
+  exportBookingHistory(): void {
+    BookingHistoryService.exportHistoryAsJson();
+  }
+
+  /**
+   * Get booking statistics including history data
+   */
+  getBookingStatistics() {
+    return {
+      ...this.getStatistics(),
+      ...BookingHistoryService.getBookingStatistics()
+    };
   }
 }
 
