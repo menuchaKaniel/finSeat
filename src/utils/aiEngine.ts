@@ -1,14 +1,15 @@
-import { 
-  Seat, 
-  SeatRecommendation, 
-  UserPreferences, 
-  Schedule, 
-  Zone, 
-  ZoneType, 
-  AIResponse 
+import {
+  Seat,
+  SeatRecommendation,
+  UserPreferences,
+  Schedule,
+  Zone,
+  ZoneType,
+  AIResponse
 } from '../types';
 import { addHours, isAfter, isBefore, format } from 'date-fns';
 import { LLMService, ConversationContext } from './llmService';
+import { trendService } from '../services/trendService';
 
 export class AIRecommendationEngine {
   public seats: Seat[];
@@ -245,7 +246,7 @@ export class AIRecommendationEngine {
     score += this.getWorkStyleScore(seat, preferences.workStyle) * 0.25;
 
     // Feature matching (20% weight)
-    const featureMatch = seat.features.filter(f => 
+    const featureMatch = seat.features.filter(f =>
       preferences.seatFeatures.includes(f.type)
     ).length / Math.max(preferences.seatFeatures.length, 1);
     score += featureMatch * 20;
@@ -270,6 +271,10 @@ export class AIRecommendationEngine {
     if (preferences.amenityPreferences) {
       score += this.getAmenityScore(seat, preferences.amenityPreferences);
     }
+
+    // Historical popularity bonus (5% weight based on historical data)
+    const popularityBonus = this.getHistoricalPopularityBonus(seat, preferences.team);
+    score += popularityBonus;
 
     return Math.min(score, maxScore);
   }
@@ -410,7 +415,7 @@ export class AIRecommendationEngine {
   // Get activity level score
   private getActivityLevelScore(zone: Zone, preferences: UserPreferences): number {
     const activityLevel = zone.currentActivity;
-    
+
     if (preferences.workStyle === 'quiet') {
       return Math.max(0, 100 - activityLevel);
     } else if (preferences.workStyle === 'social') {
@@ -418,6 +423,40 @@ export class AIRecommendationEngine {
     } else {
       // Mixed preference - moderate activity is preferred
       return 100 - Math.abs(activityLevel - 50);
+    }
+  }
+
+  // Get historical popularity bonus based on trend data
+  private getHistoricalPopularityBonus(seat: Seat, userTeam: string): number {
+    try {
+      // Get desk popularity trends
+      const deskTrends = trendService.getDeskPopularityTrends();
+      const deskTrend = deskTrends.find(d => d.desk_id === seat.id);
+
+      if (!deskTrend) {
+        return 0; // No historical data for this desk
+      }
+
+      // Bonus if the desk was popular with the user's team
+      const teamUsedDesk = deskTrend.teams_used.includes(userTeam);
+      let bonus = 0;
+
+      if (teamUsedDesk) {
+        // Bonus based on popularity (normalized to 0-5 points)
+        const popularityScore = Math.min(deskTrend.total_bookings / 10, 1); // Max 1 for 10+ bookings
+        bonus += popularityScore * 5; // Up to 5 points
+      }
+
+      // Small bonus for desks with diverse team usage (shows versatility)
+      if (deskTrend.teams_used.length > 2) {
+        bonus += 2;
+      }
+
+      return bonus;
+    } catch (error) {
+      // If trend service fails, return 0
+      console.error('Error getting historical popularity bonus:', error);
+      return 0;
     }
   }
 
@@ -431,25 +470,41 @@ export class AIRecommendationEngine {
       reasons.push(`In your team's area (${preferences.team})`);
     }
 
+    // Historical trend reasons
+    try {
+      const deskTrends = trendService.getDeskPopularityTrends();
+      const deskTrend = deskTrends.find(d => d.desk_id === seat.id);
+
+      if (deskTrend && deskTrend.total_bookings > 5) {
+        if (deskTrend.teams_used.includes(preferences.team)) {
+          reasons.push(`Popular with ${preferences.team} team (${deskTrend.total_bookings} bookings)`);
+        } else if (deskTrend.teams_used.length > 2) {
+          reasons.push(`Versatile desk used by ${deskTrend.teams_used.length} teams`);
+        }
+      }
+    } catch (error) {
+      // Skip historical reasons if unavailable
+    }
+
     // Zone-based reasons
     if (preferences.preferredZones.includes(seat.zone)) {
       reasons.push(`Perfect ${seat.zone} zone match`);
     }
 
     // Feature-based reasons
-    const matchedFeatures = seat.features.filter(f => 
+    const matchedFeatures = seat.features.filter(f =>
       preferences.seatFeatures.includes(f.type)
     );
-    
+
     if (matchedFeatures.length > 0) {
       reasons.push(`Has ${matchedFeatures.map(f => f.label).join(', ')}`);
     }
 
     // Work style reasons
-    if (preferences.workStyle === 'quiet' && 
+    if (preferences.workStyle === 'quiet' &&
         [ZoneType.QUIET, ZoneType.FOCUS].includes(seat.zone)) {
       reasons.push('Ideal for focused work');
-    } else if (preferences.workStyle === 'social' && 
+    } else if (preferences.workStyle === 'social' &&
                [ZoneType.SOCIAL, ZoneType.COLLABORATIVE].includes(seat.zone)) {
       reasons.push('Great for collaboration');
     }
