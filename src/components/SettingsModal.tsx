@@ -26,7 +26,7 @@ const Overlay = styled(motion.div)`
 
 const Modal = styled(motion.div)`
   background: white;
-  border-radius: 16px;
+  border-radius: 0;
   padding: 24px;
   max-width: 500px;
   width: 100%;
@@ -54,9 +54,9 @@ const CloseButton = styled.button`
   border: none;
   cursor: pointer;
   padding: 4px;
-  border-radius: 6px;
+  border-radius: 0;
   color: #6b7280;
-  
+
   &:hover {
     background: #f3f4f6;
     color: #374151;
@@ -89,15 +89,15 @@ const Input = styled.input`
   width: 100%;
   padding: 12px 16px;
   border: 2px solid #e5e7eb;
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 14px;
   transition: border-color 0.3s ease;
-  
+
   &:focus {
     outline: none;
     border-color: #667eea;
   }
-  
+
   &::placeholder {
     color: #9ca3af;
   }
@@ -111,7 +111,7 @@ const ButtonGroup = styled.div`
 
 const Button = styled(motion.button)<{ variant?: 'primary' | 'secondary' }>`
   padding: 10px 16px;
-  border-radius: 8px;
+  border-radius: 0;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -139,7 +139,7 @@ const StatusIndicator = styled.div<{ status: 'success' | 'error' | 'testing' }>`
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 0;
   font-size: 14px;
   margin-top: 8px;
   
@@ -170,7 +170,7 @@ const StatusIndicator = styled.div<{ status: 'success' | 'error' | 'testing' }>`
 const InfoBox = styled.div`
   background: #f0f9ff;
   border: 1px solid #e0f2fe;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 16px;
   margin-bottom: 20px;
 `;

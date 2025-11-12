@@ -22,15 +22,15 @@ import { Settings, Eye, EyeOff, Download } from 'lucide-react';
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: #0a0e27;
-  background-image: 
-    radial-gradient(at 20% 30%, rgba(0, 255, 255, 0.1) 0px, transparent 50%),
-    radial-gradient(at 80% 70%, rgba(138, 43, 226, 0.15) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(0, 255, 157, 0.08) 0px, transparent 50%);
-  padding: 30px 20px;
+  background: #f5f8fa;
+  background-image:
+    radial-gradient(at 20% 30%, rgba(168, 213, 232, 0.3) 0px, transparent 50%),
+    radial-gradient(at 80% 70%, rgba(212, 197, 232, 0.3) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(197, 232, 212, 0.2) 0px, transparent 50%);
+  padding: 20px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   position: relative;
-  
+
   &::before {
     content: '';
     position: fixed;
@@ -38,9 +38,9 @@ const AppContainer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background:
+      linear-gradient(90deg, rgba(168, 213, 232, 0.05) 1px, transparent 1px),
+      linear-gradient(rgba(168, 213, 232, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     pointer-events: none;
     z-index: 0;
@@ -49,56 +49,54 @@ const AppContainer = styled.div`
 
 const Header = styled.div`
   text-align: center;
-  color: white;
-  margin-bottom: 30px;
+  color: #2c3e50;
+  margin-bottom: 20px;
   position: relative;
   z-index: 1;
 `;
 
 const Title = styled(motion.h1)`
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 900;
-  margin: 0 0 10px 0;
-  background: linear-gradient(135deg, #00ffff 0%, #00ff9d 50%, #8a2be2 100%);
+  margin: 0 0 8px 0;
+  background: linear-gradient(135deg, #5a8bb8 0%, #7d9fbe 50%, #8fa8c8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
   letter-spacing: -1px;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
     width: 100px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #00ffff, transparent);
-    box-shadow: 0 0 10px #00ffff;
+    background: linear-gradient(90deg, transparent, #A8D5E8, transparent);
   }
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.1rem;
-  color: rgba(0, 255, 255, 0.7);
-  margin: 20px 0 0 0;
+  font-size: 0.85rem;
+  color: #5a8bb8;
+  margin: 15px 0 0 0;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  font-size: 0.85rem;
 `;
 
 const MainContent = styled.div`
   display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 30px;
-  max-width: 1600px;
+  grid-template-columns: minmax(600px, 1fr) 400px;
+  gap: 20px;
+  max-width: 1400px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
-  
+  align-items: start;
+
   @media (max-width: 1200px) {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -107,133 +105,164 @@ const MainContent = styled.div`
 
 const MapSection = styled.div`
   display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: start;
+`;
+
+const LeftSidebar = styled.div`
+  display: flex;
   flex-direction: column;
   gap: 15px;
 `;
 
 const MapControls = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(15, 23, 42, 0.95);
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  padding: 16px 20px;
-  border-radius: 16px;
-  box-shadow: 
-    0 4px 24px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(0, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 255, 0.2);
+  padding: 16px;
+  border-radius: 0;
+  box-shadow:
+    0 4px 16px rgba(90, 139, 184, 0.15),
+    0 0 0 1px rgba(168, 213, 232, 0.3);
+  border: 1px solid rgba(168, 213, 232, 0.4);
   position: relative;
-  
+  min-width: 200px;
+
   &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.5), transparent);
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(168, 213, 232, 0.5), transparent);
   }
 `;
 
 const ControlGroup = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 12px;
 `;
 
 const ToggleButton = styled(motion.button)<{ active: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  background: ${props => props.active 
-    ? 'linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 157, 0.2) 100%)' 
-    : 'rgba(30, 41, 59, 0.6)'};
-  color: ${props => props.active ? '#00ffff' : 'rgba(255, 255, 255, 0.6)'};
-  border: 1px solid ${props => props.active ? 'rgba(0, 255, 255, 0.5)' : 'rgba(100, 116, 139, 0.3)'};
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 14px;
+  width: 100%;
+  background: ${props => props.active
+    ? 'linear-gradient(135deg, rgba(168, 213, 232, 0.4) 0%, rgba(197, 232, 212, 0.4) 100%)'
+    : 'rgba(245, 248, 250, 0.8)'};
+  color: ${props => props.active ? '#2c5f7f' : '#5a8bb8'};
+  border: 1px solid ${props => props.active ? 'rgba(168, 213, 232, 0.6)' : 'rgba(168, 213, 232, 0.3)'};
+  padding: 12px 16px;
+  border-radius: 0;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: ${props => props.active 
-    ? '0 0 20px rgba(0, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)' 
-    : '0 2px 8px rgba(0, 0, 0, 0.2)'};
+  box-shadow: ${props => props.active
+    ? '0 2px 8px rgba(168, 213, 232, 0.3)'
+    : '0 1px 4px rgba(90, 139, 184, 0.1)'};
   position: relative;
   backdrop-filter: blur(5px);
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 10px;
-    padding: 1px;
-    background: ${props => props.active 
-      ? 'linear-gradient(135deg, rgba(0, 255, 255, 0.5), rgba(0, 255, 157, 0.5))' 
-      : 'transparent'};
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    opacity: ${props => props.active ? 1 : 0};
-    transition: opacity 0.3s ease;
-  }
-
   &:hover {
-    transform: translateY(-2px);
-    border-color: ${props => props.active ? 'rgba(0, 255, 255, 0.8)' : 'rgba(100, 116, 139, 0.5)'};
-    color: ${props => props.active ? '#00ffff' : 'rgba(255, 255, 255, 0.9)'};
-    box-shadow: ${props => props.active 
-      ? '0 0 30px rgba(0, 255, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15)' 
-      : '0 4px 12px rgba(0, 0, 0, 0.3)'};
+    transform: translateX(4px);
+    border-color: ${props => props.active ? 'rgba(168, 213, 232, 0.8)' : 'rgba(168, 213, 232, 0.5)'};
+    color: ${props => props.active ? '#2c5f7f' : '#3d6b8f'};
+    box-shadow: ${props => props.active
+      ? '0 4px 12px rgba(168, 213, 232, 0.4)'
+      : '0 2px 8px rgba(90, 139, 184, 0.2)'};
   }
 `;
 
 const StatsDisplay = styled.div`
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 16px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #2c3e50;
 `;
 
 const StatItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 12px;
+  padding: 12px 0;
   position: relative;
-  
+
   &:not(:last-child)::after {
     content: '';
     position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.3), transparent);
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 1px;
+    width: 80%;
+    background: linear-gradient(to right, transparent, rgba(168, 213, 232, 0.5), transparent);
   }
-  
+
   .number {
     font-weight: 800;
     font-size: 22px;
-    background: linear-gradient(135deg, #00ffff 0%, #00ff9d 100%);
+    background: linear-gradient(135deg, #5a8bb8 0%, #7d9fbe 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
     font-family: 'Orbitron', monospace;
   }
-  
+
   .label {
     font-size: 10px;
-    color: rgba(0, 255, 255, 0.6);
+    color: #5a8bb8;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 4px;
+  }
+`;
+
+const Legend = styled.div`
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 16px;
+  border-radius: 0;
+  box-shadow:
+    0 4px 16px rgba(90, 139, 184, 0.15),
+    0 0 0 1px rgba(168, 213, 232, 0.3);
+  border: 1px solid rgba(168, 213, 232, 0.4);
+  min-width: 200px;
+`;
+
+const LegendTitle = styled.div`
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #5a8bb8;
+  font-size: 13px;
+`;
+
+const LegendItem = styled.div<{ color: string }>`
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  font-weight: 500;
+  color: #5a8bb8;
+  font-size: 12px;
+
+  &::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 0;
+    margin-right: 10px;
+    background: ${props => props.color};
+    box-shadow: 0 2px 4px rgba(90, 139, 184, 0.2);
+    border: 1px solid rgba(168, 213, 232, 0.5);
   }
 `;
 
@@ -244,7 +273,7 @@ function deriveZonesFromDesks(desks: Desk[]): Zone[] {
     zoneGroups[desk.zone] = zoneGroups[desk.zone] || [];
     zoneGroups[desk.zone].push(desk);
   });
-  const zoneColors = ['#8b5cf6', '#f59e0b', '#10b981', '#3b82f6', '#ef4444'];
+  const zoneColors = ['#A8D5E8', '#D4C5E8', '#C5E8D4', '#E8C5D4', '#F5C5B6', '#C5D8E8'];
   return Object.entries(zoneGroups).map(([zoneName, zoneDesks], idx) => {
     // Compute activity from desk occupancy
     const occupiedCount = zoneDesks.filter(d => d.status === 'occupied' || d.status === 'reserved').length;
@@ -322,7 +351,7 @@ function App() {
         isAvailable: isAvailable,
         currentUser: serviceDesk?.reserved_for || undefined,
         x: seat.x, // Use actual coordinates from JSON
-        y: seat.y + 200  // Offset for meeting rooms and header at top
+        y: seat.y + 50  // Reduced offset to minimize empty space at top
       };
     });
   });
@@ -331,7 +360,7 @@ function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: "Hi there! I'm your AI Desk Buddy 2.0. I'm here to help you find the perfect seat based on your work style, schedule, and the current office vibe. What kind of workspace are you looking for today?",
+      content: "Hi there! I'm FinSeat, your smart seating assistant. I'm here to help you find the perfect seat based on your work style, schedule, and the current office vibe. What kind of workspace are you looking for today?",
       sender: 'ai',
       timestamp: new Date(),
       type: 'text'
@@ -508,14 +537,15 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          AI Desk Buddy 2.0
+          FinSeat
         </Title>
         <Subtitle>Smart seating recommendations powered by AI</Subtitle>
       </Header>
 
       <MainContent>
         <MapSection>
-          <MapControls>
+          <LeftSidebar>
+            <MapControls>
             <ControlGroup>
               <ToggleButton
                 active={showZones}
@@ -536,40 +566,48 @@ function App() {
                 <Settings size={16} />
                 Settings
               </ToggleButton>
-              
-              <ToggleButton
-                active={false}
-                onClick={() => seatService.exportBookingHistory()}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                title="Download updated seat history JSON file"
-              >
-                <Download size={16} />
-                Export History
-              </ToggleButton>
+
+            
             </ControlGroup>
 
-            <StatsDisplay>
-              <StatItem>
-                <div className="number">{availableSeats}</div>
-                <div className="label">Available</div>
-              </StatItem>
-              <StatItem>
-                <div className="number">{occupancyRate}%</div>
-                <div className="label">Occupied</div>
-              </StatItem>
-              <StatItem>
-                <div className="number">{avgUtilization}%</div>
-                <div className="label">Avg Util (Year)</div>
-              </StatItem>
-              {topSeat && (
+              <StatsDisplay>
                 <StatItem>
-                  <div className="number">{topSeat}</div>
-                  <div className="label">Top Seat</div>
+                  <div className="number">{availableSeats}</div>
+                  <div className="label">Available</div>
                 </StatItem>
-              )}
-            </StatsDisplay>
-          </MapControls>
+                <StatItem>
+                  <div className="number">{occupancyRate}%</div>
+                  <div className="label">Occupied</div>
+                </StatItem>
+                <StatItem>
+                  <div className="number">{avgUtilization}%</div>
+                  <div className="label">Avg Util (Year)</div>
+                </StatItem>
+                {topSeat && (
+                  <StatItem>
+                    <div className="number">{topSeat}</div>
+                    <div className="label">Top Seat</div>
+                  </StatItem>
+                )}
+              </StatsDisplay>
+            </MapControls>
+
+            <Legend>
+              <LegendTitle>Desk Status</LegendTitle>
+              <LegendItem color="linear-gradient(135deg, rgba(168, 213, 232, 0.7) 0%, rgba(168, 213, 232, 0.8) 100%)">
+                Available
+              </LegendItem>
+              <LegendItem color="linear-gradient(135deg, rgba(197, 232, 212, 0.8) 0%, rgba(197, 232, 212, 0.9) 100%)">
+                Recommended
+              </LegendItem>
+              <LegendItem color="linear-gradient(135deg, rgba(212, 197, 232, 0.8) 0%, rgba(212, 197, 232, 0.9) 100%)">
+                Selected
+              </LegendItem>
+              <LegendItem color="linear-gradient(135deg, rgba(200, 200, 200, 0.4) 0%, rgba(180, 180, 180, 0.5) 100%)">
+                Occupied
+              </LegendItem>
+            </Legend>
+          </LeftSidebar>
 
           <SeatMap
             seats={seats}

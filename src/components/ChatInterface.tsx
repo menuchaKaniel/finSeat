@@ -16,15 +16,15 @@ const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 700px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafb 100%);
+  border-radius: 0;
+  box-shadow: 0 8px 32px rgba(90, 139, 184, 0.15);
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(168, 213, 232, 0.5);
 `;
 
 const ChatHeader = styled.div`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #5a8bb8 0%, #7d9fbe 100%);
   color: white;
   padding: 16px 20px;
   display: flex;
@@ -44,13 +44,13 @@ const MessagesContainer = styled.div`
 const MessageBubble = styled(motion.div)<{ isUser: boolean }>`
   max-width: 80%;
   align-self: ${props => props.isUser ? 'flex-end' : 'flex-start'};
-  background: ${props => props.isUser 
-    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' 
-    : '#f8f9fa'};
-  color: ${props => props.isUser ? 'white' : '#1f2937'};
+  background: ${props => props.isUser
+    ? 'linear-gradient(135deg, rgba(168, 213, 232, 0.8) 0%, rgba(168, 213, 232, 0.9) 100%)'
+    : 'rgba(245, 248, 250, 0.8)'};
+  color: ${props => props.isUser ? 'white' : '#2c3e50'};
   padding: 12px 16px;
-  border-radius: ${props => props.isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px'};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  box-shadow: 0 2px 8px rgba(90, 139, 184, 0.15);
   position: relative;
 `;
 
@@ -60,8 +60,8 @@ const MessageIcon = styled.div<{ isUser: boolean }>`
   top: 0;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  background: ${props => props.isUser ? '#667eea' : '#10b981'};
+  border-radius: 0;
+  background: ${props => props.isUser ? '#a8d5e8' : '#c5e8d4'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,19 +69,19 @@ const MessageIcon = styled.div<{ isUser: boolean }>`
 `;
 
 const RecommendationCard = styled(motion.div)`
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  border: 2px solid #10b981;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(197, 232, 212, 0.25) 0%, rgba(197, 232, 212, 0.15) 100%);
+  border: 2px solid rgba(197, 232, 212, 0.6);
+  border-radius: 0;
   padding: 16px;
   margin: 12px 0;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 4px 12px rgba(107, 165, 133, 0.15);
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
-    border-color: #059669;
+    box-shadow: 0 8px 24px rgba(107, 165, 133, 0.25);
+    border-color: rgba(197, 232, 212, 0.8);
   }
 `;
 
@@ -93,10 +93,10 @@ const RecommendationHeader = styled.div`
 `;
 
 const SeatBadge = styled.div`
-  background: #10b981;
-  color: white;
+  background: #c5e8d4;
+  color: #2c3e50;
   padding: 4px 12px;
-  border-radius: 20px;
+  border-radius: 0;
   font-size: 14px;
   font-weight: 600;
   display: flex;
@@ -105,10 +105,10 @@ const SeatBadge = styled.div`
 `;
 
 const ScoreBadge = styled.div`
-  background: #fbbf24;
-  color: white;
+  background: #f5c5b6;
+  color: #2c3e50;
   padding: 4px 8px;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 12px;
   font-weight: 600;
   margin-left: auto;
@@ -122,17 +122,17 @@ const RecommendationReasons = styled.div`
 `;
 
 const ReasonTag = styled.span`
-  background: #e0f2fe;
-  color: #0369a1;
+  background: rgba(168, 213, 232, 0.3);
+  color: #5a8bb8;
   padding: 2px 8px;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 11px;
 `;
 
 const InputContainer = styled.div`
   padding: 20px;
-  border-top: 1px solid #e5e7eb;
-  background: #f9fafb;
+  border-top: 1px solid rgba(168, 213, 232, 0.3);
+  background: rgba(245, 248, 250, 0.5);
 `;
 
 const InputWrapper = styled.div`
@@ -144,37 +144,38 @@ const InputWrapper = styled.div`
 const MessageInput = styled.textarea`
   flex: 1;
   padding: 12px 16px;
-  border: 2px solid #e5e7eb;
-  border-radius: 24px;
+  border: 2px solid rgba(168, 213, 232, 0.4);
+  border-radius: 0;
   resize: none;
   font-family: inherit;
   font-size: 14px;
-  line-height: 1.4;
-  max-height: 100px;
+  line-height: 1.5;
+  min-height: 68px;
+  max-height: 120px;
   background: white;
 
   &:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: rgba(168, 213, 232, 0.8);
   }
 
   &::placeholder {
-    color: #9ca3af;
+    color: #7d9fbe;
   }
 `;
 
 const SendButton = styled(motion.button)`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #5a8bb8 0%, #7d9fbe 100%);
   color: white;
   border: none;
-  border-radius: 50%;
+  border-radius: 0;
   width: 44px;
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 2px 8px rgba(90, 139, 184, 0.3);
 
   &:disabled {
     opacity: 0.5;
@@ -186,7 +187,7 @@ const TypingIndicator = styled(motion.div)`
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #6b7280;
+  color: #7d9fbe;
   font-style: italic;
   align-self: flex-start;
 `;
@@ -194,14 +195,14 @@ const TypingIndicator = styled(motion.div)`
 const TypingDots = styled.div`
   display: flex;
   gap: 4px;
-  
+
   span {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
-    background: #6b7280;
+    border-radius: 0;
+    background: #7d9fbe;
     animation: typing 1.4s infinite ease-in-out;
-    
+
     &:nth-child(1) { animation-delay: -0.32s; }
     &:nth-child(2) { animation-delay: -0.16s; }
   }
@@ -217,11 +218,11 @@ const TypingDots = styled.div`
 `;
 
 const BookButton = styled(motion.button)`
-  background: #10b981;
-  color: white;
+  background: #c5e8d4;
+  color: #2c3e50;
   border: none;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 0;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -231,7 +232,7 @@ const BookButton = styled(motion.button)`
   gap: 4px;
 
   &:hover {
-    background: #047857;
+    background: #b0d9c2;
   }
 `;
 
@@ -274,7 +275,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       <ChatHeader>
         <Bot size={24} />
         <div>
-          <h3 style={{ margin: 0, fontSize: '18px' }}>AI Desk Buddy 2.0</h3>
+          <h3 style={{ margin: 0, fontSize: '18px' }}>FinSeat Assistant</h3>
           <p style={{ margin: 0, fontSize: '12px', opacity: 0.8 }}>
             Your smart seating assistant
           </p>
@@ -355,7 +356,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             animate={{ opacity: 1 }}
           >
             <Bot size={16} />
-            AI Desk Buddy is thinking...
+            FinSeat is thinking...
             <TypingDots>
               <span></span>
               <span></span>

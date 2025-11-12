@@ -44,66 +44,49 @@ interface SeatMapProps {
 const MapContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 1500px;
-  height: 800px;
-  max-height: 800px;
-  border: 2px solid rgba(0, 255, 255, 0.3);
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-  overflow-y: scroll;
-  overflow-x: auto;
-  box-shadow: 
-    0 0 40px rgba(0, 255, 255, 0.2),
-    inset 0 0 60px rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
-  
-  &::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: rgba(15, 23, 42, 0.5);
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, rgba(0, 255, 255, 0.5), rgba(0, 255, 157, 0.5));
-    border-radius: 6px;
-    border: 2px solid rgba(15, 23, 42, 0.5);
-    
-    &:hover {
-      background: linear-gradient(135deg, rgba(0, 255, 255, 0.7), rgba(0, 255, 157, 0.7));
-    }
-  }
+  max-width: 100%;
+  height: 740px;
+  border: 2px solid rgba(168, 213, 232, 0.5);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafb 100%);
+  overflow: hidden;
+  box-shadow:
+    0 4px 24px rgba(90, 139, 184, 0.15),
+    0 0 0 1px rgba(168, 213, 232, 0.3);
+  border-radius: 0;
 `;
 
 const MapContent = styled.div`
-  position: relative;
+  position: absolute;
   width: 1500px;
   height: 1900px;
-  min-height: 1900px;
-  background-image: 
-    linear-gradient(rgba(0, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.02) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(168, 213, 232, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 213, 232, 0.15) 1px, transparent 1px);
   background-size: 50px 50px;
+  transform: scale(0.42);
+  transform-origin: center top;
+  top: 0;
+  left: 50%;
+  margin-left: -750px;
+  margin-top: 0;
 `;
 
 const MapHeader = styled.div`
   position: absolute;
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.95);
-  border: 1px solid rgba(0, 255, 255, 0.5);
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(168, 213, 232, 0.5);
   border-radius: 0;
   padding: 8px 20px;
   font-size: 14px;
   font-weight: 700;
-  color: #00ffff;
-  text-align: center;
+  color: #5a8bb8;
+  text-align: left;
   z-index: 200;
-  box-shadow: 
-    0 0 20px rgba(0, 255, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 16px rgba(90, 139, 184, 0.15),
+    0 0 0 1px rgba(168, 213, 232, 0.3);
   backdrop-filter: blur(10px);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -111,8 +94,8 @@ const MapHeader = styled.div`
 
 const MeetingRoomBox = styled.div`
   position: absolute;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%);
-  border: 2px solid rgba(59, 130, 246, 0.5);
+  background: linear-gradient(135deg, rgba(168, 213, 232, 0.25) 0%, rgba(168, 213, 232, 0.15) 100%);
+  border: 2px solid rgba(168, 213, 232, 0.6);
   border-radius: 0;
   display: flex;
   flex-direction: column;
@@ -120,10 +103,10 @@ const MeetingRoomBox = styled.div`
   justify-content: center;
   font-size: 12px;
   font-weight: 600;
-  color: rgba(147, 197, 253, 0.9);
-  box-shadow: 
-    0 4px 12px rgba(59, 130, 246, 0.3),
-    inset 0 0 20px rgba(59, 130, 246, 0.1);
+  color: #5a8bb8;
+  box-shadow:
+    0 4px 12px rgba(90, 139, 184, 0.2),
+    inset 0 0 20px rgba(168, 213, 232, 0.1);
   padding: 8px;
   text-align: center;
   backdrop-filter: blur(5px);
@@ -133,20 +116,20 @@ const FacilityBox = styled.div<{ facilityType: string }>`
   position: absolute;
   background: ${props => {
     switch (props.facilityType) {
-      case 'kitchenette': return 'linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%)';
-      case 'bathroom': return 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.15) 100%)';
-      case 'printer': return 'linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(147, 51, 234, 0.15) 100%)';
-      case 'elevator': return 'linear-gradient(135deg, rgba(107, 114, 128, 0.15) 0%, rgba(75, 85, 99, 0.15) 100%)';
-      default: return 'linear-gradient(135deg, rgba(156, 163, 175, 0.15) 0%, rgba(107, 114, 128, 0.15) 100%)';
+      case 'kitchenette': return 'linear-gradient(135deg, rgba(245, 197, 182, 0.25) 0%, rgba(245, 197, 182, 0.15) 100%)';
+      case 'bathroom': return 'linear-gradient(135deg, rgba(212, 197, 232, 0.25) 0%, rgba(212, 197, 232, 0.15) 100%)';
+      case 'printer': return 'linear-gradient(135deg, rgba(232, 197, 212, 0.25) 0%, rgba(232, 197, 212, 0.15) 100%)';
+      case 'elevator': return 'linear-gradient(135deg, rgba(197, 232, 212, 0.25) 0%, rgba(197, 232, 212, 0.15) 100%)';
+      default: return 'linear-gradient(135deg, rgba(168, 213, 232, 0.25) 0%, rgba(168, 213, 232, 0.15) 100%)';
     }
   }};
   border: 2px solid ${props => {
     switch (props.facilityType) {
-      case 'kitchenette': return 'rgba(251, 191, 36, 0.5)';
-      case 'bathroom': return 'rgba(99, 102, 241, 0.5)';
-      case 'printer': return 'rgba(168, 85, 247, 0.5)';
-      case 'elevator': return 'rgba(107, 114, 128, 0.5)';
-      default: return 'rgba(156, 163, 175, 0.5)';
+      case 'kitchenette': return 'rgba(245, 197, 182, 0.6)';
+      case 'bathroom': return 'rgba(212, 197, 232, 0.6)';
+      case 'printer': return 'rgba(232, 197, 212, 0.6)';
+      case 'elevator': return 'rgba(197, 232, 212, 0.6)';
+      default: return 'rgba(168, 213, 232, 0.6)';
     }
   }};
   border-radius: 0;
@@ -158,14 +141,14 @@ const FacilityBox = styled.div<{ facilityType: string }>`
   font-weight: 600;
   color: ${props => {
     switch (props.facilityType) {
-      case 'kitchenette': return 'rgba(251, 191, 36, 0.9)';
-      case 'bathroom': return 'rgba(165, 180, 252, 0.9)';
-      case 'printer': return 'rgba(216, 180, 254, 0.9)';
-      case 'elevator': return 'rgba(209, 213, 219, 0.9)';
-      default: return 'rgba(229, 231, 235, 0.9)';
+      case 'kitchenette': return '#c89a8b';
+      case 'bathroom': return '#8b7ba8';
+      case 'printer': return '#c898a8';
+      case 'elevator': return '#6ba585';
+      default: return '#5a8bb8';
     }
   }};
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(90, 139, 184, 0.15);
   padding: 8px;
   text-align: center;
   backdrop-filter: blur(5px);
@@ -173,16 +156,16 @@ const FacilityBox = styled.div<{ facilityType: string }>`
 
 const ZoneLabel = styled.div`
   position: absolute;
-  background: rgba(15, 23, 42, 0.95);
-  border: 2px solid rgba(0, 255, 157, 0.5);
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(168, 213, 232, 0.6);
   border-radius: 0;
   padding: 6px 12px;
   font-size: 13px;
   font-weight: 700;
-  color: #00ff9d;
-  box-shadow: 
-    0 4px 12px rgba(0, 255, 157, 0.3),
-    0 0 20px rgba(0, 255, 157, 0.2);
+  color: #5a8bb8;
+  box-shadow:
+    0 4px 12px rgba(90, 139, 184, 0.2),
+    0 0 20px rgba(168, 213, 232, 0.15);
   backdrop-filter: blur(10px);
   pointer-events: none;
   text-transform: uppercase;
@@ -192,40 +175,40 @@ const ZoneLabel = styled.div`
 const TeamZoneBorder = styled.div<{ team: string }>`
   position: absolute;
   border: 3px solid ${props => {
-    // Different border colors for different teams
+    // Different border colors for different teams - pastel versions
     switch (props.team) {
-      case 'Risk': return '#ef4444';
-      case 'Product': return '#f59e0b';
-      case 'Engineering': return '#3b82f6';
-      case 'Reserved': return '#8b5cf6';
-      case 'IT Security': return '#06b6d4';
-      case 'DevOps': return '#10b981';
-      default: return '#6b7280';
+      case 'Risk': return '#e8a8a8';
+      case 'Product': return '#f5c5b6';
+      case 'Engineering': return '#a8d5e8';
+      case 'Reserved': return '#d4c5e8';
+      case 'IT Security': return '#a8d8e8';
+      case 'DevOps': return '#c5e8d4';
+      default: return '#c5d8e8';
     }
   }};
   border-radius: 0;
   background: ${props => {
     switch (props.team) {
-      case 'Risk': return 'rgba(239, 68, 68, 0.03)';
-      case 'Product': return 'rgba(245, 158, 11, 0.03)';
-      case 'Engineering': return 'rgba(59, 130, 246, 0.03)';
-      case 'Reserved': return 'rgba(139, 92, 246, 0.03)';
-      case 'IT Security': return 'rgba(6, 182, 212, 0.03)';
-      case 'DevOps': return 'rgba(16, 185, 129, 0.03)';
-      default: return 'rgba(107, 114, 128, 0.03)';
+      case 'Risk': return 'rgba(232, 168, 168, 0.08)';
+      case 'Product': return 'rgba(245, 197, 182, 0.08)';
+      case 'Engineering': return 'rgba(168, 213, 232, 0.08)';
+      case 'Reserved': return 'rgba(212, 197, 232, 0.08)';
+      case 'IT Security': return 'rgba(168, 216, 232, 0.08)';
+      case 'DevOps': return 'rgba(197, 232, 212, 0.08)';
+      default: return 'rgba(197, 216, 232, 0.08)';
     }
   }};
   pointer-events: none;
   z-index: 0;
   box-shadow: inset 0 0 0 1px ${props => {
     switch (props.team) {
-      case 'Risk': return 'rgba(239, 68, 68, 0.1)';
-      case 'Product': return 'rgba(245, 158, 11, 0.1)';
-      case 'Engineering': return 'rgba(59, 130, 246, 0.1)';
-      case 'Reserved': return 'rgba(139, 92, 246, 0.1)';
-      case 'IT Security': return 'rgba(6, 182, 212, 0.1)';
-      case 'DevOps': return 'rgba(16, 185, 129, 0.1)';
-      default: return 'rgba(107, 114, 128, 0.1)';
+      case 'Risk': return 'rgba(232, 168, 168, 0.15)';
+      case 'Product': return 'rgba(245, 197, 182, 0.15)';
+      case 'Engineering': return 'rgba(168, 213, 232, 0.15)';
+      case 'Reserved': return 'rgba(212, 197, 232, 0.15)';
+      case 'IT Security': return 'rgba(168, 216, 232, 0.15)';
+      case 'DevOps': return 'rgba(197, 232, 212, 0.15)';
+      default: return 'rgba(197, 216, 232, 0.15)';
     }
   }};
 `;
@@ -233,21 +216,20 @@ const TeamZoneBorder = styled.div<{ team: string }>`
 const LeanDesk = styled.div`
   position: absolute;
   height: 12px;
-  background: linear-gradient(180deg, rgba(71, 85, 105, 0.6) 0%, rgba(51, 65, 85, 0.8) 100%);
-  border: 1px solid rgba(0, 255, 255, 0.3);
+  background: linear-gradient(180deg, rgba(168, 213, 232, 0.4) 0%, rgba(168, 213, 232, 0.6) 100%);
+  border: 1px solid rgba(168, 213, 232, 0.5);
   border-radius: 0;
-  box-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.4), 
-    inset 0 1px 2px rgba(0, 255, 255, 0.2),
-    0 0 10px rgba(0, 255, 255, 0.1);
+  box-shadow:
+    0 2px 4px rgba(90, 139, 184, 0.15),
+    inset 0 1px 2px rgba(168, 213, 232, 0.2);
   pointer-events: none;
   z-index: 1;
   transform: translateY(-6px);
 `;
 
-const SeatElement = styled(motion.div)<{ 
-  isAvailable: boolean; 
-  isSelected: boolean; 
+const SeatElement = styled(motion.div)<{
+  isAvailable: boolean;
+  isSelected: boolean;
   isRecommended: boolean;
   zone: ZoneType;
   team?: string;
@@ -262,96 +244,63 @@ const SeatElement = styled(motion.div)<{
   transition: all 0.3s ease;
   z-index: 2;
   border-radius: 0;
-  
+
   background: ${props => {
-    if (props.isSelected) return 'linear-gradient(135deg, rgba(138, 43, 226, 0.8) 0%, rgba(124, 58, 237, 0.9) 100%)';
-    if (props.isRecommended) return 'linear-gradient(135deg, rgba(0, 255, 157, 0.8) 0%, rgba(0, 255, 255, 0.8) 100%)';
-    if (!props.isAvailable) return 'linear-gradient(135deg, rgba(71, 85, 105, 0.6) 0%, rgba(51, 65, 85, 0.7) 100%)';
-    return 'linear-gradient(135deg, rgba(59, 130, 246, 0.7) 0%, rgba(37, 99, 235, 0.8) 100%)';
+    if (props.isSelected) return 'linear-gradient(135deg, rgba(212, 197, 232, 0.8) 0%, rgba(212, 197, 232, 0.9) 100%)';
+    if (props.isRecommended) return 'linear-gradient(135deg, rgba(197, 232, 212, 0.8) 0%, rgba(197, 232, 212, 0.9) 100%)';
+    if (!props.isAvailable) return 'linear-gradient(135deg, rgba(200, 200, 200, 0.4) 0%, rgba(180, 180, 180, 0.5) 100%)';
+    return 'linear-gradient(135deg, rgba(168, 213, 232, 0.7) 0%, rgba(168, 213, 232, 0.8) 100%)';
   }};
-  
+
   border: 2px solid ${props => {
-    if (props.isSelected) return 'rgba(138, 43, 226, 0.9)';
-    if (props.isRecommended) return 'rgba(0, 255, 157, 0.9)';
-    if (!props.isAvailable) return 'rgba(100, 116, 139, 0.5)';
-    return 'rgba(59, 130, 246, 0.8)';
+    if (props.isSelected) return 'rgba(212, 197, 232, 0.9)';
+    if (props.isRecommended) return 'rgba(197, 232, 212, 0.9)';
+    if (!props.isAvailable) return 'rgba(180, 180, 180, 0.5)';
+    return 'rgba(168, 213, 232, 0.8)';
   }};
-  
+
   box-shadow: ${props => {
-    if (props.isSelected) return '0 4px 12px rgba(138, 43, 226, 0.6), 0 0 20px rgba(138, 43, 226, 0.3)';
-    if (props.isRecommended) return '0 4px 12px rgba(0, 255, 157, 0.6), 0 0 20px rgba(0, 255, 157, 0.4)';
-    return '0 3px 10px rgba(0, 0, 0, 0.4)';
+    if (props.isSelected) return '0 4px 12px rgba(212, 197, 232, 0.6), 0 0 20px rgba(212, 197, 232, 0.3)';
+    if (props.isRecommended) return '0 4px 12px rgba(197, 232, 212, 0.6), 0 0 20px rgba(197, 232, 212, 0.4)';
+    return '0 3px 10px rgba(90, 139, 184, 0.2)';
   }};
 
   &:hover {
     transform: ${props => props.isAvailable ? 'translateY(-4px) scale(1.1)' : 'none'};
     z-index: 10;
     box-shadow: ${props => {
-      if (props.isAvailable && props.isSelected) return '0 6px 18px rgba(138, 43, 226, 0.7), 0 0 30px rgba(138, 43, 226, 0.5)';
-      if (props.isAvailable && props.isRecommended) return '0 6px 18px rgba(0, 255, 157, 0.7), 0 0 30px rgba(0, 255, 157, 0.5)';
-      if (props.isAvailable) return '0 5px 16px rgba(59, 130, 246, 0.5), 0 0 25px rgba(59, 130, 246, 0.3)';
-      return '0 3px 10px rgba(0, 0, 0, 0.4)';
+      if (props.isAvailable && props.isSelected) return '0 6px 18px rgba(212, 197, 232, 0.7), 0 0 30px rgba(212, 197, 232, 0.5)';
+      if (props.isAvailable && props.isRecommended) return '0 6px 18px rgba(197, 232, 212, 0.7), 0 0 30px rgba(197, 232, 212, 0.5)';
+      if (props.isAvailable) return '0 5px 16px rgba(168, 213, 232, 0.6), 0 0 25px rgba(168, 213, 232, 0.4)';
+      return '0 3px 10px rgba(90, 139, 184, 0.2)';
     }};
   }
 `;
 
 const SeatTooltip = styled(motion.div)`
-  position: fixed;
-  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  color: white;
-  padding: 16px;
-  border-radius: 12px;
-  font-size: 13px;
+  position: absolute;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafb 100%);
+  color: #2c3e50;
+  padding: 30px;
+  border-radius: 0;
+  font-size: 26px;
   pointer-events: none;
   z-index: 10000;
-  max-width: 320px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  line-height: 1.6;
-  
+  width: auto;
+  min-width: 600px;
+  max-width: 850px;
+  box-shadow: 0 20px 50px rgba(90, 139, 184, 0.4);
+  border: 3px solid rgba(168, 213, 232, 0.6);
+  line-height: 1.5;
+
   > div {
-    margin: 4px 0;
+    margin: 0;
   }
-  
+
   strong {
-    color: #10b981;
-    font-size: 14px;
-  }
-`;
-
-const Legend = styled.div`
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: rgba(15, 23, 42, 0.95);
-  padding: 16px;
-  border-radius: 12px;
-  font-size: 13px;
-  box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(0, 255, 255, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  z-index: 100;
-`;
-
-const LegendItem = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 6px 0;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
-  
-  &::before {
-    content: '';
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    margin-right: 10px;
-    background: ${props => props.color};
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px ${props => props.color}40;
-    border: 1px solid ${props => props.color}80;
+    color: #5a8bb8;
+    font-size: 36px;
+    font-weight: 800;
   }
 `;
 
@@ -389,20 +338,20 @@ export const SeatMap: React.FC<SeatMapProps> = ({
       {meetingRooms.map((room: any, idx: number) => {
         // Position Meron meeting room below Engineering(SW)
         const isMeron = room.name === 'Meron';
-        const meronPosition = isMeron ? { left: 155, top: 1606 } : null; // Adjusted +5px to account for zone bottom extension
-        
+        const meronPosition = isMeron ? { left: 155, top: 1486 } : null; // Moved 120px higher
+
         // Position Yarkon meeting room below Engineering(S) aligned to left
         const isYarkon = room.name === 'Yarkon';
-        const yarkonPosition = isYarkon ? { left: 340, top: 1700 } : null;
+        const yarkonPosition = isYarkon ? { left: 340, top: 1580 } : null; // Moved 120px higher
         
         // Position Negev meeting room above Engineering(S) aligned to left
         // With 60px gap from Engineering(S) border
         const isNegev = room.name === 'Negev';
-        const negevPosition = isNegev ? { left: 370, top: 1298 } : null;
-        
+        const negevPosition = isNegev ? { left: 370, top: 1098 } : null; // Moved 200px higher
+
         // Position Timna meeting room above Negev with minimal space
         const isTimna = room.name === 'Timna';
-        const timnaPosition = isTimna ? { left: 370, top: 1198 } : null;
+        const timnaPosition = isTimna ? { left: 370, top: 998 } : null; // Moved 200px higher
         
         // Position Ramon meeting room - top aligns with Product(W) top Y position
         const isRamon = room.name === 'Ramon';
@@ -430,11 +379,11 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         
         // Position Dan above Reserved(S) with 60px gap from border (square shaped)
         const isDan = room.name === 'Dan';
-        const danPosition = isDan ? { left: 880, top: 1298 } : null;
+        const danPosition = isDan ? { left: 880, top: 1098 } : null; // Moved 200px higher
         
-        // Position Carmel to the right of Reserved(S) - vertical orientation, minimal padding, aligned with top border
+        // Position Carmel to the right of Reserved(S) - vertical orientation, aligned with IT Security line
         const isCarmel = room.name === 'Carmel';
-        const carmelPosition = isCarmel ? { left: 1140, top: 1448 } : null;
+        const carmelPosition = isCarmel ? { left: 1140, top: 1260 } : null;
         
         // Position Golan to the left of DevOps(E) bottom 2 rows, above Carmel, right-aligned with Carmel
         const isGolan = room.name === 'Golan';
@@ -465,7 +414,7 @@ export const SeatMap: React.FC<SeatMapProps> = ({
       <FacilityBox
         facilityType="kitchenette"
         style={{
-          left: 880,
+          left: 850,
           top: 300,
           width: 380,
           height: 390
@@ -479,7 +428,7 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         facilityType="bathroom"
         style={{
           left: 550,
-          top: 1198,
+          top: 998,
           width: 270,
           height: 90
         }}
@@ -487,12 +436,12 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         <ToiletIcon size={20} style={{ marginBottom: 4 }} />
         <div>Men Bathroom</div>
       </FacilityBox>
-      
+
       <FacilityBox
         facilityType="bathroom"
         style={{
           left: 520,
-          top: 1298,
+          top: 1098,
           width: 300,
           height: 90
         }}
@@ -500,12 +449,12 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         <ToiletIcon size={20} style={{ marginBottom: 4 }} />
         <div>Women Bathroom</div>
       </FacilityBox>
-      
+
       <FacilityBox
         facilityType="kitchenette"
         style={{
           left: 980,
-          top: 1298,
+          top: 1098,
           width: 110,
           height: 80
         }}
@@ -536,7 +485,7 @@ export const SeatMap: React.FC<SeatMapProps> = ({
           const padding = 15;
           const seatWidth = 50; // Seat width in px
           const seatHeight = 50; // Seat height in px
-          const yOffset = 200; // Match the offset applied to seats in App.tsx
+          const yOffset = 50; // Match the offset applied to seats in App.tsx
           
           // Zones with 0px seat offsets - no extra space needed in borders
           const teamZone = key;
@@ -585,9 +534,9 @@ export const SeatMap: React.FC<SeatMapProps> = ({
           
           const minX = Math.min(...group.desks.map(d => d.coordinates.x));
           const minY = Math.min(...group.desks.map(d => d.coordinates.y));
-          
+
           const padding = 15;
-          const yOffset = 200;
+          const yOffset = 50;
           const labelHeight = 20; // Approximate label height
           
           return (
@@ -616,8 +565,8 @@ export const SeatMap: React.FC<SeatMapProps> = ({
         
         return Object.entries(teamZoneGroups).flatMap(([key, group]) => {
           if (group.desks.length === 0) return [];
-          
-          const yOffset = 200; // From App.tsx
+
+          const yOffset = 50; // From App.tsx
           
           // Special handling for Reserved(S) - custom grouping
           if (key === 'Reserved-S') {
@@ -845,56 +794,59 @@ export const SeatMap: React.FC<SeatMapProps> = ({
       <AnimatePresence>
         {hoveredSeat && (() => {
           const desk = getDeskForSeat(hoveredSeat);
+          const tooltipLeft = hoveredSeat.x + 70;
+          const tooltipTop = hoveredSeat.y;
+
           return (
             <SeatTooltip
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
               style={{
-                left: Math.min(mousePosition.x + 20, window.innerWidth - 360),
-                top: Math.min(mousePosition.y + 20, window.innerHeight - 400),
+                left: tooltipLeft,
+                top: tooltipTop,
               }}
             >
-              <div style={{ marginBottom: '8px' }}>
+              <div style={{ marginBottom: '12px', paddingBottom: '12px', borderBottom: '3px solid rgba(168, 213, 232, 0.3)' }}>
                 <strong>{desk ? `🪑 ${desk.desk_id}` : `Seat ${hoveredSeat.id}`}</strong>
               </div>
-              
+
               {desk && (
                 <>
-                  <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '8px', marginBottom: '12px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: '12px', marginBottom: '12px', fontSize: '26px' }}>
                     <span style={{ opacity: 0.7 }}>Team:</span>
                     <span style={{ fontWeight: 600 }}>{desk.team}</span>
-                    
+
                     <span style={{ opacity: 0.7 }}>Zone:</span>
                     <span>{desk.zone}</span>
-                    
+
                     <span style={{ opacity: 0.7 }}>Floor:</span>
                     <span>{desk.floor}</span>
-                    
+
                     <span style={{ opacity: 0.7 }}>Status:</span>
-                    <span style={{ 
+                    <span style={{
                       color: desk.status === 'available' ? '#10b981' : '#ef4444',
                       fontWeight: 600,
                       textTransform: 'capitalize'
                     }}>{desk.status}</span>
                   </div>
-                  
+
                   {desk.reserved_for && (
-                    <div style={{ marginBottom: '8px', padding: '6px 10px', background: 'rgba(239, 68, 68, 0.2)', borderRadius: '6px', fontSize: '12px' }}>
+                    <div style={{ marginBottom: '12px', padding: '10px 16px', background: 'rgba(239, 68, 68, 0.2)', borderRadius: '6px', fontSize: '24px' }}>
                       Reserved: {desk.reserved_for}
                     </div>
                   )}
-                  
+
                   {desk.equipment.length > 0 && (
-                    <div style={{ marginBottom: '8px' }}>
-                      <div style={{ opacity: 0.7, fontSize: '11px', marginBottom: '4px' }}>EQUIPMENT</div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                    <div style={{ marginBottom: '12px' }}>
+                      <div style={{ opacity: 0.7, fontSize: '22px', marginBottom: '8px', fontWeight: 600 }}>EQUIPMENT</div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                         {desk.equipment.map((eq, i) => (
-                          <span key={i} style={{ 
-                            background: 'rgba(16, 185, 129, 0.2)', 
-                            padding: '2px 8px', 
-                            borderRadius: '4px', 
-                            fontSize: '11px',
+                          <span key={i} style={{
+                            background: 'rgba(16, 185, 129, 0.2)',
+                            padding: '6px 14px',
+                            borderRadius: '4px',
+                            fontSize: '22px',
                             color: '#10b981'
                           }}>
                             {eq}
@@ -903,10 +855,10 @@ export const SeatMap: React.FC<SeatMapProps> = ({
                       </div>
                     </div>
                   )}
-                  
-                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-                    <div style={{ opacity: 0.7, fontSize: '11px', marginBottom: '6px' }}>NEARBY AMENITIES</div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px', fontSize: '12px' }}>
+
+                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '3px solid rgba(168, 213, 232, 0.2)' }}>
+                    <div style={{ opacity: 0.7, fontSize: '22px', marginBottom: '8px', fontWeight: 600 }}>NEARBY AMENITIES</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '24px' }}>
                       {desk.nearby.meeting_rooms.length > 0 && (
                         <div>✓ Meeting rooms</div>
                       )}
@@ -918,14 +870,14 @@ export const SeatMap: React.FC<SeatMapProps> = ({
                       {desk.nearby.cafeteria && <div>✓ Cafeteria</div>}
                     </div>
                   </div>
-                  
+
                   {desk.notes && (
-                    <div style={{ 
-                      marginTop: '12px', 
-                      padding: '8px', 
-                      background: 'rgba(59, 130, 246, 0.2)', 
-                      borderRadius: '6px', 
-                      fontSize: '12px',
+                    <div style={{
+                      marginTop: '12px',
+                      padding: '10px 16px',
+                      background: 'rgba(59, 130, 246, 0.2)',
+                      borderRadius: '6px',
+                      fontSize: '24px',
                       fontStyle: 'italic',
                       color: '#93c5fd'
                     }}>
@@ -934,14 +886,14 @@ export const SeatMap: React.FC<SeatMapProps> = ({
                   )}
                 </>
               )}
-              
+
               {!desk && (
                 <>
-                  <div>Zone: {hoveredSeat.zone}</div>
-                  <div>Status: {hoveredSeat.isAvailable ? '✓ Available' : '✗ Occupied'}</div>
-                  {hoveredSeat.currentUser && <div>User: {hoveredSeat.currentUser}</div>}
+                  <div style={{ fontSize: '26px', marginBottom: '8px' }}>Zone: {hoveredSeat.zone}</div>
+                  <div style={{ fontSize: '26px', marginBottom: '8px' }}>Status: {hoveredSeat.isAvailable ? '✓ Available' : '✗ Occupied'}</div>
+                  {hoveredSeat.currentUser && <div style={{ fontSize: '26px', marginBottom: '8px' }}>User: {hoveredSeat.currentUser}</div>}
                   {hoveredSeat.features.length > 0 && (
-                    <div>Features: {hoveredSeat.features.map(f => f.label).join(', ')}</div>
+                    <div style={{ fontSize: '26px' }}>Features: {hoveredSeat.features.map(f => f.label).join(', ')}</div>
                   )}
                 </>
               )}
@@ -949,15 +901,6 @@ export const SeatMap: React.FC<SeatMapProps> = ({
           );
         })()}
       </AnimatePresence>
-
-      {/* Legend */}
-      <Legend>
-        <div style={{ fontWeight: 600, marginBottom: 8 }}>Desk Status</div>
-        <LegendItem color="linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)">Available</LegendItem>
-        <LegendItem color="linear-gradient(135deg, #34d399 0%, #10b981 100%)">Recommended</LegendItem>
-        <LegendItem color="linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)">Selected</LegendItem>
-        <LegendItem color="linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)">Occupied</LegendItem>
-      </Legend>
       </MapContent>
     </MapContainer>
   );

@@ -1,0 +1,974 @@
+[
+  {
+    "employee_id": "E230",
+    "employee_name": "Rachel D.",
+    "team": "Product",
+    "desk_id": "PRO-SW-16",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-10",
+    "remote_ratio": 0.79
+  },
+  {
+    "employee_id": "E219",
+    "employee_name": "Sara N.",
+    "team": "Product",
+    "desk_id": "PRO-SE-19",
+    "start_date": "2024-11-01",
+    "end_date": "2025-03-25",
+    "remote_ratio": 0.69
+  },
+  {
+    "employee_id": "E352",
+    "employee_name": "Eli K.",
+    "team": "Product",
+    "desk_id": "PRO-NE-25",
+    "start_date": "2024-11-01",
+    "end_date": "2025-02-07",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E791",
+    "employee_name": "Eli K.",
+    "team": "Product",
+    "desk_id": "PRO-NE-28",
+    "start_date": "2024-11-01",
+    "end_date": "2025-01-05",
+    "remote_ratio": 0.46
+  },
+  {
+    "employee_id": "E1025",
+    "employee_name": "Sasha Soudarikov",
+    "team": "Engineering",
+    "desk_id": "ENG-S-57",
+    "start_date": "2024-11-04",
+    "end_date": "2025-01-28",
+    "remote_ratio": 0.63
+  },
+  {
+    "employee_id": "E5002",
+    "employee_name": "Shimon Stroll",
+    "team": "Risk",
+    "desk_id": "RIS-NW-02",
+    "start_date": "2024-11-08",
+    "end_date": "2024-12-11",
+    "remote_ratio": 0.78
+  },
+  {
+    "employee_id": "E5002",
+    "employee_name": "Gary Jaye",
+    "team": "Risk",
+    "desk_id": "RIS-NW-11",
+    "start_date": "2024-11-14",
+    "end_date": "2025-04-12",
+    "remote_ratio": 0.65
+  },
+  {
+    "employee_id": "E2008",
+    "employee_name": "Adina Cohen",
+    "team": "DevOps",
+    "desk_id": "DEV-E-100",
+    "start_date": "2024-11-16",
+    "end_date": "2025-04-02",
+    "remote_ratio": 0.66
+  },
+  {
+    "employee_id": "E4000",
+    "employee_name": "Devra Ariel",
+    "team": "Product",
+    "desk_id": "PRO-W-30",
+    "start_date": "2024-11-30",
+    "end_date": "2025-02-11",
+    "remote_ratio": 0.52
+  },
+  {
+    "employee_id": "E1009",
+    "employee_name": "Efrat Wizel",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-43",
+    "start_date": "2024-12-02",
+    "end_date": "2025-03-01",
+    "remote_ratio": 0.65
+  },
+  {
+    "employee_id": "E1017",
+    "employee_name": "Miriam Blau",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-46",
+    "start_date": "2024-12-05",
+    "end_date": "2025-03-19",
+    "remote_ratio": 0.72
+  },
+  {
+    "employee_id": "E5004",
+    "employee_name": "Nathaniel Selevan",
+    "team": "Risk",
+    "desk_id": "RIS-NW-08",
+    "start_date": "2024-12-09",
+    "end_date": "2025-02-11",
+    "remote_ratio": 0.79
+  },
+  {
+    "employee_id": "E5000",
+    "employee_name": "Orya Jasper",
+    "team": "Risk",
+    "desk_id": "RIS-NW-08",
+    "start_date": "2024-12-11",
+    "end_date": "2025-03-16",
+    "remote_ratio": 0.77
+  },
+  {
+    "employee_id": "E2018",
+    "employee_name": "Haim Arie",
+    "team": "DevOps",
+    "desk_id": "DEV-E-100",
+    "start_date": "2024-12-13",
+    "end_date": "2025-05-05",
+    "remote_ratio": 0.6
+  },
+  {
+    "employee_id": "E1002",
+    "employee_name": "Rena Markiewitz",
+    "team": "Engineering",
+    "desk_id": "ENG-S-48",
+    "start_date": "2024-12-15",
+    "end_date": "2025-04-17",
+    "remote_ratio": 0.69
+  },
+  {
+    "employee_id": "E1065",
+    "employee_name": "Yochi Bloy",
+    "team": "Engineering",
+    "desk_id": "ENG-S-47",
+    "start_date": "2024-12-21",
+    "end_date": "2025-03-17",
+    "remote_ratio": 0.74
+  },
+  {
+    "employee_id": "E5007",
+    "employee_name": "Dovid Kesselman",
+    "team": "Risk",
+    "desk_id": "RIS-NW-02",
+    "start_date": "2024-12-23",
+    "end_date": "2025-03-13",
+    "remote_ratio": 0.69
+  },
+  {
+    "employee_id": "E1028",
+    "employee_name": "Esther Rivka Kaye",
+    "team": "Engineering",
+    "desk_id": "ENG-S-53",
+    "start_date": "2024-12-26",
+    "end_date": "2025-04-29",
+    "remote_ratio": 0.52
+  },
+  {
+    "employee_id": "E957",
+    "employee_name": "Rachel D.",
+    "team": "Product",
+    "desk_id": "PRO-NE-28",
+    "start_date": "2025-01-05",
+    "end_date": "2025-05-07",
+    "remote_ratio": 0.75
+  },
+  {
+    "employee_id": "E654",
+    "employee_name": "Eli K.",
+    "team": "Risk",
+    "desk_id": "RIS-SE-21",
+    "start_date": "2025-01-16",
+    "end_date": "2025-03-18",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E5004",
+    "employee_name": "Nathaniel Selevan",
+    "team": "Risk",
+    "desk_id": "RIS-NW-08",
+    "start_date": "2025-01-16",
+    "end_date": "2025-05-27",
+    "remote_ratio": 0.72
+  },
+  {
+    "employee_id": "E1043",
+    "employee_name": "Miriam Neumann",
+    "team": "Engineering",
+    "desk_id": "ENG-S-47",
+    "start_date": "2025-01-17",
+    "end_date": "2025-05-23",
+    "remote_ratio": 0.57
+  },
+  {
+    "employee_id": "E1013",
+    "employee_name": "Menucha Kaniel",
+    "team": "Engineering",
+    "desk_id": "ENG-S-56",
+    "start_date": "2025-01-20",
+    "end_date": "2025-04-26",
+    "remote_ratio": 0.41
+  },
+  {
+    "employee_id": "E1021",
+    "employee_name": "Gil Griva",
+    "team": "Engineering",
+    "desk_id": "ENG-S-63",
+    "start_date": "2025-02-03",
+    "end_date": "2025-06-30",
+    "remote_ratio": 0.68
+  },
+  {
+    "employee_id": "E2005",
+    "employee_name": "Elyashiv Hofman",
+    "team": "DevOps",
+    "desk_id": "DEV-E-103",
+    "start_date": "2025-02-07",
+    "end_date": "2025-05-30",
+    "remote_ratio": 0.41
+  },
+  {
+    "employee_id": "E1049",
+    "employee_name": "Uri Keselman",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-43",
+    "start_date": "2025-02-08",
+    "end_date": "2025-06-02",
+    "remote_ratio": 0.7
+  },
+  {
+    "employee_id": "E1026",
+    "employee_name": "Sasha Soudarikov",
+    "team": "Engineering",
+    "desk_id": "ENG-S-57",
+    "start_date": "2025-02-10",
+    "end_date": "2025-07-03",
+    "remote_ratio": 0.64
+  },
+  {
+    "employee_id": "E2000",
+    "employee_name": "Nadav Peretz",
+    "team": "DevOps",
+    "desk_id": "DEV-E-99",
+    "start_date": "2025-02-10",
+    "end_date": "2025-06-08",
+    "remote_ratio": 0.42
+  },
+  {
+    "employee_id": "E5005",
+    "employee_name": "Nathaniel Selevan",
+    "team": "Risk",
+    "desk_id": "RIS-NW-08",
+    "start_date": "2025-02-27",
+    "end_date": "2025-06-23",
+    "remote_ratio": 0.47
+  },
+  {
+    "employee_id": "E4001",
+    "employee_name": "Devra Ariel",
+    "team": "Product",
+    "desk_id": "PRO-W-35",
+    "start_date": "2025-02-28",
+    "end_date": "2025-04-23",
+    "remote_ratio": 0.53
+  },
+  {
+    "employee_id": "E705",
+    "employee_name": "Eli K.",
+    "team": "Risk",
+    "desk_id": "RIS-W-07",
+    "start_date": "2025-03-01",
+    "end_date": "2025-07-18",
+    "remote_ratio": 0.54
+  },
+  {
+    "employee_id": "E1010",
+    "employee_name": "Efrat Wizel",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-44",
+    "start_date": "2025-03-07",
+    "end_date": "2025-06-05",
+    "remote_ratio": 0.5
+  },
+  {
+    "employee_id": "E1016",
+    "employee_name": "Yehudit Ainhoren",
+    "team": "Engineering",
+    "desk_id": "ENG-S-60",
+    "start_date": "2025-03-09",
+    "end_date": "2025-05-25",
+    "remote_ratio": 0.78
+  },
+  {
+    "employee_id": "E1005",
+    "employee_name": "Miriam Bisker",
+    "team": "Engineering",
+    "desk_id": "ENG-S-56",
+    "start_date": "2025-03-12",
+    "end_date": "2025-06-04",
+    "remote_ratio": 0.6
+  },
+  {
+    "employee_id": "E2019",
+    "employee_name": "Pnina Sofer",
+    "team": "DevOps",
+    "desk_id": "DEV-E-108",
+    "start_date": "2025-03-12",
+    "end_date": "2025-05-06",
+    "remote_ratio": 0.67
+  },
+  {
+    "employee_id": "E1000",
+    "employee_name": "Basya Rosemann",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-40",
+    "start_date": "2025-03-21",
+    "end_date": "2025-07-24",
+    "remote_ratio": 0.68
+  },
+  {
+    "employee_id": "E2011",
+    "employee_name": "Mendi Levin",
+    "team": "DevOps",
+    "desk_id": "DEV-E-98",
+    "start_date": "2025-03-21",
+    "end_date": "2025-04-21",
+    "remote_ratio": 0.56
+  },
+  {
+    "employee_id": "E1045",
+    "employee_name": "Osnat Openhaim",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-45",
+    "start_date": "2025-03-23",
+    "end_date": "2025-08-10",
+    "remote_ratio": 0.74
+  },
+  {
+    "employee_id": "E1066",
+    "employee_name": "Yochi Bloy",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-44",
+    "start_date": "2025-03-24",
+    "end_date": "2025-07-23",
+    "remote_ratio": 0.5
+  },
+  {
+    "employee_id": "E5001",
+    "employee_name": "Shimon Stroll",
+    "team": "Risk",
+    "desk_id": "RIS-NW-08",
+    "start_date": "2025-03-27",
+    "end_date": "2025-06-04",
+    "remote_ratio": 0.74
+  },
+  {
+    "employee_id": "E2014",
+    "employee_name": "Yossi Sabo",
+    "team": "DevOps",
+    "desk_id": "DEV-E-97",
+    "start_date": "2025-03-30",
+    "end_date": "2025-07-02",
+    "remote_ratio": 0.61
+  },
+  {
+    "employee_id": "E1007",
+    "employee_name": "Shaindy Dubin",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-46",
+    "start_date": "2025-04-02",
+    "end_date": "2025-07-23",
+    "remote_ratio": 0.51
+  },
+  {
+    "employee_id": "E1035",
+    "employee_name": "Netanel Kremer",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-39",
+    "start_date": "2025-04-03",
+    "end_date": "2025-06-25",
+    "remote_ratio": 0.48
+  },
+  {
+    "employee_id": "E5008",
+    "employee_name": "Dovid Kesselman",
+    "team": "Risk",
+    "desk_id": "RIS-NW-11",
+    "start_date": "2025-04-06",
+    "end_date": "2025-08-14",
+    "remote_ratio": 0.56
+  },
+  {
+    "employee_id": "E1047",
+    "employee_name": "Rut Bagad",
+    "team": "Engineering",
+    "desk_id": "ENG-S-58",
+    "start_date": "2025-04-08",
+    "end_date": "2025-08-17",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E2009",
+    "employee_name": "Adina Cohen",
+    "team": "DevOps",
+    "desk_id": "DEV-E-100",
+    "start_date": "2025-04-09",
+    "end_date": "2025-07-01",
+    "remote_ratio": 0.54
+  },
+  {
+    "employee_id": "E1034",
+    "employee_name": "Leah Lerner",
+    "team": "Engineering",
+    "desk_id": "ENG-S-57",
+    "start_date": "2025-04-10",
+    "end_date": "2025-07-31",
+    "remote_ratio": 0.79
+  },
+  {
+    "employee_id": "E1067",
+    "employee_name": "Zvi Kuper",
+    "team": "Engineering",
+    "desk_id": "ENG-S-59",
+    "start_date": "2025-04-11",
+    "end_date": "2025-05-17",
+    "remote_ratio": 0.6
+  },
+  {
+    "employee_id": "E1039",
+    "employee_name": "Danil Brenner",
+    "team": "Engineering",
+    "desk_id": "ENG-S-54",
+    "start_date": "2025-04-12",
+    "end_date": "2025-06-05",
+    "remote_ratio": 0.66
+  },
+  {
+    "employee_id": "E1031",
+    "employee_name": "Tzippy Freedman",
+    "team": "Engineering",
+    "desk_id": "ENG-S-55",
+    "start_date": "2025-04-15",
+    "end_date": "2025-07-21",
+    "remote_ratio": 0.65
+  },
+  {
+    "employee_id": "E1056",
+    "employee_name": "Maor Opedisano",
+    "team": "Engineering",
+    "desk_id": "ENG-S-58",
+    "start_date": "2025-04-16",
+    "end_date": "2025-05-31",
+    "remote_ratio": 0.56
+  },
+  {
+    "employee_id": "E5000",
+    "employee_name": "Orya Jasper",
+    "team": "Risk",
+    "desk_id": "RIS-NW-10",
+    "start_date": "2025-04-20",
+    "end_date": "2025-06-05",
+    "remote_ratio": 0.73
+  },
+  {
+    "employee_id": "E5005",
+    "employee_name": "Dovid Kesselman",
+    "team": "Risk",
+    "desk_id": "RIS-NW-12",
+    "start_date": "2025-04-22",
+    "end_date": "2025-06-10",
+    "remote_ratio": 0.73
+  },
+  {
+    "employee_id": "E4004",
+    "employee_name": "Temima Greenberg",
+    "team": "Product",
+    "desk_id": "PRO-W-27",
+    "start_date": "2025-04-24",
+    "end_date": "2025-07-31",
+    "remote_ratio": 0.5
+  },
+  {
+    "employee_id": "E1018",
+    "employee_name": "Esther Leiman",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-39",
+    "start_date": "2025-04-25",
+    "end_date": "2025-08-11",
+    "remote_ratio": 0.56
+  },
+  {
+    "employee_id": "E2012",
+    "employee_name": "Mendi Levin",
+    "team": "DevOps",
+    "desk_id": "DEV-E-99",
+    "start_date": "2025-04-26",
+    "end_date": "2025-07-23",
+    "remote_ratio": 0.56
+  },
+  {
+    "employee_id": "E5003",
+    "employee_name": "Gary Jaye",
+    "team": "Risk",
+    "desk_id": "RIS-NW-03",
+    "start_date": "2025-04-29",
+    "end_date": "2025-09-02",
+    "remote_ratio": 0.45
+  },
+  {
+    "employee_id": "E1003",
+    "employee_name": "Rena Markiewitz",
+    "team": "Engineering",
+    "desk_id": "ENG-S-55",
+    "start_date": "2025-04-30",
+    "end_date": "2025-07-18",
+    "remote_ratio": 0.45
+  },
+  {
+    "employee_id": "E2003",
+    "employee_name": "Rachel Aslizada",
+    "team": "DevOps",
+    "desk_id": "DEV-E-103",
+    "start_date": "2025-05-01",
+    "end_date": "2025-08-27",
+    "remote_ratio": 0.75
+  },
+  {
+    "employee_id": "E1020",
+    "employee_name": "Benjamin Malev",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-43",
+    "start_date": "2025-05-06",
+    "end_date": "2025-09-29",
+    "remote_ratio": 0.77
+  },
+  {
+    "employee_id": "E1062",
+    "employee_name": "Naor Levi",
+    "team": "Engineering",
+    "desk_id": "ENG-S-54",
+    "start_date": "2025-05-09",
+    "end_date": "2025-07-04",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E4002",
+    "employee_name": "Reuven Normile",
+    "team": "Product",
+    "desk_id": "PRO-W-29",
+    "start_date": "2025-05-09",
+    "end_date": "2025-06-19",
+    "remote_ratio": 0.44
+  },
+  {
+    "employee_id": "E1023",
+    "employee_name": "Meni Goldstein",
+    "team": "Engineering",
+    "desk_id": "ENG-S-50",
+    "start_date": "2025-05-12",
+    "end_date": "2025-07-19",
+    "remote_ratio": 0.53
+  },
+  {
+    "employee_id": "E1029",
+    "employee_name": "Esther Rivka Kaye",
+    "team": "Engineering",
+    "desk_id": "ENG-S-63",
+    "start_date": "2025-05-15",
+    "end_date": "2025-07-05",
+    "remote_ratio": 0.61
+  },
+  {
+    "employee_id": "E1014",
+    "employee_name": "Menucha Kaniel",
+    "team": "Engineering",
+    "desk_id": "ENG-S-60",
+    "start_date": "2025-05-16",
+    "end_date": "2025-08-19",
+    "remote_ratio": 0.63
+  },
+  {
+    "employee_id": "E4007",
+    "employee_name": "Ilan Axelrod",
+    "team": "Product",
+    "desk_id": "PRO-W-32",
+    "start_date": "2025-05-19",
+    "end_date": "2025-07-26",
+    "remote_ratio": 0.79
+  },
+  {
+    "employee_id": "E1059",
+    "employee_name": "Dvir Tahar",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-40",
+    "start_date": "2025-05-27",
+    "end_date": "2025-08-23",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E5003",
+    "employee_name": "Gary Jaye",
+    "team": "Risk",
+    "desk_id": "RIS-NW-18",
+    "start_date": "2025-05-27",
+    "end_date": "2025-07-22",
+    "remote_ratio": 0.51
+  },
+  {
+    "employee_id": "E4006",
+    "employee_name": "Ari Pollack",
+    "team": "Product",
+    "desk_id": "PRO-W-28",
+    "start_date": "2025-05-31",
+    "end_date": "2025-07-04",
+    "remote_ratio": 0.46
+  },
+  {
+    "employee_id": "E2006",
+    "employee_name": "Elyashiv Hofman",
+    "team": "DevOps",
+    "desk_id": "DEV-E-103",
+    "start_date": "2025-06-05",
+    "end_date": "2025-07-20",
+    "remote_ratio": 0.73
+  },
+  {
+    "employee_id": "E1068",
+    "employee_name": "Zvi Kuper",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-46",
+    "start_date": "2025-06-06",
+    "end_date": "2025-07-06",
+    "remote_ratio": 0.77
+  },
+  {
+    "employee_id": "E1040",
+    "employee_name": "Danil Brenner",
+    "team": "Engineering",
+    "desk_id": "ENG-S-56",
+    "start_date": "2025-06-10",
+    "end_date": "2025-10-31",
+    "remote_ratio": 0.59
+  },
+  {
+    "employee_id": "E1044",
+    "employee_name": "Miriam Neumann",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-36",
+    "start_date": "2025-06-13",
+    "end_date": "2025-08-15",
+    "remote_ratio": 0.75
+  },
+  {
+    "employee_id": "E5001",
+    "employee_name": "Orya Jasper",
+    "team": "Risk",
+    "desk_id": "RIS-NW-14",
+    "start_date": "2025-06-14",
+    "end_date": "2025-08-27",
+    "remote_ratio": 0.65
+  },
+  {
+    "employee_id": "E1006",
+    "employee_name": "Miriam Bisker",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-36",
+    "start_date": "2025-06-21",
+    "end_date": "2025-09-25",
+    "remote_ratio": 0.5
+  },
+  {
+    "employee_id": "E1057",
+    "employee_name": "Maor Opedisano",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-46",
+    "start_date": "2025-06-22",
+    "end_date": "2025-11-03",
+    "remote_ratio": 0.78
+  },
+  {
+    "employee_id": "E1050",
+    "employee_name": "Uri Keselman",
+    "team": "Engineering",
+    "desk_id": "ENG-S-62",
+    "start_date": "2025-06-26",
+    "end_date": "2025-07-29",
+    "remote_ratio": 0.69
+  },
+  {
+    "employee_id": "E2001",
+    "employee_name": "Nadav Peretz",
+    "team": "DevOps",
+    "desk_id": "DEV-E-103",
+    "start_date": "2025-06-28",
+    "end_date": "2025-09-12",
+    "remote_ratio": 0.57
+  },
+  {
+    "employee_id": "E1036",
+    "employee_name": "Netanel Kremer",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-43",
+    "start_date": "2025-06-30",
+    "end_date": "2025-10-17",
+    "remote_ratio": 0.75
+  },
+  {
+    "employee_id": "E5006",
+    "employee_name": "Nathaniel Selevan",
+    "team": "Risk",
+    "desk_id": "RIS-NW-12",
+    "start_date": "2025-07-04",
+    "end_date": "2025-09-06",
+    "remote_ratio": 0.55
+  },
+  {
+    "employee_id": "E1022",
+    "employee_name": "Gil Griva",
+    "team": "Engineering",
+    "desk_id": "ENG-S-63",
+    "start_date": "2025-07-07",
+    "end_date": "2025-11-03",
+    "remote_ratio": 0.44
+  },
+  {
+    "employee_id": "E4003",
+    "employee_name": "Reuven Normile",
+    "team": "Product",
+    "desk_id": "PRO-W-34",
+    "start_date": "2025-07-12",
+    "end_date": "2025-08-20",
+    "remote_ratio": 0.54
+  },
+  {
+    "employee_id": "E1063",
+    "employee_name": "Naor Levi",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-41",
+    "start_date": "2025-07-16",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.54
+  },
+  {
+    "employee_id": "E1069",
+    "employee_name": "Zvi Kuper",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-39",
+    "start_date": "2025-07-16",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.76
+  },
+  {
+    "employee_id": "E826",
+    "employee_name": "Eli K.",
+    "team": "Risk",
+    "desk_id": "RIS-W-07",
+    "start_date": "2025-07-18",
+    "end_date": "2025-09-19",
+    "remote_ratio": 0.77
+  },
+  {
+    "employee_id": "E1030",
+    "employee_name": "Esther Rivka Kaye",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-36",
+    "start_date": "2025-07-21",
+    "end_date": "2025-09-23",
+    "remote_ratio": 0.57
+  },
+  {
+    "employee_id": "E1027",
+    "employee_name": "Sasha Soudarikov",
+    "team": "Engineering",
+    "desk_id": "ENG-S-56",
+    "start_date": "2025-07-26",
+    "end_date": "2025-10-22",
+    "remote_ratio": 0.5
+  },
+  {
+    "employee_id": "E1032",
+    "employee_name": "Tzippy Freedman",
+    "team": "Engineering",
+    "desk_id": "ENG-S-60",
+    "start_date": "2025-07-26",
+    "end_date": "2025-09-15",
+    "remote_ratio": 0.6
+  },
+  {
+    "employee_id": "E2007",
+    "employee_name": "Elyashiv Hofman",
+    "team": "DevOps",
+    "desk_id": "DEV-E-108",
+    "start_date": "2025-08-01",
+    "end_date": "2025-10-06",
+    "remote_ratio": 0.45
+  },
+  {
+    "employee_id": "E4008",
+    "employee_name": "Ilan Axelrod",
+    "team": "Product",
+    "desk_id": "PRO-W-20",
+    "start_date": "2025-08-01",
+    "end_date": "2025-09-09",
+    "remote_ratio": 0.64
+  },
+  {
+    "employee_id": "E1004",
+    "employee_name": "Rena Markiewitz",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-41",
+    "start_date": "2025-08-04",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.58
+  },
+  {
+    "employee_id": "E1008",
+    "employee_name": "Shaindy Dubin",
+    "team": "Engineering",
+    "desk_id": "ENG-S-49",
+    "start_date": "2025-08-05",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.53
+  },
+  {
+    "employee_id": "E1024",
+    "employee_name": "Meni Goldstein",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-37",
+    "start_date": "2025-08-06",
+    "end_date": "2025-10-06",
+    "remote_ratio": 0.65
+  },
+  {
+    "employee_id": "E1001",
+    "employee_name": "Basya Rosemann",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-37",
+    "start_date": "2025-08-09",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.66
+  },
+  {
+    "employee_id": "E1051",
+    "employee_name": "Uri Keselman",
+    "team": "Engineering",
+    "desk_id": "ENG-S-53",
+    "start_date": "2025-08-09",
+    "end_date": "2025-09-30",
+    "remote_ratio": 0.55
+  },
+  {
+    "employee_id": "E2013",
+    "employee_name": "Mendi Levin",
+    "team": "DevOps",
+    "desk_id": "DEV-E-107",
+    "start_date": "2025-08-09",
+    "end_date": "2025-10-05",
+    "remote_ratio": 0.53
+  },
+  {
+    "employee_id": "E4005",
+    "employee_name": "Temima Greenberg",
+    "team": "Product",
+    "desk_id": "PRO-W-27",
+    "start_date": "2025-08-11",
+    "end_date": "2025-09-14",
+    "remote_ratio": 0.48
+  },
+  {
+    "employee_id": "E1019",
+    "employee_name": "Esther Leiman",
+    "team": "Engineering",
+    "desk_id": "ENG-S-62",
+    "start_date": "2025-08-19",
+    "end_date": "2025-10-23",
+    "remote_ratio": 0.5
+  },
+  {
+    "employee_id": "E1046",
+    "employee_name": "Osnat Openhaim",
+    "team": "Engineering",
+    "desk_id": "ENG-S-49",
+    "start_date": "2025-08-22",
+    "end_date": "2025-10-21",
+    "remote_ratio": 0.66
+  },
+  {
+    "employee_id": "E1048",
+    "employee_name": "Rut Bagad",
+    "team": "Engineering",
+    "desk_id": "ENG-S-52",
+    "start_date": "2025-08-28",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.72
+  },
+  {
+    "employee_id": "E5009",
+    "employee_name": "Dovid Kesselman",
+    "team": "Risk",
+    "desk_id": "RIS-NW-12",
+    "start_date": "2025-08-31",
+    "end_date": "2025-11-06",
+    "remote_ratio": 0.77
+  },
+  {
+    "employee_id": "E1060",
+    "employee_name": "Dvir Tahar",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-36",
+    "start_date": "2025-09-06",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.53
+  },
+  {
+    "employee_id": "E1015",
+    "employee_name": "Menucha Kaniel",
+    "team": "Engineering",
+    "desk_id": "ENG-S-61",
+    "start_date": "2025-09-12",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.41
+  },
+  {
+    "employee_id": "E2004",
+    "employee_name": "Rachel Aslizada",
+    "team": "DevOps",
+    "desk_id": "DEV-E-98",
+    "start_date": "2025-09-13",
+    "end_date": "2025-11-05",
+    "remote_ratio": 0.72
+  },
+  {
+    "employee_id": "E4009",
+    "employee_name": "Ilan Axelrod",
+    "team": "Product",
+    "desk_id": "PRO-W-24",
+    "start_date": "2025-09-21",
+    "end_date": "2025-10-25",
+    "remote_ratio": 0.43
+  },
+  {
+    "employee_id": "E2002",
+    "employee_name": "Nadav Peretz",
+    "team": "DevOps",
+    "desk_id": "DEV-E-98",
+    "start_date": "2025-09-23",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.77
+  },
+  {
+    "employee_id": "E1033",
+    "employee_name": "Tzippy Freedman",
+    "team": "Engineering",
+    "desk_id": "ENG-S-49",
+    "start_date": "2025-10-01",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.49
+  },
+  {
+    "employee_id": "E1058",
+    "employee_name": "Maor Opedisano",
+    "team": "Engineering",
+    "desk_id": "ENG-SW-45",
+    "start_date": "2025-11-08",
+    "end_date": "2025-11-09",
+    "remote_ratio": 0.41
+  }
+]
