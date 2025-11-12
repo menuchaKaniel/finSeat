@@ -1,15 +1,15 @@
-import {
-  Seat,
-  SeatRecommendation,
-  UserPreferences,
-  Schedule,
-  Zone,
-  ZoneType,
-  AIResponse
+import { 
+  Seat, 
+  SeatRecommendation, 
+  UserPreferences, 
+  Schedule, 
+  Zone, 
+  ZoneType, 
+  AIResponse 
 } from '../types';
 import { addHours, isAfter, isBefore, format } from 'date-fns';
 import { LLMService, ConversationContext } from './llmService';
-import { trendService } from '../services/trendService';
+import { BookingHistoryService } from '../services/bookingHistoryService';
 
 export class AIRecommendationEngine {
   public seats: Seat[];
@@ -18,11 +18,11 @@ export class AIRecommendationEngine {
   private llmService: LLMService;
   private conversationHistory: string[] = [];
 
-  constructor(seats: Seat[], zones: Zone[], apiKey?: string) {
+  constructor(seats: Seat[], zones: Zone[], region?: string, modelId?: string) {
     this.seats = seats;
     this.zones = zones;
     this.currentTime = new Date();
-    this.llmService = new LLMService(apiKey);
+    this.llmService = new LLMService(region, modelId);
   }
 
   // Main method to process user messages and return AI responses
@@ -36,11 +36,94 @@ export class AIRecommendationEngine {
     // Add to conversation history
     this.conversationHistory.push(`User: ${message}`);
     
+    // Extract preferences from the message to enhance recommendations
+    const enhancedPreferences = this.extractPreferencesFromMessage(message, userPreferences);
+    
     // Intent detection and recommendations
     let recommendations: SeatRecommendation[] = [];
     
     if (this.isSeatingRequest(lowercaseMessage)) {
-      recommendations = this.generateRecommendations(userPreferences, userSchedule);
+      recommendations = this.generateRecommendations(enhancedPreferences, userSchedule);
+      
+      // If user specifically asked for window seats, filter to only window seats
+      if (lowercaseMessage.includes('window')) {
+        console.log('🪟 User requested window seat - original recommendations:', recommendations.length);
+        console.log('🔍 Original recommendations:', recommendations.map(r => ({
+          id: r.seat.id,
+          features: r.seat.features,
+          distanceToWindow: r.seat.distanceMetrics?.toNearestWindow,
+          hasWindowFeature: r.seat.features?.some(f => f.type === 'window-view'),
+          rawSeat: (r.seat as any).window
+        })));
+        
+        const windowRecommendations = recommendations.filter(rec => {
+          const hasWindowFeature = rec.seat.features?.some(f => f.type === 'window-view');
+          const isCloseToWindow = rec.seat.distanceMetrics?.toNearestWindow && rec.seat.distanceMetrics.toNearestWindow < 5;
+          const hasRawWindowProperty = (rec.seat as any).window === true;
+          
+          const isWindowSeat = hasWindowFeature || isCloseToWindow || hasRawWindowProperty;
+          
+          console.log(`🪟 Seat ${rec.seat.id}:`, {
+            hasWindowFeature,
+            isCloseToWindow,
+            hasRawWindowProperty,
+            isWindowSeat,
+            features: rec.seat.features?.map(f => f.type)
+          });
+          
+          return isWindowSeat;
+        });
+        
+        console.log(`🪟 After filtering: ${windowRecommendations.length} window seats found`);
+        
+        if (windowRecommendations.length > 0) {
+          recommendations = windowRecommendations;
+          // Update reasons to emphasize window feature
+          recommendations.forEach(rec => {
+            if (!rec.reasons.some(r => r.toLowerCase().includes('window'))) {
+              rec.reasons.unshift('Window view available');
+            }
+          });
+        } else {
+          console.log('🔍 No window recommendations found, searching all available seats...');
+          // If no window seats found in recommendations, find available window seats manually
+          const allWindowSeats = this.seats.filter(seat => {
+            if (!seat.isAvailable) return false;
+            
+            const hasWindowFeature = seat.features?.some(f => f.type === 'window-view');
+            const isCloseToWindow = seat.distanceMetrics?.toNearestWindow && seat.distanceMetrics.toNearestWindow < 5;
+            const hasRawWindowProperty = (seat as any).window === true;
+            
+            return hasWindowFeature || isCloseToWindow || hasRawWindowProperty;
+          });
+          
+          console.log(`🪟 Found ${allWindowSeats.length} available window seats:`, allWindowSeats.map(s => ({
+            id: s.id,
+            features: s.features?.map(f => f.type),
+            distanceToWindow: s.distanceMetrics?.toNearestWindow
+          })));
+          
+          if (allWindowSeats.length > 0) {
+            // Create recommendations for window seats with proper scoring
+            recommendations = allWindowSeats.slice(0, 3).map((seat, index) => ({
+              seat,
+              score: 95 - (index * 3), // 95%, 92%, 89% etc.
+              reasons: ['Window view available', 'Natural light', 'Matches your window request'],
+              matchedPreferences: ['window-view'],
+              timeSlots: [{ start: new Date(), end: new Date(Date.now() + 4 * 60 * 60 * 1000), available: true }]
+            }));
+          } else {
+            // No window seats available at all
+            console.log('❌ No window seats available');
+            return {
+              message: "Sorry, no window seats are currently available. Would you like me to recommend other seats or check for window seat availability later?",
+              recommendations: [],
+              suggestedActions: ["Check availability later", "Find alternative seats", "Set window seat alert"],
+              followUpQuestions: ["Would you prefer a quiet seat instead?", "Are you flexible on timing?", "Should I notify you when window seats become available?"]
+            };
+          }
+        }
+      }
     }
     
     // Build context for LLM
@@ -62,13 +145,22 @@ export class AIRecommendationEngine {
       // Add AI response to history
       this.conversationHistory.push(`AI: ${aiMessage}`);
       
+      // Extract seat IDs from LLM response and align recommendations
+      const llmRecommendedSeats = this.extractSeatIDsFromLLMResponse(aiMessage);
+      let finalRecommendations = recommendations;
+      
+      if (llmRecommendedSeats.length > 0) {
+        // Align internal recommendations with LLM suggestions
+        finalRecommendations = this.alignRecommendationsWithLLM(llmRecommendedSeats, recommendations);
+      }
+      
       // Determine suggested actions based on intent and context
-      const suggestedActions = this.getSuggestedActions(lowercaseMessage, recommendations);
-      const followUpQuestions = this.getFollowUpQuestions(lowercaseMessage, recommendations);
+      const suggestedActions = this.getSuggestedActions(lowercaseMessage, finalRecommendations);
+      const followUpQuestions = this.getFollowUpQuestions(lowercaseMessage, finalRecommendations);
       
       return {
         message: aiMessage,
-        recommendations: recommendations.length > 0 ? recommendations.slice(0, 3) : undefined,
+        recommendations: finalRecommendations.length > 0 ? finalRecommendations.slice(0, 3) : undefined,
         suggestedActions,
         followUpQuestions
       };
@@ -84,9 +176,70 @@ export class AIRecommendationEngine {
   private isSeatingRequest(message: string): boolean {
     const seatingKeywords = [
       'recommend', 'suggest', 'find', 'seat', 'desk', 'where should i sit',
-      'best place', 'good spot', 'need a seat', 'book', 'reserve'
+      'best place', 'good spot', 'need a seat', 'book', 'reserve', 'window'
     ];
     return seatingKeywords.some(keyword => message.includes(keyword));
+  }
+
+  // Extract preferences from user message
+  private extractPreferencesFromMessage(message: string, basePreferences: UserPreferences): UserPreferences {
+    const lowerMessage = message.toLowerCase();
+    const updatedPreferences = { ...basePreferences };
+
+    // Window seat detection
+    if (lowerMessage.includes('window') || lowerMessage.includes('view')) {
+      updatedPreferences.seatFeatures = [...(updatedPreferences.seatFeatures || [])];
+      if (!updatedPreferences.seatFeatures.includes('window-view')) {
+        updatedPreferences.seatFeatures.push('window-view');
+      }
+      // Add nearWindow preference for filtering
+      (updatedPreferences as any).nearWindow = true;
+    }
+
+    // Quiet/focus work detection
+    if (lowerMessage.includes('quiet') || lowerMessage.includes('focus') || lowerMessage.includes('concentrated')) {
+      updatedPreferences.workStyle = 'quiet';
+      updatedPreferences.collaborationNeeds = 'low';
+    }
+
+    // Collaborative work detection
+    if (lowerMessage.includes('collaborate') || lowerMessage.includes('team') || lowerMessage.includes('brainstorm')) {
+      updatedPreferences.workStyle = 'social';
+      updatedPreferences.collaborationNeeds = 'high';
+    }
+
+    // Standing desk detection
+    if (lowerMessage.includes('standing')) {
+      updatedPreferences.seatFeatures = [...(updatedPreferences.seatFeatures || [])];
+      if (!updatedPreferences.seatFeatures.includes('standing-desk')) {
+        updatedPreferences.seatFeatures.push('standing-desk');
+      }
+    }
+
+    // Monitor preference
+    if (lowerMessage.includes('monitor') || lowerMessage.includes('screen')) {
+      updatedPreferences.seatFeatures = [...(updatedPreferences.seatFeatures || [])];
+      if (!updatedPreferences.seatFeatures.includes('monitor')) {
+        updatedPreferences.seatFeatures.push('monitor');
+      }
+    }
+
+    // Team preference extraction
+    if (lowerMessage.includes('devops') || lowerMessage.includes('dev ops')) {
+      updatedPreferences.team = 'DevOps';
+    } else if (lowerMessage.includes('engineering') || lowerMessage.includes('eng')) {
+      updatedPreferences.team = 'Engineering';
+    } else if (lowerMessage.includes('product') || lowerMessage.includes('prod')) {
+      updatedPreferences.team = 'Product';
+    } else if (lowerMessage.includes('risk')) {
+      updatedPreferences.team = 'Risk';
+    } else if (lowerMessage.includes('it security') || lowerMessage.includes('security')) {
+      updatedPreferences.team = 'IT Security';
+    }
+
+    console.log(`🔍 Extracted team preference: "${updatedPreferences.team}" from message: "${message}"`);
+
+    return updatedPreferences;
   }
 
   // Check if user is asking about availability
@@ -227,56 +380,102 @@ export class AIRecommendationEngine {
     preferences: UserPreferences,
     schedule: Schedule[]
   ): number {
-    let score = 0;
+    let score = 50; // Start with base score of 50
     const maxScore = 100;
 
-    // Team zone matching (20 point bonus)
-    const teamBonus = this.getTeamZoneBonus(seat, preferences.team);
-    score += teamBonus;
+    // Historical preference boost (NEW - 20 points max)
+    const historyBonus = this.getHistoryBonus(seat, preferences);
+    score += Math.min(historyBonus, 20);
 
-    // Zone preference matching (30% weight)
+    // Team zone matching (15 point bonus - reduced from 20)
+    const teamBonus = this.getTeamZoneBonus(seat, preferences.team);
+    score += Math.min(teamBonus, 15);
+
+    // Zone preference matching (20 points max - reduced from 30)
     if (preferences.preferredZones.includes(seat.zone)) {
-      score += 30;
+      score += 20;
     } else {
       // Partial points for compatible zones
-      score += this.getZoneCompatibilityScore(seat.zone, preferences) * 0.3;
+      score += Math.min(this.getZoneCompatibilityScore(seat.zone, preferences), 10);
     }
 
-    // Work style matching (25% weight)
-    score += this.getWorkStyleScore(seat, preferences.workStyle) * 0.25;
+    // Work style matching (15 points max - reduced)
+    score += Math.min(this.getWorkStyleScore(seat, preferences.workStyle), 15);
 
-    // Feature matching (20% weight)
-    const featureMatch = seat.features.filter(f =>
+    // Feature matching (10 points max - reduced from 20)
+    const featureMatch = seat.features.filter(f => 
       preferences.seatFeatures.includes(f.type)
     ).length / Math.max(preferences.seatFeatures.length, 1);
-    score += featureMatch * 20;
+    score += featureMatch * 10;
 
-    // Time-based preferences (15% weight)
-    score += this.getTimePreferenceScore(preferences.timePreferences) * 0.15;
+    // Window preference bonus (high priority for window requests)
+    if ((preferences as any).nearWindow) {
+      const hasWindowFeature = seat.features?.some(f => f.type === 'window-view');
+      const isCloseToWindow = seat.distanceMetrics?.toNearestWindow && seat.distanceMetrics.toNearestWindow < 5;
+      const hasRawWindowProperty = (seat as any).window === true;
+      
+      if (hasWindowFeature || isCloseToWindow || hasRawWindowProperty) {
+        score += 25; // Reduced bonus for window seats when requested
+      } else {
+        score -= 25; // Penalty for non-window seats when window is requested
+      }
+    }
 
-    // Collaboration needs (10% weight)
-    score += this.getCollaborationScore(seat, preferences.collaborationNeeds) * 0.1;
+    // Time-based preferences (10 points max)
+    score += Math.min(this.getTimePreferenceScore(preferences.timePreferences), 10);
 
-    // Proximity to scheduled meetings bonus
+    // Collaboration needs (10 points max)
+    score += Math.min(this.getCollaborationScore(seat, preferences.collaborationNeeds), 10);
+
+    // Proximity to scheduled meetings bonus (5 points max)
     const meetingBonus = this.getMeetingProximityBonus(seat, schedule);
-    score += meetingBonus;
+    score += Math.min(meetingBonus, 5);
 
-    // Activity level consideration
+    // Activity level consideration (5 points max)
     const zone = this.zones.find(z => z.type === seat.zone);
     if (zone) {
-      score += this.getActivityLevelScore(zone, preferences) * 0.1;
+      score += Math.min(this.getActivityLevelScore(zone, preferences), 5);
     }
 
-    // Amenity preferences scoring
+    // Amenity preferences scoring (5 points max)
     if (preferences.amenityPreferences) {
-      score += this.getAmenityScore(seat, preferences.amenityPreferences);
+      score += Math.min(this.getAmenityScore(seat, preferences.amenityPreferences), 5);
     }
 
-    // Historical popularity bonus (5% weight based on historical data)
-    const popularityBonus = this.getHistoricalPopularityBonus(seat, preferences.team);
-    score += popularityBonus;
+    // Debug logging for score calculation
+    console.log(`🔢 Score calculation for ${seat.id}: ${score} (raw), capped to ${Math.min(score, maxScore)}`);
 
     return Math.min(score, maxScore);
+  }
+
+  // NEW: Calculate bonus points based on seat booking history
+  private getHistoryBonus(seat: Seat, preferences: UserPreferences): number {
+    if (!preferences.team) {
+      return 0; // No team context, no history bonus
+    }
+
+    const seatPopularity = BookingHistoryService.getSeatPopularityData();
+    const seatData = seatPopularity.get(seat.id);
+    
+    if (!seatData) {
+      return 0; // No history for this seat
+    }
+
+    let bonus = 0;
+
+    // High bonus if this seat is popular with user's team
+    if (seatData.teams.includes(preferences.team)) {
+      bonus += 15; // Major bonus for team preference
+      console.log(`📈 History bonus for ${seat.id}: Team ${preferences.team} has used this seat`);
+    }
+
+    // Smaller bonus for generally popular seats
+    if (seatData.count >= 5) {
+      bonus += Math.min(seatData.count, 5); // Up to 5 bonus points for popularity
+      console.log(`📊 Popularity bonus for ${seat.id}: ${seatData.count} total bookings`);
+    }
+
+    return bonus;
   }
 
   // Get amenity preference score
@@ -302,7 +501,7 @@ export class AIRecommendationEngine {
     const seatId = seat.id;
     const teamPrefixes: { [key: string]: string } = {
       'ENG': 'Engineering',
-      'PROD': 'Product',
+      'PRO': 'Product',
       'RISK': 'Risk',
       'IT': 'IT Security',
       'DEV': 'DevOps',
@@ -311,7 +510,7 @@ export class AIRecommendationEngine {
 
     for (const [prefix, teamName] of Object.entries(teamPrefixes)) {
       if (seatId.startsWith(prefix) && teamName === userTeam) {
-        return 20; // 20 point bonus for team zone match
+        return 15; // 15 point bonus for team zone match (reduced from 20)
       }
     }
 
@@ -327,54 +526,54 @@ export class AIRecommendationEngine {
     };
 
     const compatibleZones = workStyleZoneMap[preferences.workStyle] || [];
-    return compatibleZones.includes(zoneType) ? 70 : 30;
+    return compatibleZones.includes(zoneType) ? 15 : 5;
   }
 
   // Calculate work style compatibility score
   private getWorkStyleScore(seat: Seat, workStyle: string): number {
     const zoneScores = {
       'quiet': {
-        [ZoneType.QUIET]: 100,
-        [ZoneType.FOCUS]: 90,
-        [ZoneType.COLLABORATIVE]: 20,
-        [ZoneType.SOCIAL]: 10,
-        [ZoneType.MEETING]: 5
+        [ZoneType.QUIET]: 15,
+        [ZoneType.FOCUS]: 12,
+        [ZoneType.COLLABORATIVE]: 3,
+        [ZoneType.SOCIAL]: 1,
+        [ZoneType.MEETING]: 0
       },
       'social': {
-        [ZoneType.SOCIAL]: 100,
-        [ZoneType.COLLABORATIVE]: 80,
-        [ZoneType.MEETING]: 70,
-        [ZoneType.FOCUS]: 30,
-        [ZoneType.QUIET]: 20
+        [ZoneType.SOCIAL]: 15,
+        [ZoneType.COLLABORATIVE]: 12,
+        [ZoneType.MEETING]: 10,
+        [ZoneType.FOCUS]: 5,
+        [ZoneType.QUIET]: 3
       },
       'mixed': {
-        [ZoneType.COLLABORATIVE]: 100,
-        [ZoneType.FOCUS]: 85,
-        [ZoneType.SOCIAL]: 70,
-        [ZoneType.QUIET]: 60,
-        [ZoneType.MEETING]: 50
+        [ZoneType.COLLABORATIVE]: 15,
+        [ZoneType.FOCUS]: 13,
+        [ZoneType.SOCIAL]: 10,
+        [ZoneType.QUIET]: 9,
+        [ZoneType.MEETING]: 7
       }
     };
 
-    return (zoneScores as any)[workStyle]?.[seat.zone] || 50;
+    return (zoneScores as any)[workStyle]?.[seat.zone] || 8;
   }
 
   // Calculate time preference score
   private getTimePreferenceScore(timePrefs: UserPreferences['timePreferences']): number {
     const currentHour = this.currentTime.getHours();
-    let score = 50; // Base score
+    let score = 5; // Base score
 
     if (timePrefs.morningPerson && currentHour < 12) {
-      score += 30;
+      score += 5;
     } else if (!timePrefs.morningPerson && currentHour >= 12) {
-      score += 30;
+      score += 5;
     }
 
     if (timePrefs.afternoonFocus && currentHour >= 13 && currentHour <= 17) {
-      score += 20;
+      score += 3;
     }
 
-    return Math.min(score, 100);
+    return score;
   }
 
   // Calculate collaboration score
@@ -384,13 +583,13 @@ export class AIRecommendationEngine {
 
     switch (collaborationNeeds) {
       case 'high':
-        return isCollabZone ? 100 : 30;
+        return isCollabZone ? 10 : 3;
       case 'medium':
-        return isCollabZone ? 80 : 60;
+        return isCollabZone ? 8 : 6;
       case 'low':
-        return isCollabZone ? 40 : 90;
+        return isCollabZone ? 4 : 9;
       default:
-        return 50;
+        return 5;
     }
   }
 
@@ -406,7 +605,7 @@ export class AIRecommendationEngine {
 
     // If seat is in meeting zone and there are upcoming meetings
     if (seat.zone === ZoneType.MEETING || seat.zone === ZoneType.COLLABORATIVE) {
-      return 15;
+      return 5; // Reduced from 15
     }
 
     return 0;
@@ -415,48 +614,14 @@ export class AIRecommendationEngine {
   // Get activity level score
   private getActivityLevelScore(zone: Zone, preferences: UserPreferences): number {
     const activityLevel = zone.currentActivity;
-
+    
     if (preferences.workStyle === 'quiet') {
-      return Math.max(0, 100 - activityLevel);
+      return Math.max(0, 5 - (activityLevel / 20)); // Max 5 points, decreases with activity
     } else if (preferences.workStyle === 'social') {
-      return activityLevel;
+      return Math.min(5, activityLevel / 20); // Max 5 points, increases with activity
     } else {
       // Mixed preference - moderate activity is preferred
-      return 100 - Math.abs(activityLevel - 50);
-    }
-  }
-
-  // Get historical popularity bonus based on trend data
-  private getHistoricalPopularityBonus(seat: Seat, userTeam: string): number {
-    try {
-      // Get desk popularity trends
-      const deskTrends = trendService.getDeskPopularityTrends();
-      const deskTrend = deskTrends.find(d => d.desk_id === seat.id);
-
-      if (!deskTrend) {
-        return 0; // No historical data for this desk
-      }
-
-      // Bonus if the desk was popular with the user's team
-      const teamUsedDesk = deskTrend.teams_used.includes(userTeam);
-      let bonus = 0;
-
-      if (teamUsedDesk) {
-        // Bonus based on popularity (normalized to 0-5 points)
-        const popularityScore = Math.min(deskTrend.total_bookings / 10, 1); // Max 1 for 10+ bookings
-        bonus += popularityScore * 5; // Up to 5 points
-      }
-
-      // Small bonus for desks with diverse team usage (shows versatility)
-      if (deskTrend.teams_used.length > 2) {
-        bonus += 2;
-      }
-
-      return bonus;
-    } catch (error) {
-      // If trend service fails, return 0
-      console.error('Error getting historical popularity bonus:', error);
-      return 0;
+      return 5 - Math.abs(activityLevel - 50) / 20; // Best at 50% activity
     }
   }
 
@@ -470,41 +635,25 @@ export class AIRecommendationEngine {
       reasons.push(`In your team's area (${preferences.team})`);
     }
 
-    // Historical trend reasons
-    try {
-      const deskTrends = trendService.getDeskPopularityTrends();
-      const deskTrend = deskTrends.find(d => d.desk_id === seat.id);
-
-      if (deskTrend && deskTrend.total_bookings > 5) {
-        if (deskTrend.teams_used.includes(preferences.team)) {
-          reasons.push(`Popular with ${preferences.team} team (${deskTrend.total_bookings} bookings)`);
-        } else if (deskTrend.teams_used.length > 2) {
-          reasons.push(`Versatile desk used by ${deskTrend.teams_used.length} teams`);
-        }
-      }
-    } catch (error) {
-      // Skip historical reasons if unavailable
-    }
-
     // Zone-based reasons
     if (preferences.preferredZones.includes(seat.zone)) {
       reasons.push(`Perfect ${seat.zone} zone match`);
     }
 
     // Feature-based reasons
-    const matchedFeatures = seat.features.filter(f =>
+    const matchedFeatures = seat.features.filter(f => 
       preferences.seatFeatures.includes(f.type)
     );
-
+    
     if (matchedFeatures.length > 0) {
       reasons.push(`Has ${matchedFeatures.map(f => f.label).join(', ')}`);
     }
 
     // Work style reasons
-    if (preferences.workStyle === 'quiet' &&
+    if (preferences.workStyle === 'quiet' && 
         [ZoneType.QUIET, ZoneType.FOCUS].includes(seat.zone)) {
       reasons.push('Ideal for focused work');
-    } else if (preferences.workStyle === 'social' &&
+    } else if (preferences.workStyle === 'social' && 
                [ZoneType.SOCIAL, ZoneType.COLLABORATIVE].includes(seat.zone)) {
       reasons.push('Great for collaboration');
     }
@@ -776,9 +925,92 @@ export class AIRecommendationEngine {
     }
   }
 
-  // Method to update API key
-  updateApiKey(apiKey: string): void {
-    this.llmService.updateApiKey(apiKey);
+  // Extract seat IDs and percentages from LLM response
+  private extractSeatIDsFromLLMResponse(llmResponse: string): { seatId: string; percentage: number }[] {
+    // Match patterns like "Seat ENG-SW-37 (95% match)" or "ENG-SW-37 (92% match)"
+    const seatPattern = /(?:Seat\s+)?([A-Z]{2,4}-[A-Z]{1,2}-\d{1,3})\s*\((\d{1,3})%[^)]*\)/g;
+    const matches = [];
+    let match;
+    
+    while ((match = seatPattern.exec(llmResponse)) !== null) {
+      const seatId = match[1];
+      const percentage = parseInt(match[2], 10);
+      matches.push({ seatId, percentage });
+    }
+    
+    console.log('🔍 Extracted seats and percentages from LLM response:', matches);
+    return matches.slice(0, 3); // Return max 3 seats
+  }
+
+  // Align internal recommendations with LLM suggested seats and percentages
+  private alignRecommendationsWithLLM(
+    llmSeats: { seatId: string; percentage: number }[], 
+    originalRecommendations: SeatRecommendation[]
+  ): SeatRecommendation[] {
+    const alignedRecommendations: SeatRecommendation[] = [];
+    
+    // For each LLM suggested seat, find or create a recommendation with LLM percentage
+    for (const llmSeat of llmSeats) {
+      // First try to find it in existing recommendations
+      let recommendation = originalRecommendations.find(rec => rec.seat.id === llmSeat.seatId);
+      
+      if (recommendation) {
+        // Update existing recommendation with LLM percentage
+        recommendation = {
+          ...recommendation,
+          score: llmSeat.percentage, // Use LLM percentage instead of algorithm score
+          reasons: [`${llmSeat.percentage}% match from AI analysis`, ...recommendation.reasons.slice(0, 2)]
+        };
+      } else {
+        // If not found in recommendations, find the seat and create a new recommendation
+        const seat = this.seats.find(s => s.id === llmSeat.seatId && s.isAvailable);
+        if (seat) {
+          // Create a new recommendation using LLM percentage
+          recommendation = {
+            seat,
+            score: llmSeat.percentage, // Use LLM percentage
+            reasons: [`${llmSeat.percentage}% match from AI analysis`, 'Recommended by AI assistant', 'Good match for your preferences'],
+            matchedPreferences: [],
+            timeSlots: [{
+              start: this.currentTime,
+              end: addHours(this.currentTime, 8),
+              available: true
+            }]
+          };
+        }
+      }
+      
+      if (recommendation) {
+        alignedRecommendations.push(recommendation);
+      }
+    }
+    
+    // If we don't have 3 aligned recommendations, fill with original ones (but update their scores to be lower)
+    while (alignedRecommendations.length < 3 && alignedRecommendations.length < originalRecommendations.length) {
+      const nextOriginal = originalRecommendations.find(rec => 
+        !alignedRecommendations.some(aligned => aligned.seat.id === rec.seat.id)
+      );
+      if (nextOriginal) {
+        // Lower the score since LLM didn't specifically recommend it
+        const fallbackRecommendation = {
+          ...nextOriginal,
+          score: Math.min(nextOriginal.score - 10, 80), // Cap fallback scores at 80%
+          reasons: ['Alternative option', ...nextOriginal.reasons.slice(0, 2)]
+        };
+        alignedRecommendations.push(fallbackRecommendation);
+      } else {
+        break;
+      }
+    }
+    
+    console.log('🎯 Aligned recommendations with LLM percentages:', 
+      alignedRecommendations.map(r => `${r.seat.id}: ${r.score}%`));
+    return alignedRecommendations;
+  }
+
+  // Method to update Bedrock configuration
+  updateBedrockConfig(region?: string, modelId?: string): void {
+    this.llmService.updateBedrockConfig(region, modelId);
   }
 
   // Method to test LLM connection

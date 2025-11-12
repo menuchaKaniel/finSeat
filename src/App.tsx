@@ -4,22 +4,21 @@ import { motion } from 'framer-motion';
 import { ChatInterface } from './components/ChatInterface';
 import { SeatMap } from './components/SeatMap';
 import { SettingsModal } from './components/SettingsModal';
-import { Dashboard } from './components/Dashboard';
 import { AIRecommendationEngine } from './utils/aiEngine';
-import {
-  Seat,
+import { 
+  Seat, 
   Desk,
-  Zone,
-  ZoneType,
-  ChatMessage,
-  SeatRecommendation,
-  UserPreferences,
-  Schedule
+  Zone, 
+  ZoneType, 
+  ChatMessage, 
+  SeatRecommendation, 
+  UserPreferences, 
+  Schedule 
 } from './types';
 import { seatHistories } from './data/officeLayout';
 import { desks as layoutDesks, deskToSeat } from './data/desks';
 import { seatService } from './services/seatService';
-import { Settings, Eye, EyeOff, BarChart3 } from 'lucide-react';
+import { Settings, Eye, EyeOff, Download } from 'lucide-react';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -263,10 +262,10 @@ function deriveZonesFromDesks(desks: Desk[]): Zone[] {
 }
 
 const sampleUserPreferences: UserPreferences = {
-  team: 'Engineering', // Default team
+  team: 'Engineering', // Default team when not specified
   workStyle: 'mixed',
   collaborationNeeds: 'medium',
-  preferredZones: [ZoneType.FOCUS, ZoneType.COLLABORATIVE],
+  preferredZones: [ZoneType.COLLABORATIVE, ZoneType.FOCUS], // Engineering zones: SW (collaborative) prioritized
   timePreferences: {
     morningPerson: true,
     afternoonFocus: true
@@ -343,8 +342,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showZones, setShowZones] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
-  const [showDashboard, setShowDashboard] = useState(false);
-  const [aiEngine] = useState(() => new AIRecommendationEngine(seats, zones, localStorage.getItem('openai_api_key') || undefined));
+  const [aiEngine] = useState(() => new AIRecommendationEngine(seats, zones));
 
   // Update AI engine and zones when seats change
   useEffect(() => {
@@ -437,8 +435,8 @@ function App() {
       return;
     }
 
-    // Reserve the seat using seat service
-    const success = seatService.reserveSeat(deskId, 'You');
+    // Reserve the seat using seat service with user's team info
+    const success = seatService.reserveSeat(deskId, 'You', sampleUserPreferences.team || 'Engineering');
     
     if (!success) {
       // Seat could not be reserved (not available or error)
@@ -487,8 +485,8 @@ function App() {
     console.log('📊 Seat Statistics:', stats);
   };
 
-  const handleApiKeyUpdate = (apiKey: string) => {
-    aiEngine.updateApiKey(apiKey);
+  const handleBedrockConfigUpdate = (region?: string, modelId?: string) => {
+    aiEngine.updateBedrockConfig(region, modelId);
   };
 
   const handleTestConnection = async (): Promise<boolean> => {
@@ -538,15 +536,16 @@ function App() {
                 <Settings size={16} />
                 Settings
               </ToggleButton>
-
+              
               <ToggleButton
                 active={false}
-                onClick={() => setShowDashboard(true)}
+                onClick={() => seatService.exportBookingHistory()}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                title="Download updated seat history JSON file"
               >
-                <BarChart3 size={16} />
-                Dashboard
+                <Download size={16} />
+                Export History
               </ToggleButton>
             </ControlGroup>
 
@@ -595,13 +594,9 @@ function App() {
       <SettingsModal
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}
-        onApiKeyUpdate={handleApiKeyUpdate}
+        onBedrockConfigUpdate={handleBedrockConfigUpdate}
         onTestConnection={handleTestConnection}
       />
-
-      {showDashboard && (
-        <Dashboard onClose={() => setShowDashboard(false)} />
-      )}
     </AppContainer>
   );
 }

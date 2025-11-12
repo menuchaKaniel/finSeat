@@ -6,7 +6,7 @@ import { Settings, X, Key, CheckCircle, AlertCircle } from 'lucide-react';
 interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onApiKeyUpdate: (apiKey: string) => void;
+  onBedrockConfigUpdate: (region?: string, modelId?: string) => void;
   onTestConnection: () => Promise<boolean>;
 }
 
@@ -200,20 +200,20 @@ const Link = styled.a`
 export const SettingsModal: React.FC<SettingsModalProps> = ({
   isOpen,
   onClose,
-  onApiKeyUpdate,
+  onBedrockConfigUpdate,
   onTestConnection
 }) => {
-  const [apiKey, setApiKey] = useState(localStorage.getItem('openai_api_key') || '');
+  const [region, setRegion] = useState(process.env.AWS_DEFAULT_REGION || 'us-east-1');
+  const [modelId, setModelId] = useState(process.env.AWS_BEDROCK_MODEL_ID || 'anthropic.claude-sonnet-4-5-20250929-v1:0');
   const [testStatus, setTestStatus] = useState<'idle' | 'testing' | 'success' | 'error'>('idle');
 
   const handleSave = () => {
-    localStorage.setItem('openai_api_key', apiKey);
-    onApiKeyUpdate(apiKey);
+    onBedrockConfigUpdate(region, modelId);
     setTestStatus('idle');
   };
 
   const handleTest = async () => {
-    if (!apiKey.trim()) {
+    if (!region.trim()) {
       setTestStatus('error');
       return;
     }
@@ -233,9 +233,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       case 'testing':
         return { icon: <Key size={16} />, text: 'Testing connection...' };
       case 'success':
-        return { icon: <CheckCircle size={16} />, text: 'Connection successful! Smart responses enabled.' };
+        return { icon: <CheckCircle size={16} />, text: 'Bedrock connection successful! Smart responses enabled.' };
       case 'error':
-        return { icon: <AlertCircle size={16} />, text: 'Connection failed. Check your API key.' };
+        return { icon: <AlertCircle size={16} />, text: 'Connection failed. Check your AWS credentials and Bedrock access.' };
       default:
         return null;
     }
@@ -267,28 +267,43 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </Header>
 
             <InfoBox>
-              <InfoTitle>🚀 Enhanced AI Responses</InfoTitle>
+              <InfoTitle>🚀 Enhanced AI with AWS Bedrock</InfoTitle>
               <InfoText>
-                Add your OpenAI API key to unlock dynamic, personalized responses! Without it, 
-                you'll get smart but more basic responses. Get your key at{' '}
-                <Link href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">
-                  platform.openai.com
+                Configure your AWS Bedrock settings to unlock advanced AI responses using Claude 3! 
+                Make sure your AWS credentials are configured via the .env file or AWS CLI. 
+                Learn more at{' '}
+                <Link href="https://docs.aws.amazon.com/bedrock/" target="_blank" rel="noopener noreferrer">
+                  AWS Bedrock Documentation
                 </Link>
               </InfoText>
             </InfoBox>
 
             <Section>
-              <Label>OpenAI API Key</Label>
+              <Label>AWS Region</Label>
               <Description>
-                Your API key enables advanced AI responses and is stored locally in your browser. 
-                It's never sent to our servers.
+                The AWS region where Bedrock is available (e.g., us-east-1, us-west-2).
               </Description>
               <InputGroup>
                 <Input
-                  type="password"
-                  value={apiKey}
-                  onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="sk-..."
+                  type="text"
+                  value={region}
+                  onChange={(e) => setRegion(e.target.value)}
+                  placeholder="us-east-1"
+                />
+              </InputGroup>
+            </Section>
+
+            <Section>
+              <Label>Bedrock Model ID</Label>
+              <Description>
+                The specific Claude model to use. Claude 3 Sonnet is recommended for balanced performance.
+              </Description>
+              <InputGroup>
+                <Input
+                  type="text"
+                  value={modelId}
+                  onChange={(e) => setModelId(e.target.value)}
+                  placeholder="anthropic.claude-3-sonnet-20240229-v1:0"
                 />
               </InputGroup>
 
@@ -304,7 +319,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <Button
                 variant="secondary"
                 onClick={handleTest}
-                disabled={!apiKey.trim() || testStatus === 'testing'}
+                disabled={!region.trim() || testStatus === 'testing'}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
