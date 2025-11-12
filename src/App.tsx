@@ -4,21 +4,22 @@ import { motion } from 'framer-motion';
 import { ChatInterface } from './components/ChatInterface';
 import { SeatMap } from './components/SeatMap';
 import { SettingsModal } from './components/SettingsModal';
+import { Dashboard } from './components/Dashboard';
 import { AIRecommendationEngine } from './utils/aiEngine';
-import { 
-  Seat, 
+import {
+  Seat,
   Desk,
-  Zone, 
-  ZoneType, 
-  ChatMessage, 
-  SeatRecommendation, 
-  UserPreferences, 
-  Schedule 
+  Zone,
+  ZoneType,
+  ChatMessage,
+  SeatRecommendation,
+  UserPreferences,
+  Schedule
 } from './types';
 import { seatHistories } from './data/officeLayout';
 import { desks as layoutDesks, deskToSeat } from './data/desks';
 import { seatService } from './services/seatService';
-import { Settings, Eye, EyeOff } from 'lucide-react';
+import { Settings, Eye, EyeOff, BarChart3 } from 'lucide-react';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -342,6 +343,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showZones, setShowZones] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
   const [aiEngine] = useState(() => new AIRecommendationEngine(seats, zones, localStorage.getItem('openai_api_key') || undefined));
 
   // Update AI engine and zones when seats change
@@ -536,6 +538,16 @@ function App() {
                 <Settings size={16} />
                 Settings
               </ToggleButton>
+
+              <ToggleButton
+                active={false}
+                onClick={() => setShowDashboard(true)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <BarChart3 size={16} />
+                Dashboard
+              </ToggleButton>
             </ControlGroup>
 
             <StatsDisplay>
@@ -586,6 +598,10 @@ function App() {
         onApiKeyUpdate={handleApiKeyUpdate}
         onTestConnection={handleTestConnection}
       />
+
+      {showDashboard && (
+        <Dashboard onClose={() => setShowDashboard(false)} />
+      )}
     </AppContainer>
   );
 }
