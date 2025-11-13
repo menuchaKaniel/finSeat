@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ChatInterface } from './components/ChatInterface';
 import { SeatMap } from './components/SeatMap';
 import { SettingsModal } from './components/SettingsModal';
+import { Dashboard } from './components/Dashboard';
 import { AIRecommendationEngine } from './utils/aiEngine';
 import { 
   Seat, 
@@ -18,7 +19,9 @@ import {
 import { seatHistories } from './data/officeLayout';
 import { desks as layoutDesks, deskToSeat } from './data/desks';
 import { seatService } from './services/seatService';
-import { Settings, Eye, EyeOff, Download } from 'lucide-react';
+import { Settings, Eye, EyeOff, BarChart3 } from 'lucide-react';
+// @ts-ignore
+import seatHistoryData from './seat_history.json';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -266,6 +269,63 @@ const LegendItem = styled.div<{ color: string }>`
   }
 `;
 
+// Helper to extract unique employees from history
+function getEmployeesFromHistory(): Array<{ name: string; team: string }> {
+  const employees: Array<{ name: string; team: string }> = [];
+  const seen = new Set<string>();
+
+  seatHistoryData.forEach((record: any) => {
+    const key = `${record.employee_name}-${record.team}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      employees.push({
+        name: record.employee_name,
+        team: record.team
+      });
+    }
+  });
+
+  return employees;
+}
+
+// Helper to randomly occupy 10% of seats
+function randomlyOccupySeats(desks: Desk[]): Desk[] {
+  const employees = getEmployeesFromHistory();
+  const availableDesks = desks.filter(d => d.status === 'available');
+  const numToOccupy = Math.floor(availableDesks.length * 0.1);
+
+  // Shuffle available desks
+  const shuffled = [...availableDesks].sort(() => Math.random() - 0.5);
+  const desksToOccupy = shuffled.slice(0, numToOccupy);
+
+  // Create a map of desk IDs to occupy
+  const occupiedDeskIds = new Set(desksToOccupy.map(d => d.desk_id));
+
+  // Assign random employees to selected desks, matching team
+  return desks.map(desk => {
+    if (occupiedDeskIds.has(desk.desk_id)) {
+      // Filter employees by desk's team to ensure allocation matches
+      const matchingEmployees = employees.filter(emp => emp.team === desk.team);
+
+      // If no matching employees for this desk's team, skip this desk
+      if (matchingEmployees.length === 0) {
+        console.warn(`No employees found for team ${desk.team}, skipping desk ${desk.desk_id}`);
+        return desk;
+      }
+
+      // Select a random employee from matching team members
+      const randomEmployee = matchingEmployees[Math.floor(Math.random() * matchingEmployees.length)];
+      return {
+        ...desk,
+        status: 'occupied' as any,
+        reserved_for: randomEmployee.name,
+        team: randomEmployee.team
+      };
+    }
+    return desk;
+  });
+}
+
 // Derive zones dynamically from desks (by desk.zone string)
 function deriveZonesFromDesks(desks: Desk[]): Zone[] {
   const zoneGroups: Record<string, Desk[]> = {};
@@ -326,30 +386,33 @@ const sampleSchedule: Schedule[] = [
 ];
 
 function App() {
+  // Initialize desks with random occupancy before component state
+  const initializedDesks = React.useMemo(() => {
+    // Randomly occupy 10% of seats with names from history
+    const occupiedDesks = randomlyOccupySeats(layoutDesks);
+
+    // Initialize seat service with occupied desks
+    occupiedDesks.forEach(desk => {
+      if (desk.status === 'occupied' && desk.reserved_for) {
+        seatService.reserveSeat(desk.desk_id, desk.reserved_for, desk.team || 'Engineering');
+      }
+    });
+
+    return occupiedDesks;
+  }, []);
+
   // Use desks as primary data, convert to seats for AI engine compatibility
-  const [desks, setDesks] = useState<Desk[]>(() => {
-    // Use the desk status from the data (already randomized in desks.ts)
-    return layoutDesks;
-  });
-  
+  const [desks, setDesks] = useState<Desk[]>(() => initializedDesks);
+
   const [seats, setSeats] = useState<Seat[]>(() => {
-    // Try to load saved state from localStorage first
-    seatService.loadFromStorage();
-    
     // Convert desks to seats for map rendering - use actual coordinates from JSON
-    // Also sync with seat service state
-    const allDesks = seatService.getAllDesks();
-    
-    return layoutDesks.map(d => {
-      // Find corresponding desk in seat service to get current status
-      const serviceDesk = allDesks.find(sd => sd.desk_id === d.desk_id);
-      const isAvailable = serviceDesk ? serviceDesk.status === 'available' : d.status === 'available';
-      
+    // Use initializedDesks to ensure consistency
+    return initializedDesks.map(d => {
       const seat = deskToSeat(d);
       return {
         ...seat,
-        isAvailable: isAvailable,
-        currentUser: serviceDesk?.reserved_for || undefined,
+        isAvailable: d.status === 'available',
+        currentUser: d.reserved_for || undefined,
         x: seat.x, // Use actual coordinates from JSON
         y: seat.y + 50  // Reduced offset to minimize empty space at top
       };
@@ -371,6 +434,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showZones, setShowZones] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
   const [aiEngine] = useState(() => new AIRecommendationEngine(seats, zones));
 
   // Update AI engine and zones when seats change
@@ -567,7 +631,16 @@ function App() {
                 Settings
               </ToggleButton>
 
-            
+              <ToggleButton
+                active={false}
+                onClick={() => setShowDashboard(true)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <BarChart3 size={16} />
+                Dashboard
+              </ToggleButton>
+
             </ControlGroup>
 
               <StatsDisplay>
@@ -635,6 +708,10 @@ function App() {
         onBedrockConfigUpdate={handleBedrockConfigUpdate}
         onTestConnection={handleTestConnection}
       />
+
+      {showDashboard && (
+        <Dashboard onClose={() => setShowDashboard(false)} />
+      )}
     </AppContainer>
   );
 }
